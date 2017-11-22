@@ -40,6 +40,7 @@ CMFCDiet1View::~CMFCDiet1View()
 void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_TAB1, m_Tab);
 }
 
 BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)

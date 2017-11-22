@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxcmn.h"
 
 
 class CMFCDiet1View : public CFormView
@@ -43,6 +44,8 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	CTabCtrl m_Tab;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
