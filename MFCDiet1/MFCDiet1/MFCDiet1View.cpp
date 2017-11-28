@@ -11,6 +11,7 @@
 
 #include "MFCDiet1Doc.h"
 #include "MFCDiet1View.h"
+#include "ShowInfoDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +23,7 @@
 IMPLEMENT_DYNCREATE(CMFCDiet1View, CFormView)
 
 BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
+	ON_BN_CLICKED(ID_SHOWINFO, &CMFCDiet1View::OnBnClickedShowinfo)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -29,6 +31,7 @@ END_MESSAGE_MAP()
 CMFCDiet1View::CMFCDiet1View()
 	: CFormView(IDD_MFCDIET1_FORM)
 {
+	m_pShowInfoDlg = NULL;
 	// TODO: 여기에 생성 코드를 추가합니다.
 
 }
@@ -82,3 +85,17 @@ CMFCDiet1Doc* CMFCDiet1View::GetDocument() const // 디버그되지 않은 버전은 인라�
 
 
 // CMFCDiet1View 메시지 처리기
+
+
+void CMFCDiet1View::OnBnClickedShowinfo()
+{
+	if(m_pShowInfoDlg != NULL)
+		m_pShowInfoDlg -> SetFocus();
+	else {
+		m_pShowInfoDlg  = new CShowInfoDialog();
+		m_pShowInfoDlg -> m_pView = this;
+		m_pShowInfoDlg ->Create(IDD_DIALOG1);
+		m_pShowInfoDlg ->ShowWindow(SW_SHOW);
+	}
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}

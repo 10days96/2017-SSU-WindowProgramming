@@ -191,9 +191,9 @@ BEGIN
     EDITTEXT        IDC_EDIT3,42,180,78,14,ES_AUTOHSCROLL
     LTEXT           "kcal/인분",IDC_STATIC,126,168,29,8
     LTEXT           "인분",IDC_STATIC,126,186,18,8
-    PUSHBUTTON      "자세히",IDC_BUTTON1,12,210,36,14
-    PUSHBUTTON      "수정",IDC_BUTTON2,60,210,36,14
-    PUSHBUTTON      "삭제",IDC_BUTTON3,108,210,36,14
+    PUSHBUTTON      "자세히",ID_SHOWINFO,18,210,36,14
+    PUSHBUTTON      "수정",IDC_BUTTON2,66,210,36,14
+    PUSHBUTTON      "삭제",IDC_BUTTON3,114,210,36,14
     CONTROL         "",IDC_TAB1,"SysTabControl32",0x0,180,18,186,198
     PUSHBUTTON      "Button6",IDC_BUTTON6,402,96,36,30
     PUSHBUTTON      "Button6",IDC_BUTTON7,402,24,36,30
@@ -201,6 +201,43 @@ BEGIN
     EDITTEXT        IDC_EDIT4,180,219,40,15,ES_AUTOHSCROLL
     LTEXT           "/kcal",IDC_Kcal,228,222,42,12
     PUSHBUTTON      "추가",IDC_BUTTON9,321,222,44,12
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 311, 177
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "적용",IDOK,72,150,50,14
+    PUSHBUTTON      "취소",IDCANCEL,132,150,50,14
+    LTEXT           "날짜:",ID_D1_Date,18,30,14,8
+    EDITTEXT        ID_D1_Date_Edit,48,24,102,14,ES_AUTOHSCROLL
+    LTEXT           "이름:",ID_D1_Name,18,54,14,8
+    EDITTEXT        ID_D1_Name_Edit,48,48,60,14,ES_AUTOHSCROLL
+    LTEXT           "열랑:",ID_D1_Calory,18,78,14,8
+    EDITTEXT        ID_D1_Kcal_Edit,48,72,60,14,ES_AUTOHSCROLL
+    LTEXT           "섭취량:",ID_D1_Amount,18,102,19,8
+    EDITTEXT        ID_D1_Amount_Edit,48,96,66,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "검색",IDC_BUTTON2,114,48,30,14
+    LTEXT           "kcal/인분",ID_D1_kcalper1,114,78,30,8
+    LTEXT           "인분",IDC_STATIC,120,102,12,8
+    COMBOBOX        ID_D1_Meal_combo,48,126,84,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "시기:",ID_D1_Meal,18,126,14,8
+    PUSHBUTTON      "초기화",IDC_RESET,192,150,50,14
+    LTEXT           "탄수화물:",ID_D1_Carbo,156,30,25,8
+    EDITTEXT        ID_D1_Carbo_Edit,186,24,90,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Protein_Edit,186,48,90,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Fat_Edit,186,72,90,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Na_Edit,186,96,90,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Fiber_Edit,186,120,90,14,ES_AUTOHSCROLL
+    LTEXT           "단백질:",ID_D1_Protein,156,54,19,8
+    LTEXT           "지방:",ID_D1_Fat,156,78,14,8
+    LTEXT           "나트륨:",ID_D1_Na,156,102,19,8
+    LTEXT           "식이섬유:",ID_D1_Fiber,156,126,25,8
+    LTEXT           "g/인분",ID_D1_gper1,282,30,18,8
+    LTEXT           "g/인분",ID_D1_gper2,282,54,18,8
+    LTEXT           "g/인분",ID_D1_gper3,282,78,18,8
+    LTEXT           "g/인분",ID_D1_gper4,282,102,18,8
+    LTEXT           "g/인분",ID_D1_gper5,282,126,18,8
 END
 
 
@@ -266,6 +303,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 240
     END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 304
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 170
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -277,6 +322,30 @@ END
 
 IDD_MFCDIET1_FORM AFX_DIALOG_LAYOUT
 BEGIN
+    0
+END
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DIALOG1 DLGINIT
+BEGIN
+    ID_D1_Meal_combo, 0x403, 5, 0
+0xc6be, 0xa7c4, "\000" 
+    ID_D1_Meal_combo, 0x403, 5, 0
+0xa1c1, 0xc9bd, "\000" 
+    ID_D1_Meal_combo, 0x403, 5, 0
+0xfac0, 0xe1b3, "\000" 
+    ID_D1_Meal_combo, 0x403, 5, 0
+0xa3b0, 0xc4bd, "\000" 
     0
 END
 
