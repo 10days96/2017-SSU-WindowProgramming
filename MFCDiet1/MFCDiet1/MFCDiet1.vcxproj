@@ -191,6 +191,7 @@
     <ClInclude Include="MFCDiet1Doc.h" />
     <ClInclude Include="MFCDiet1View.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ShowInfoDialog.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -199,6 +200,7 @@
     <ClCompile Include="MFCDiet1.cpp" />
     <ClCompile Include="MFCDiet1Doc.cpp" />
     <ClCompile Include="MFCDiet1View.cpp" />
+    <ClCompile Include="ShowInfoDialog.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

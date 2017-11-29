@@ -4,6 +4,7 @@
 
 #pragma once
 #include "afxcmn.h"
+class CShowInfoDialog;
 
 
 class CMFCDiet1View : public CFormView
@@ -20,6 +21,7 @@ public:
 // 특성입니다.
 public:
 	CMFCDiet1Doc* GetDocument() const;
+	CShowInfoDialog* m_pShowInfoDlg;
 
 // 작업입니다.
 public:
@@ -46,6 +48,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CTabCtrl m_Tab;
+	afx_msg void OnBnClickedShowinfo();
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
