@@ -23,4 +23,5 @@ protected:
 public:
 	CMFCDiet1View* m_pView;
 	//afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnBnClickedCancel();
 };
