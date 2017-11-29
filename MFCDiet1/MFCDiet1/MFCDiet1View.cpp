@@ -102,7 +102,7 @@ void CMFCDiet1View::OnBnClickedButton2()
 	else {
 		m_pShowInfoDlg = new CShowInfoDialog();
 		m_pShowInfoDlg->m_pView = this;
-		m_pShowInfoDlg->Create(IDD_DIALOG1);
+		m_pShowInfoDlg->Create(IDD_SHOWINFO);
 		m_pShowInfoDlg->ShowWindow(SW_SHOW);
 	}
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.

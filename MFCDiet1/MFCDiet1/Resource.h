@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ì…ë‹ˆë‹¤.
-// MFCDiet1.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìˆìŠµë‹ˆë‹¤.
+// Microsoft Visual C++¿¡¼­ »ı¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
+// MFCDiet1.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -8,6 +8,7 @@
 #define IDR_MAINFRAME                   128
 #define IDR_MFCDiet1TYPE                130
 #define IDD_DIALOG1                     319
+#define IDD_SHOWINFO                    319
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
