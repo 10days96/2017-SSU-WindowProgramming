@@ -186,6 +186,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InfoDialog.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MFCDiet1.h" />
     <ClInclude Include="MFCDiet1Doc.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InfoDialog.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCDiet1.cpp" />
     <ClCompile Include="MFCDiet1Doc.cpp" />
