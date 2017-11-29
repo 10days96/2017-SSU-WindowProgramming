@@ -49,6 +49,7 @@ protected:
 public:
 	CTabCtrl m_Tab;
 	afx_msg void OnBnClickedShowinfo();
+	afx_msg void OnBnClickedButton2();
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

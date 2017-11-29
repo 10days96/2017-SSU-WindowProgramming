@@ -24,6 +24,7 @@ IMPLEMENT_DYNCREATE(CMFCDiet1View, CFormView)
 
 BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_BN_CLICKED(ID_SHOWINFO, &CMFCDiet1View::OnBnClickedShowinfo)
+	ON_BN_CLICKED(IDC_BUTTON2, &CMFCDiet1View::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -89,13 +90,20 @@ CMFCDiet1Doc* CMFCDiet1View::GetDocument() const // 디버그되지 않은 버전은 인라�
 
 void CMFCDiet1View::OnBnClickedShowinfo()
 {
-	if(m_pShowInfoDlg != NULL)
-		m_pShowInfoDlg -> SetFocus();
+	
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CMFCDiet1View::OnBnClickedButton2()
+{
+	if (m_pShowInfoDlg != NULL)
+		m_pShowInfoDlg->SetFocus();
 	else {
-		m_pShowInfoDlg  = new CShowInfoDialog();
-		m_pShowInfoDlg -> m_pView = this;
-		m_pShowInfoDlg ->Create(IDD_DIALOG1);
-		m_pShowInfoDlg ->ShowWindow(SW_SHOW);
+		m_pShowInfoDlg = new CShowInfoDialog();
+		m_pShowInfoDlg->m_pView = this;
+		m_pShowInfoDlg->Create(IDD_DIALOG1);
+		m_pShowInfoDlg->ShowWindow(SW_SHOW);
 	}
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
