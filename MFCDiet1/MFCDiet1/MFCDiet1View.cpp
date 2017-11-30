@@ -12,6 +12,9 @@
 #include "MFCDiet1Doc.h"
 #include "MFCDiet1View.h"
 #include "ShowInfoDialog.h"
+#include "UserInfoDlg.h"
+#include "ShowBMIDlg.h"
+#include "PieChartDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,6 +28,9 @@ IMPLEMENT_DYNCREATE(CMFCDiet1View, CFormView)
 BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_BN_CLICKED(ID_SHOWINFO, &CMFCDiet1View::OnBnClickedShowinfo)
 	ON_BN_CLICKED(IDC_BUTTON2, &CMFCDiet1View::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON_USERINFO, &CMFCDiet1View::OnBnClickedButtonUserinfo)
+	ON_BN_CLICKED(IDC_BUTTON_BMI, &CMFCDiet1View::OnBnClickedButtonBmi)
+	ON_BN_CLICKED(IDC_BUTTON_CHART, &CMFCDiet1View::OnBnClickedButtonChart)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -106,4 +112,29 @@ void CMFCDiet1View::OnBnClickedButton2()
 		m_pShowInfoDlg->ShowWindow(SW_SHOW);
 	}
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CMFCDiet1View::OnBnClickedButtonUserinfo()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CUserInfoDlg dlg;
+
+	dlg.DoModal();
+}
+
+
+void CMFCDiet1View::OnBnClickedButtonBmi()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CShowBMIDlg dlg;
+	dlg.DoModal();
+}
+
+
+void CMFCDiet1View::OnBnClickedButtonChart()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CPieChartDlg dlg;
+	dlg.DoModal();
 }

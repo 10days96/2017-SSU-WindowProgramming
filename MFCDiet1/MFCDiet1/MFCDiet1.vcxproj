@@ -190,16 +190,21 @@
     <ClInclude Include="MFCDiet1.h" />
     <ClInclude Include="MFCDiet1Doc.h" />
     <ClInclude Include="MFCDiet1View.h" />
+    <ClInclude Include="PieChartDlg.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ShowBMIDlg.h" />
     <ClInclude Include="ShowInfoDialog.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UserInfoDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCDiet1.cpp" />
     <ClCompile Include="MFCDiet1Doc.cpp" />
     <ClCompile Include="MFCDiet1View.cpp" />
+    <ClCompile Include="PieChartDlg.cpp" />
+    <ClCompile Include="ShowBMIDlg.cpp" />
     <ClCompile Include="ShowInfoDialog.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -207,6 +212,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UserInfoDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFCDiet1.rc" />
