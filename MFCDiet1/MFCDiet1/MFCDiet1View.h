@@ -27,7 +27,6 @@ public:
 // 특성입니다.
 public:
 	CMFCDiet1Doc* GetDocument() const;
-	CShowInfoDialog* m_pShowInfoDlg;
 
 // 작업입니다.
 public:
@@ -56,8 +55,9 @@ protected:
 public:
 	CTabCtrl m_Tab;
 	int select;
-	Food tmp;
+	//Food tmp;
 	SYSTEMTIME date;
+	SYSTEMTIME date1;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
 //<<<<<<< Updated upstream
@@ -78,6 +78,8 @@ public:
 	CString m_edit2;
 	CString m_edit3;
 	afx_msg void OnBnClickedButton9();
+	Food tmp;
+	CShowInfoDialog* m_pShowInfoDlg;
 //	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
 

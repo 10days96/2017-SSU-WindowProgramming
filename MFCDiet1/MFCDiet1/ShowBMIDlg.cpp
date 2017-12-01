@@ -58,10 +58,15 @@ BOOL CShowBMIDlg::OnInitDialog()
 	else
 		SetDlgItemText(IDC_EDIT_STATE, _T("비만"));
 
+	/*
 	CClientDC dc(this);
+	
 	CImage Image;
 	Image.Load(_T("BMI.png"));
 	Image.BitBlt(dc.m_hDC, 0, 400);
+	*/
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+				  
+
 }

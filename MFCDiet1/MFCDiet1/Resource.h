@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++¿¡¼­ »ı¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
-// MFCDiet1.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
+// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ì…ë‹ˆë‹¤.
+// MFCDiet1.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìˆìŠµë‹ˆë‹¤.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -69,9 +69,11 @@
 #define IDC_RADIO1                      1044
 #define IDC_Search                      1044
 #define IDC_D1_Search                   1044
+#define IDC_RADIO_MALE                  1044
 #define IDC_RADIO2                      1045
 #define IDC_CHECK_NAME                  1045
 #define ID_D1_Cholest                   1045
+#define IDC_RADIO_FEMALE                1045
 #define IDC_CHECK_PERCENT               1046
 #define ID_D1_gper6                     1046
 #define IDC_VIEW                        1047
@@ -86,6 +88,7 @@
 #define IDC_COLOR1                      1051
 #define IDC_RADIO_HIGH                  1051
 #define IDC_COLOR2                      1052
+#define IDC_EDIT_NAME                   1052
 #define IDC_COLOR3                      1053
 #define IDC_COLOR4                      1054
 #define IDC_COLOR5                      1055
@@ -98,7 +101,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1050
+#define _APS_NEXT_CONTROL_VALUE         1053
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
