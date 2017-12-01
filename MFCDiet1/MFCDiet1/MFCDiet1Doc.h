@@ -5,6 +5,18 @@
 
 #pragma once
 
+typedef struct Food {
+	//SYSTEMTIME date ;
+	CTime date_day  ;  
+	CTime date_month;
+	CTime date_year;
+	int time = 0;    //아침 점심 저녁 간식
+	CString foodname;
+	double plate;
+	double cal;
+
+
+} Food;
 
 class CMFCDiet1Doc : public CDocument
 {

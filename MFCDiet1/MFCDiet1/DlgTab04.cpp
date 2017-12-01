@@ -24,6 +24,7 @@ CDlgTab04::~CDlgTab04()
 void CDlgTab04::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_List4);
 }
 
 
