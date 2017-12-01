@@ -85,25 +85,25 @@ void CMFCDiet1View::OnInitialUpdate()
 	CRect rect;
 
 	m_pDialog1 = new CDlgTab01;
-	m_pDialog1->Create(IDD_DIALOG2, &m_Tab);
+	m_pDialog1->Create(IDD_TAB1, &m_Tab);
 	m_pDialog1->GetWindowRect(&rect);
 	m_pDialog1->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog1->ShowWindow(SW_SHOW);
 
 	m_pDialog2 = new CDlgTab02;
-	m_pDialog2->Create(IDD_DIALOG3, &m_Tab);
+	m_pDialog2->Create(IDD_TAB2, &m_Tab);
 	m_pDialog2->GetWindowRect(&rect);
 	m_pDialog2->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog2->ShowWindow(SW_SHOW);
 
 	m_pDialog3 = new CDlgTab03;
-	m_pDialog3->Create(IDD_DIALOG4, &m_Tab);
+	m_pDialog3->Create(IDD_TAB3, &m_Tab);
 	m_pDialog3->GetWindowRect(&rect);
 	m_pDialog3->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog3->ShowWindow(SW_SHOW);
 
 	m_pDialog4 = new CDlgTab04;
-	m_pDialog4->Create(IDD_DIALOG5, &m_Tab);
+	m_pDialog4->Create(IDD_TAB4, &m_Tab);
 	m_pDialog4->GetWindowRect(&rect);
 	m_pDialog4->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog4->ShowWindow(SW_SHOW);
