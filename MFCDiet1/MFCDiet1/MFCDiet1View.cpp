@@ -53,13 +53,13 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TAB1, m_Tab);
 }
 
-BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)
-{
-	// TODO: CREATESTRUCT cs를 수정하여 여기에서
-	//  Window 클래스 또는 스타일을 수정합니다.
-
-	return CFormView::PreCreateWindow(cs);
-}
+//BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)
+//{
+//	// TODO: CREATESTRUCT cs를 수정하여 여기에서
+//	//  Window 클래스 또는 스타일을 수정합니다.
+//
+//	return CFormView::PreCreateWindow(cs);
+//}
 
 void CMFCDiet1View::OnInitialUpdate()
 {
@@ -138,3 +138,6 @@ void CMFCDiet1View::OnBnClickedButtonChart()
 	CPieChartDlg dlg;
 	dlg.DoModal();
 }
+=======
+
+>>>>>>> Stashed changes
