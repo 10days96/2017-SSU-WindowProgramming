@@ -50,13 +50,13 @@ public:
 	CTabCtrl m_Tab;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 	afx_msg void OnBnClickedButtonUserinfo();
 	afx_msg void OnBnClickedButtonBmi();
 	afx_msg void OnBnClickedButtonChart();
-=======
+//=======
 //	virtual void PostNcDestroy();
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
