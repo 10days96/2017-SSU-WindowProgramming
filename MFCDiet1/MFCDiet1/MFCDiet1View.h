@@ -63,6 +63,7 @@ public:
 	CDlgTab03 *m_pDialog3;
 	CDlgTab04 *m_pDialog4;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedButton9();
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

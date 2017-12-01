@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON_BMI, &CMFCDiet1View::OnBnClickedButtonBmi)
 	ON_BN_CLICKED(IDC_BUTTON_CHART, &CMFCDiet1View::OnBnClickedButtonChart)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMFCDiet1View::OnTcnSelchangeTab1)
+	ON_BN_CLICKED(IDC_BUTTON9, &CMFCDiet1View::OnBnClickedButton9)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -219,4 +220,17 @@ void CMFCDiet1View::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		break;
 	}
 	*pResult = 0;
+}
+
+
+void CMFCDiet1View::OnBnClickedButton9()
+{
+	if (m_pShowInfoDlg != NULL)
+		m_pShowInfoDlg->SetFocus();
+	else {
+		m_pShowInfoDlg = new CShowInfoDialog();
+		m_pShowInfoDlg->m_pView = this;
+		m_pShowInfoDlg->Create(IDD_SHOWINFO);
+		m_pShowInfoDlg->ShowWindow(SW_SHOW);
+	}// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

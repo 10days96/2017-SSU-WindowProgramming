@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(CDlgTab04, CDialogEx)
 
 CDlgTab04::CDlgTab04(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG5, pParent)
+	: CDialogEx(IDD_TAB4, pParent)
 {
 
 }
