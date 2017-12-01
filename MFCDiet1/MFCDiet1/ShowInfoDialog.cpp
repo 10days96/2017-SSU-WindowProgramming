@@ -84,29 +84,17 @@ void CShowInfoDialog::PostNcDestroy()
 
 void CShowInfoDialog::OnBnClickedD1Search()
 {
-	/*CFile file;
-	char a[100];
-	file.Open(_T("calory.csv"),CFile::modeRead);
-	file.Read(a,100*sizeof(char));
-	file.Close();
-	AfxMessageBox(a[0]);
-	file.Close();
-	*/
 	setlocale(LC_ALL, "korea");
 	CString test = _T("");
 	char* read;
-	//CStdioFile file;
-	CFile file;
+	CStdioFile file;
+	//CFile file;
 	file.Open(_T("calory1.txt"),CFile::modeRead);
 	//file.ReadString(test);
-	UINT i = file.GetLength();
-	read = new char[100];
-	file.Read(read,100);
-	//read = UTF8toANSI(read);
-	test = CString(read);
-	//OutputDebugString(test);
+	while (1) {
+		;
+	}
 	file.Close();
-	AfxMessageBox(test);
 	
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
