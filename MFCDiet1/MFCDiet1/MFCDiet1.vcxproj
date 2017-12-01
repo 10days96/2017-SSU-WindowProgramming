@@ -224,6 +224,7 @@
     <None Include="res\MFCDiet1.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\MFCDiet1.ico" />
     <Image Include="res\MFCDiet1Doc.ico" />
     <Image Include="res\Toolbar.bmp" />

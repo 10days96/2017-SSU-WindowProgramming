@@ -51,6 +51,9 @@
     <ClInclude Include="DlgTab4.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="ShowInfoDialog.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCDiet1.cpp">
@@ -80,6 +83,9 @@
     <ClCompile Include="DlgTab4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ShowInfoDialog.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFCDiet1.rc">
@@ -99,6 +105,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
