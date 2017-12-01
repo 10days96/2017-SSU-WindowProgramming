@@ -101,7 +101,7 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_pDialog3->ShowWindow(SW_HIDE);
 	m_pDialog4->ShowWindow(SW_HIDE);
 
-	UpdateData(FALSE);
+	UpdateData(FALSE);;
 }
 
 
