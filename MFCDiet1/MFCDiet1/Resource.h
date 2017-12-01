@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ì…ë‹ˆë‹¤.
-// MFCDiet1.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìˆìŠµë‹ˆë‹¤.
+// Microsoft Visual C++¿¡¼­ »ı¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
+// MFCDiet1.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -70,22 +70,14 @@
 #define IDC_RADIO1                      1044
 #define IDC_Search                      1044
 #define IDC_D1_Search                   1044
-#define IDC_RADIO_MALE                  1044
 #define IDC_RADIO2                      1045
 #define IDC_CHECK_NAME                  1045
-#define IDC_RADIO_FEMALE                1045
 #define ID_D1_Cholest                   1045
 #define IDC_CHECK_PERCENT               1046
-#define IDC_EDIT_AGE                    1046
-#define IDC_EDIT_NAME                   1046
 #define ID_D1_gper6                     1046
 #define IDC_VIEW                        1047
 #define ID_D1_Cholest_Edit              1047
 #define IDC_LIST1                       1048
-#define IDC_EDIT_LENGTH                 1047
-#define IDC_EDIT_WEIGHT                 1048
-#define IDC_EDIT_BMI                    1049
-#define IDC_EDIT_STATE                  1050
 
 // Next default values for new objects
 // 
@@ -93,7 +85,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1051
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

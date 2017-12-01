@@ -29,14 +29,25 @@ public:
 	afx_msg void OnBnClickedD1Search();
 	//char* UTF8toANSI(char* pszCode);
 	CString m_D1_EDIT_Name;
-	CString m_D1_Kcal_Edit;
-	double m_Info_Calory;
+	//CString m_D1_Kcal_Edit;
+	//double m_Info_Amount;
+	//double m_Info_Calory;
+	//double m_Info_Carbo;
+	//double m_Info_Protein;
+	//double m_Info_Fat;
+	//double m_Info_Cholest;
+	//double m_Info_Fiber;
+	//double m_Info_Na;
+
+	afx_msg void OnEnChangeD1AmountEdit();
+	//int m_Info_Amount;
+	//double m_Info_Amount;
 	double m_Info_Carbo;
 	double m_Info_Protein;
 	double m_Info_Fat;
 	double m_Info_Cholest;
 	double m_Info_Fiber;
 	double m_Info_Na;
-	//double m_Info_
-
+	double m_Info_Calory;
+	CString m_Info_Amount;
 };
