@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(CDlgTab04, CDialogEx)
 
 CDlgTab04::CDlgTab04(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG5, pParent)
+	: CDialogEx(IDD_TAB4, pParent)
 {
 
 }
@@ -24,6 +24,7 @@ CDlgTab04::~CDlgTab04()
 void CDlgTab04::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_List4);
 }
 
 
