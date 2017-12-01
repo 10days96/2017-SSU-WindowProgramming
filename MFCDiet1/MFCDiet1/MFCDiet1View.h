@@ -4,6 +4,10 @@
 
 #pragma once
 #include "afxcmn.h"
+#include "DlgTab01.h"
+#include "DlgTab02.h"
+#include "DlgTab03.h"
+#include "DlgTab04.h"
 class CShowInfoDialog;
 
 
@@ -54,9 +58,11 @@ public:
 	afx_msg void OnBnClickedButtonUserinfo();
 	afx_msg void OnBnClickedButtonBmi();
 	afx_msg void OnBnClickedButtonChart();
-//=======
-//	virtual void PostNcDestroy();
-//>>>>>>> Stashed changes
+	CDlgTab01 *m_pDialog1;
+	CDlgTab02 *m_pDialog2;
+	CDlgTab03 *m_pDialog3;
+	CDlgTab04 *m_pDialog4;
+	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
