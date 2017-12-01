@@ -11,7 +11,7 @@
 #define IDD_DIALOG2                     320
 #define IDD_DIALOG3                     321
 #define IDD_DIALOG4                     322
-#define IDB_BITMAP1                     329
+#define IDD_DIALOG5                     332
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
@@ -31,14 +31,15 @@
 #define IDC_LIST2                       1020
 #define IDC_LIST3                       1021
 #define IDC_LIST4                       1022
+#define IDCANCEL                        1023
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        330
+#define _APS_NEXT_RESOURCE_VALUE        334
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1023
+#define _APS_NEXT_CONTROL_VALUE         1024
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
