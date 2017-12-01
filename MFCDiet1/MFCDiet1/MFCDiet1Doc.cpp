@@ -30,6 +30,10 @@ END_MESSAGE_MAP()
 CMFCDiet1Doc::CMFCDiet1Doc()
 {
 	// TODO: 여기에 일회성 생성 코드를 추가합니다.
+	user.age = 0;
+	user.length = 0;
+	user.weight = 0;
+	user.gender = 0;
 
 }
 

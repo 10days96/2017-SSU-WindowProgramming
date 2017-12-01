@@ -138,5 +138,3 @@ void CMFCDiet1View::OnBnClickedButtonChart()
 	CPieChartDlg dlg;
 	dlg.DoModal();
 }
-//
-//>>>>>>> Stashed changes
