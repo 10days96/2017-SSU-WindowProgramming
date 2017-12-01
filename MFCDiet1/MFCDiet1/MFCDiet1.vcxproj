@@ -186,6 +186,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DlgTab01.h" />
+    <ClInclude Include="DlgTab02.h" />
+    <ClInclude Include="DlgTab03.h" />
+    <ClInclude Include="DlgTab04.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MFCDiet1.h" />
     <ClInclude Include="MFCDiet1Doc.h" />
@@ -199,6 +203,10 @@
     <ClInclude Include="UserInfoDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DlgTab01.cpp" />
+    <ClCompile Include="DlgTab02.cpp" />
+    <ClCompile Include="DlgTab03.cpp" />
+    <ClCompile Include="DlgTab04.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCDiet1.cpp" />
     <ClCompile Include="MFCDiet1Doc.cpp" />

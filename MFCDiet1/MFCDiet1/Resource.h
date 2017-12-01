@@ -12,6 +12,10 @@
 #define IDD_USERINFO                    324
 #define IDD_SHOWBMI                     326
 #define IDD_PIECHART                    328
+#define IDD_TAB1                        330
+#define IDD_TAB2                        331
+#define IDD_TAB3                        332
+#define IDD_TAB4                        333
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
@@ -68,14 +72,15 @@
 #define IDC_CHECK_NAME                  1045
 #define IDC_CHECK_PERCENT               1046
 #define IDC_VIEW                        1047
+#define IDC_LIST1                       1048
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        330
+#define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1048
+#define _APS_NEXT_CONTROL_VALUE         1050
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
