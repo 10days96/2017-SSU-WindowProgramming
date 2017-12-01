@@ -20,7 +20,6 @@
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
 #define IDC_EDIT3                       1003
-#define IDC_BUTTON1                     1004
 #define ID_SHOWINFO                     1004
 #define IDC_BUTTON2                     1005
 #define IDC_BUTTON3                     1006
@@ -78,15 +77,18 @@
 #define IDC_EDIT_AGE                    1046
 #define IDC_EDIT_NAME                   1046
 #define IDC_VIEW                        1047
-//=======
-#define IDC_Search                      1044
-#define IDC_D1_Search                   1044
-//>>>>>>> Stashed changes
-#define IDC_LIST1                       1048
 #define IDC_EDIT_LENGTH                 1047
 #define IDC_EDIT_WEIGHT                 1048
+#define IDC_LIST1                       1048
 #define IDC_EDIT_BMI                    1049
 #define IDC_EDIT_STATE                  1050
+#define IDC_COLOR1                      1051
+#define IDC_COLOR2                      1052
+#define IDC_COLOR3                      1053
+#define IDC_COLOR4                      1054
+#define IDC_COLOR5                      1055
+#define IDC_COLOR6                      1056
+#define IDC_BUTTON_PIECHART                     1057
 
 // Next default values for new objects
 // 
@@ -94,7 +96,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1051
+#define _APS_NEXT_CONTROL_VALUE         1058
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
