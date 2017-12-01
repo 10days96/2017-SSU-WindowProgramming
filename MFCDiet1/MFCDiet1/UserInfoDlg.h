@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CUserInfoDlg 대화 상자입니다.
@@ -20,4 +21,16 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CEdit editAge;
+	CEdit editLength;
+	CEdit editWeight;
+	CButton radioMale;
+	CButton radioFemale;
+	int inputAge;
+	double inputLength;
+	double inputWeight;
+	BOOL inputGender;
+	afx_msg void OnBnClickedOk();
+	virtual BOOL OnInitDialog();
 };
