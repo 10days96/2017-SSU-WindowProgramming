@@ -251,8 +251,9 @@ void CShowInfoDialog::OnBnClickedOk()
 	CString Cal_str;
 	Cal_str.Format(_T("%.1lf"),m_Info_Calory);
 	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
-	m_pView->c_edit2.SetWindowText(m_Info_Amount);
-	m_pView->c_edit3.SetWindowText(Cal_str);
+	m_pView->c_edit2.SetWindowText(Cal_str);
+	m_pView->c_edit3.SetWindowText(m_Info_Amount);
+	
 	
 	CString str;
 	str.Format(_T("%s     %.3lfkcal     %.2lfÀÎºĞ"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
