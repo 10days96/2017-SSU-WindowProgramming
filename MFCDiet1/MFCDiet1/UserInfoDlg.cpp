@@ -31,6 +31,9 @@ void CUserInfoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_WEIGHT, editWeight);
 	DDX_Control(pDX, IDC_RADIO_MALE, radioMale);
 	DDX_Control(pDX, IDC_RADIO_FEMALE, radioFemale);
+	DDX_Control(pDX, IDC_RADIO_LOW, radioLow);
+	DDX_Control(pDX, IDC_RADIO_NOMAL, radioNomal);
+	DDX_Control(pDX, IDC_RADIO_HIGH, radioHigh);
 }
 
 
@@ -61,6 +64,13 @@ void CUserInfoDlg::OnBnClickedOk()
 	else if (radioFemale.GetCheck())
 		pDoc->user.gender = TRUE;
 
+	if (radioLow.GetCheck())
+		pDoc->user.exercise = 1;
+	else if (radioNomal.GetCheck())
+		pDoc->user.exercise = 2;
+	else if (radioHigh.GetCheck())
+		pDoc->user.exercise = 3;
+
 	CDialog::OnOK();
 }
 
@@ -84,6 +94,13 @@ BOOL CUserInfoDlg::OnInitDialog()
 		radioFemale.SetCheck(1);
 	else
 		radioMale.SetCheck(1);
+
+	if (pDoc->user.exercise == 1)
+		radioLow.SetCheck(1);
+	else if (pDoc->user.exercise == 2)
+		radioNomal.SetCheck(1);
+	else
+		radioHigh.SetCheck(1);
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }

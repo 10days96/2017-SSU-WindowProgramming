@@ -31,6 +31,10 @@ public:
 	double inputLength;
 	double inputWeight;
 	BOOL inputGender;
+	int inputExercise;
 	afx_msg void OnBnClickedOk();
 	virtual BOOL OnInitDialog();
+	CButton radioLow;
+	CButton radioNomal;
+	CButton radioHigh;
 };

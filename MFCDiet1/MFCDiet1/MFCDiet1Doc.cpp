@@ -34,6 +34,7 @@ CMFCDiet1Doc::CMFCDiet1Doc()
 	user.length = 0;
 	user.weight = 0;
 	user.gender = 0;
+	user.exercise = 1;
 
 }
 

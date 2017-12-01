@@ -8,6 +8,8 @@
 #include "DlgTab02.h"
 #include "DlgTab03.h"
 #include "DlgTab04.h"
+#include "afxdtctl.h"
+#include "afxwin.h"
 class CShowInfoDialog;
 
 
@@ -29,7 +31,8 @@ public:
 
 // 작업입니다.
 public:
-
+	CString str;
+	CList<Food, Food> list;
 // 재정의입니다.
 public:
 //	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
@@ -52,6 +55,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CTabCtrl m_Tab;
+	int select;
+	Food tmp;
+	SYSTEMTIME date;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
 //<<<<<<< Updated upstream
@@ -63,7 +69,16 @@ public:
 	CDlgTab03 *m_pDialog3;
 	CDlgTab04 *m_pDialog4;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult);
+	CMonthCalCtrl m_date;
+	CEdit c_edit1;
+	CEdit c_edit2;
+	CEdit c_edit3;
+	CString m_edit1;
+	CString m_edit2;
+	CString m_edit3;
 	afx_msg void OnBnClickedButton9();
+//	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
