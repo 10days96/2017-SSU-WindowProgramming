@@ -19,6 +19,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+#define SAFE_DELETE(p) {if(p){delete p; p=NULL;}}
 
 
 // CMFCDiet1View
@@ -31,6 +32,7 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON_USERINFO, &CMFCDiet1View::OnBnClickedButtonUserinfo)
 	ON_BN_CLICKED(IDC_BUTTON_BMI, &CMFCDiet1View::OnBnClickedButtonBmi)
 	ON_BN_CLICKED(IDC_BUTTON_CHART, &CMFCDiet1View::OnBnClickedButtonChart)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMFCDiet1View::OnTcnSelchangeTab1)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -40,11 +42,18 @@ CMFCDiet1View::CMFCDiet1View()
 {
 	m_pShowInfoDlg = NULL;
 	// TODO: 여기에 생성 코드를 추가합니다.
-
+	m_pDialog1 = NULL;
+	m_pDialog2 = NULL;
+	m_pDialog3 = NULL;
+	m_pDialog4 = NULL;
 }
 
 CMFCDiet1View::~CMFCDiet1View()
 {
+	SAFE_DELETE(m_pDialog1);
+	SAFE_DELETE(m_pDialog2);
+	SAFE_DELETE(m_pDialog3);
+	SAFE_DELETE(m_pDialog4);
 }
 
 void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
@@ -67,6 +76,44 @@ void CMFCDiet1View::OnInitialUpdate()
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
 
+	m_Tab.DeleteAllItems();
+	m_Tab.InsertItem(0, L"아침", 0);
+	m_Tab.InsertItem(1, L"점심", 0);
+	m_Tab.InsertItem(2, L"저녁", 0);
+	m_Tab.InsertItem(3, L"간식", 0);
+
+	CRect rect;
+
+	m_pDialog1 = new CDlgTab01;
+	m_pDialog1->Create(IDD_TAB1, &m_Tab);
+	m_pDialog1->GetWindowRect(&rect);
+	m_pDialog1->MoveWindow(5, 25, rect.Width(), rect.Height());
+	m_pDialog1->ShowWindow(SW_SHOW);
+
+	m_pDialog2 = new CDlgTab02;
+	m_pDialog2->Create(IDD_TAB2, &m_Tab);
+	m_pDialog2->GetWindowRect(&rect);
+	m_pDialog2->MoveWindow(5, 25, rect.Width(), rect.Height());
+	m_pDialog2->ShowWindow(SW_SHOW);
+
+	m_pDialog3 = new CDlgTab03;
+	m_pDialog3->Create(IDD_TAB3, &m_Tab);
+	m_pDialog3->GetWindowRect(&rect);
+	m_pDialog3->MoveWindow(5, 25, rect.Width(), rect.Height());
+	m_pDialog3->ShowWindow(SW_SHOW);
+
+	m_pDialog4 = new CDlgTab04;
+	m_pDialog4->Create(IDD_TAB4, &m_Tab);
+	m_pDialog4->GetWindowRect(&rect);
+	m_pDialog4->MoveWindow(5, 25, rect.Width(), rect.Height());
+	m_pDialog4->ShowWindow(SW_SHOW);
+
+	m_pDialog1->ShowWindow(SW_SHOW);
+	m_pDialog2->ShowWindow(SW_HIDE);
+	m_pDialog3->ShowWindow(SW_HIDE);
+	m_pDialog4->ShowWindow(SW_HIDE);
+
+	UpdateData(FALSE);
 }
 
 
@@ -138,5 +185,38 @@ void CMFCDiet1View::OnBnClickedButtonChart()
 	CPieChartDlg dlg;
 	dlg.DoModal();
 }
-//
-//>>>>>>> Stashed changes
+
+
+void CMFCDiet1View::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	int select = m_Tab.GetCurSel();
+	switch (select)
+	{
+	case 0:
+		m_pDialog1->ShowWindow(SW_SHOW);
+		m_pDialog2->ShowWindow(SW_HIDE);
+		m_pDialog3->ShowWindow(SW_HIDE);
+		m_pDialog4->ShowWindow(SW_HIDE);
+		break;
+	case 1:
+		m_pDialog1->ShowWindow(SW_HIDE);
+		m_pDialog2->ShowWindow(SW_SHOW);
+		m_pDialog3->ShowWindow(SW_HIDE);
+		m_pDialog4->ShowWindow(SW_HIDE);
+		break;
+	case 2:
+		m_pDialog1->ShowWindow(SW_HIDE);
+		m_pDialog2->ShowWindow(SW_HIDE);
+		m_pDialog3->ShowWindow(SW_SHOW);
+		m_pDialog4->ShowWindow(SW_HIDE);
+		break;
+	case 3:
+		m_pDialog1->ShowWindow(SW_HIDE);
+		m_pDialog2->ShowWindow(SW_HIDE);
+		m_pDialog3->ShowWindow(SW_HIDE);
+		m_pDialog4->ShowWindow(SW_SHOW);
+		break;
+	}
+	*pResult = 0;
+}
