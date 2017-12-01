@@ -14,8 +14,6 @@ typedef struct Food {
 	CString foodname;
 	double plate;
 	double cal;
-
-
 } Food;
 
 class CMFCDiet1Doc : public CDocument
