@@ -173,12 +173,12 @@ BOOL CPieChartDlg::OnInitDialog()
 	init_y = rectView.CenterPoint().y;
 	width = rectView.Width() / 2.0;
 	height = rectView.Height() / 2.0;
-	InputValue[0] = 1;
-	InputValue[1] = 2;
-	InputValue[2] = 3;
-	InputValue[3] = 4;
-	InputValue[4] = 5;
-	InputValue[5] = 6;
+	InputValue[0] = 0;
+	InputValue[1] = 0;
+	InputValue[2] = 0;
+	InputValue[3] = 0;
+	InputValue[4] = 0;
+	InputValue[5] = 0;
 	PiDraw = false;
 	percent = _T("%");
 	pieColor[0] = RGB(255, 0, 0);
@@ -187,6 +187,7 @@ BOOL CPieChartDlg::OnInitDialog()
 	pieColor[3] = RGB(200, 50, 200);
 	pieColor[4] = RGB(50, 200, 200);
 	pieColor[5] = RGB(200, 200, 50);
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -408,6 +409,13 @@ void CPieChartDlg::OnBnClickedButton1()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int TotalSum;
 	int i;
+
+	InputValue[0] = 1;
+	InputValue[1] = 2;
+	InputValue[2] = 3;
+	InputValue[3] = 4;
+	InputValue[4] = 5;
+	InputValue[5] = 6;
 	UpdateData(1);
 
 	TotalSum = InputValue[0] + InputValue[1] + InputValue[2] + InputValue[3] + InputValue[4] + InputValue[5];

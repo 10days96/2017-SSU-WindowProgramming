@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ÏóêÏÑú ÏÉùÏÑ±Ìïú Ìè¨Ìï® ÌååÏùºÏûÖÎãàÎã§.
-// MFCDiet1.rcÏóêÏÑú ÏÇ¨Ïö©ÎêòÍ≥† ÏûàÏäµÎãàÎã§.
+// Microsoft Visual C++ø°º≠ ª˝º∫«— ∆˜«‘ ∆ƒ¿œ¿‘¥œ¥Ÿ.
+// MFCDiet1.rcø°º≠ ªÁøÎµ«∞Ì ¿÷Ω¿¥œ¥Ÿ.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -80,19 +80,21 @@
 #define ID_D1_gper6                     1046
 #define IDC_VIEW                        1047
 #define ID_D1_Cholest_Edit              1047
-#define IDC_LIST1                       1048
 #define IDC_EDIT_LENGTH                 1047
-#define IDC_EDIT_WEIGHT                 1048
 #define IDC_LIST1                       1048
+#define IDC_EDIT_WEIGHT                 1048
 #define IDC_EDIT_BMI                    1049
+#define IDC_RADIO_LOW                   1049
 #define IDC_EDIT_STATE                  1050
+#define IDC_RADIO_NOMAL                 1050
 #define IDC_COLOR1                      1051
+#define IDC_RADIO_HIGH                  1051
 #define IDC_COLOR2                      1052
 #define IDC_COLOR3                      1053
 #define IDC_COLOR4                      1054
 #define IDC_COLOR5                      1055
 #define IDC_COLOR6                      1056
-#define IDC_BUTTON_PIECHART                     1057
+#define IDC_BUTTON_PIECHART             1057
 
 // Next default values for new objects
 // 
@@ -100,7 +102,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1048
+#define _APS_NEXT_CONTROL_VALUE         1050
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

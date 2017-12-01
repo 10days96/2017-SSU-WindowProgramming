@@ -32,6 +32,7 @@ public:
 		double length;
 		double weight;
 		BOOL gender;
+		int exercise;
 	} UserInfo;
 
 	UserInfo user;
