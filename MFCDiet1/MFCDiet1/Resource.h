@@ -67,11 +67,16 @@
 #define ID_D1_Kcal_Edit                 1041
 #define ID_D1_Amount_Edit               1042
 #define IDC_RESET                       1043
+//<<<<<<< Updated upstream
 #define IDC_RADIO1                      1044
 #define IDC_RADIO2                      1045
 #define IDC_CHECK_NAME                  1045
 #define IDC_CHECK_PERCENT               1046
 #define IDC_VIEW                        1047
+//=======
+#define IDC_Search                      1044
+#define IDC_D1_Search                   1044
+//>>>>>>> Stashed changes
 #define IDC_LIST1                       1048
 
 // Next default values for new objects
@@ -80,7 +85,11 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        338
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1050
+//<<<<<<< Updated upstream
+#define _APS_NEXT_CONTROL_VALUE         1048
+//=======
+#define _APS_NEXT_CONTROL_VALUE         1045
+//>>>>>>> Stashed changes
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

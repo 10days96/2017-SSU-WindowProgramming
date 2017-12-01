@@ -114,6 +114,9 @@
     <None Include="res\MFCDiet1.rc2">
       <Filter>리소스 파일</Filter>
     </None>
+    <None Include="..\..\..\..\..\Desktop\소프트웨어\전공\2학년\2학기\윈도우프로그래밍\칼로리데이터\calory.csv">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MFCDiet1Doc.ico">

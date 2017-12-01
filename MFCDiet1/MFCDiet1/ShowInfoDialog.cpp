@@ -7,6 +7,8 @@
 #include "afxdialogex.h"
 #include "MFCDiet1Doc.h"
 #include "MFCDiet1View.h"
+#include <locale.h>
+#include <Windows.h>
 
 
 // CShowInfoDialog 대화 상자입니다.
@@ -14,7 +16,7 @@
 IMPLEMENT_DYNAMIC(CShowInfoDialog, CDialog)
 
 CShowInfoDialog::CShowInfoDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(IDD_DIALOG1, pParent)
+	: CDialog(IDD_SHOWINFO, pParent)
 {
 
 }
@@ -32,6 +34,8 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CShowInfoDialog, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDCANCEL, &CShowInfoDialog::OnBnClickedCancel)
+	//ON_BN_CLICKED(IDC_D1_Search, &CShowInfoDialog::OnBnClickedD1Search)
+	ON_BN_CLICKED(IDC_D1_Search, &CShowInfoDialog::OnBnClickedD1Search)
 END_MESSAGE_MAP()
 
 
@@ -57,6 +61,71 @@ END_MESSAGE_MAP()
 
 void CShowInfoDialog::OnBnClickedCancel()
 {
+	DestroyWindow();
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CDialog::OnCancel();
+	//CDialog::OnCancel();
 }
+
+
+void CShowInfoDialog::PostNcDestroy()
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	m_pView->m_pShowInfoDlg = NULL;
+	delete this;
+	//CDialog::PostNcDestroy();
+}
+
+
+/*void CShowInfoDialog::OnBnClickedButton2()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+*/
+
+void CShowInfoDialog::OnBnClickedD1Search()
+{
+	/*CFile file;
+	char a[100];
+	file.Open(_T("calory.csv"),CFile::modeRead);
+	file.Read(a,100*sizeof(char));
+	file.Close();
+	AfxMessageBox(a[0]);
+	file.Close();
+	*/
+	setlocale(LC_ALL, "korea");
+	CString test = _T("");
+	char* read;
+	//CStdioFile file;
+	CFile file;
+	file.Open(_T("calory1.txt"),CFile::modeRead);
+	//file.ReadString(test);
+	UINT i = file.GetLength();
+	read = new char[100];
+	file.Read(read,100);
+	//read = UTF8toANSI(read);
+	test = CString(read);
+	//OutputDebugString(test);
+	file.Close();
+	AfxMessageBox(test);
+	
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+/*
+char* CShowInfoDialog::UTF8toANSI(char* pszCode)stn 
+{
+	BSTR    bstrWide;
+	char*   pszAnsi = NULL;
+	int     nLength;
+	nLength = MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, NULL, NULL);
+	bstrWide = SysAllocStringLen(NULL, nLength);
+	MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, bstrWide, nLength);
+	nLength = WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, NULL, 0, NULL, NULL);
+	pszAnsi = new char[nLength];
+	WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, pszAnsi, nLength, NULL, NULL);
+	SysFreeString(bstrWide);
+
+	return pszAnsi;
+	//return nullptr;
+}
+*/

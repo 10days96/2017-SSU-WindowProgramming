@@ -32,7 +32,7 @@ public:
 
 // 재정의입니다.
 public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+//	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 	virtual void OnInitialUpdate(); // 생성 후 처음 호출되었습니다.
@@ -54,6 +54,7 @@ public:
 	CTabCtrl m_Tab;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
+//<<<<<<< Updated upstream
 	afx_msg void OnBnClickedButtonUserinfo();
 	afx_msg void OnBnClickedButtonBmi();
 	afx_msg void OnBnClickedButtonChart();
