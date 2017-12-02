@@ -29,6 +29,7 @@ CShowInfoDialog::CShowInfoDialog(CWnd* pParent /*=NULL*/)
 	, m_Info_Calory(0)
 	, m_Info_Amount(_T("1"))
 	, m_Info_Date(_T(""))
+	, m_Info_meal(0)
 {
 	//m_Info_Date.Format(_T("%4d-%2d-%2d"),m_pView->date.wYear,
 		//m_pView->date.wMonth,m_pView->date.wDay);
@@ -56,6 +57,8 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, ID_D1_Kcal_Edit, m_Info_Calory);
 	DDX_Text(pDX, ID_D1_Amount_Edit, m_Info_Amount);
 	DDX_Text(pDX, ID_D1_Date_Edit, m_Info_Date);
+	DDX_CBIndex(pDX, ID_D1_Meal_combo, m_Info_meal);
+	DDX_Control(pDX, ID_D1_Meal_combo, m_Info_Combo);
 }
 
 
@@ -67,6 +70,7 @@ BEGIN_MESSAGE_MAP(CShowInfoDialog, CDialog)
 	ON_EN_CHANGE(ID_D1_Amount_Edit, &CShowInfoDialog::OnEnChangeD1AmountEdit)
 	ON_BN_CLICKED(IDOK, &CShowInfoDialog::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CShowInfoDialog::OnBnClickedCancel)
+	ON_BN_CLICKED(IDC_RESET, &CShowInfoDialog::OnBnClickedReset)
 END_MESSAGE_MAP()
 
 
@@ -244,12 +248,23 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit()
 void CShowInfoDialog::OnBnClickedOk()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+	GetDlgItemText(ID_D1_Amount_Edit, m_Info_Amount);
+	GetDlgItemText(ID_D1_Name_Edit, m_D1_EDIT_Name);
+	m_Info_Calory = *(double *)GetDlgItem(ID_D1_Kcal_Edit);
+	m_Info_meal = *(double *)GetDlgItem(ID_D1_Amount_Edit);
+	m_Info_Carbo = *(double *)GetDlgItem(ID_D1_Carbo_Edit);
+	m_Info_Protein = *(double *)GetDlgItem(ID_D1_Protein_Edit);
+	m_Info_Fat = *(double *)GetDlgItem(ID_D1_Fat_Edit);
+	m_Info_Cholest = *(double *)GetDlgItem(ID_D1_Cholest_Edit);
+	m_Info_Fiber = *(double *)GetDlgItem(ID_D1_Fiber_Edit);
+	m_Info_Na = *(double *)GetDlgItem(ID_D1_Na_Edit);
+
 	m_pView->tmp.foodname = m_D1_EDIT_Name;
 	m_pView->tmp.plate=_wtof(m_Info_Amount);
 	m_pView->tmp.cal = m_Info_Calory;
 	CString Cal_str;
 	Cal_str.Format(_T("%.1lf"),m_Info_Calory);
+	//AfxMessageBox(Cal_str);
 	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
 	m_pView->c_edit2.SetWindowText(Cal_str);
 	m_pView->c_edit3.SetWindowText(m_Info_Amount);
@@ -257,7 +272,22 @@ void CShowInfoDialog::OnBnClickedOk()
 	
 	CString str;
 	str.Format(_T("%s     %.3lfkcal     %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
-	m_pView->m_pDialog1->m_List1.AddString(str);
+	CString a;
+	//a.Format(_T("%d"),m_Info_meal);
+	//AfxMessageBox(a);
+
+	if (m_Info_Combo.GetCurSel() == 0) {
+		m_pView->m_pDialog1->m_List1.AddString(str);
+	}
+	else if (m_Info_Combo.GetCurSel() == 1) {
+		m_pView ->m_pDialog2->m_List2.AddString(str);
+	}
+	else if (m_Info_Combo.GetCurSel() == 2) {
+		m_pView->m_pDialog3->m_List3.AddString(str);
+	}
+	else if (m_Info_Combo.GetCurSel() == 3) {
+		m_pView->m_pDialog4->m_List4.AddString(str);
+	}
 	CDialog::OnOK();
 }
 
@@ -284,13 +314,30 @@ BOOL CShowInfoDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	SYSTEMTIME date;
-	//::ZeroMemory(reinterpret_cast<void*>(&time),sizeof(date));
 	m_pView -> m_date.GetCurSel(&date);
 	m_Info_Date.Format(_T("%4d-%2d-%2d"), date.wYear,
 		date.wMonth, date.wDay);
 	SetDlgItemText(ID_D1_Date_Edit,m_Info_Date);
+	//m_Info_meal = 0;
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+}
+
+
+void CShowInfoDialog::OnBnClickedReset()
+{
+	UpdateData(FALSE);
+
+	SetDlgItemText(ID_D1_Name_Edit, _T(""));
+	SetDlgItemText(ID_D1_Kcal_Edit, _T(""));
+	SetDlgItemText(ID_D1_Carbo_Edit, _T(""));
+	SetDlgItemText(ID_D1_Protein_Edit, _T(""));
+	SetDlgItemText(ID_D1_Fat_Edit, _T(""));
+	SetDlgItemText(ID_D1_Cholest_Edit, _T(""));
+	SetDlgItemText(ID_D1_Fiber_Edit, _T(""));
+	SetDlgItemText(ID_D1_Na_Edit, _T(""));
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
