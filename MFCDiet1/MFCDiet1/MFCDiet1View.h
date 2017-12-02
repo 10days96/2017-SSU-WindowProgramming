@@ -31,7 +31,7 @@ public:
 // 작업입니다.
 public:
 	CString str;
-	CList<Food, Food> list;
+
 // 재정의입니다.
 public:
 //	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
