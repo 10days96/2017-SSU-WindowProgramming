@@ -57,10 +57,8 @@ BOOL CShowBMIDlg::OnInitDialog()
 		SetDlgItemText(IDC_EDIT_STATE, _T("과체중"));
 	else
 		SetDlgItemText(IDC_EDIT_STATE, _T("비만"));
-
 	/*
 	CClientDC dc(this);
-	
 	CImage Image;
 	Image.Load(_T("BMI.png"));
 	Image.BitBlt(dc.m_hDC, 0, 400);

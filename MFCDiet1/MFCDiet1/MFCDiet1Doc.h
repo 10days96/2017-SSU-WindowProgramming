@@ -34,6 +34,7 @@ public:
 	} UserInfo;
 
 	UserInfo user;
+	CList<Food, Food> list;
 
 // 작업입니다.
 public:

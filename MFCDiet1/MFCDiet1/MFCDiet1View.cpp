@@ -267,10 +267,10 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 	m_pDialog3->m_List3.ResetContent();
 	m_pDialog4->m_List4.ResetContent();
 
-	POSITION pos = list.GetHeadPosition();
+	POSITION pos = pDoc -> list.GetHeadPosition();
 
 	while (pos != NULL) {
-		tmp = list.GetNext(pos);
+		tmp = pDoc->list.GetNext(pos);
 	
 		str.Format(_T("%s   %.3lfkcal  %.2lf인분"),tmp.foodname, tmp.cal, tmp.plate);
 
@@ -314,7 +314,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//CDlgTab01 *Tab1;
 	//m_pDialog1 = new CDlgTab01;
-
+	CMFCDiet1Doc *pDoc = GetDocument();
 
 	//if (m_pShowInfoDlg != NULL) {
 		//m_pShowInfoDlg->SetFocus();
@@ -357,7 +357,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 	c_edit3.GetWindowText(str);
 	double input_plate = _wtof(str);
 	tmp.plate = input_plate;
-	list.AddTail(tmp);
+	pDoc->list.AddTail(tmp);
 
 		
 	/*str.Format(_T("%s     %.3lfkcal     %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);

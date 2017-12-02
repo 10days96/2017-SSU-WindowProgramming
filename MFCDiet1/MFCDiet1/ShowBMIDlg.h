@@ -10,6 +10,8 @@ class CShowBMIDlg : public CDialog
 public:
 	CShowBMIDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
 	virtual ~CShowBMIDlg();
+	HBITMAP m_hBitmap;
+	BITMAP m_bBit;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME

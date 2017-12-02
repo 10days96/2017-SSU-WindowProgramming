@@ -230,6 +230,8 @@
     <None Include="res\MFCDiet1.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\BMI.bmp" />
+    <Image Include="res\BMI.png" />
     <Image Include="res\MFCDiet1.ico" />
     <Image Include="res\MFCDiet1Doc.ico" />
     <Image Include="res\Toolbar.bmp" />
