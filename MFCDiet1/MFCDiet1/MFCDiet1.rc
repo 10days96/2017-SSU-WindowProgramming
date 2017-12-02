@@ -215,11 +215,11 @@ BEGIN
     LTEXT           "날짜:",ID_D1_Date,18,42,14,8
     EDITTEXT        ID_D1_Date_Edit,48,36,102,14,ES_AUTOHSCROLL
     LTEXT           "이름:",ID_D1_Name,18,66,14,8
-    EDITTEXT        ID_D1_Name_Edit,48,60,60,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Name_Edit,48,60,60,14,ES_AUTOHSCROLL,WS_EX_ACCEPTFILES
     LTEXT           "열랑:",ID_D1_Calory,18,90,14,8
     EDITTEXT        ID_D1_Kcal_Edit,48,84,60,14,ES_AUTOHSCROLL
     LTEXT           "섭취량:",ID_D1_Amount,18,114,19,8
-    EDITTEXT        ID_D1_Amount_Edit,48,108,66,14,ES_AUTOHSCROLL
+    EDITTEXT        ID_D1_Amount_Edit,50,110,66,14,ES_AUTOHSCROLL
     PUSHBUTTON      "검색",IDC_D1_Search,114,60,30,14
     LTEXT           "kcal/인분",ID_D1_kcalper1,114,90,30,8
     LTEXT           "인분",IDC_STATIC,120,114,12,8

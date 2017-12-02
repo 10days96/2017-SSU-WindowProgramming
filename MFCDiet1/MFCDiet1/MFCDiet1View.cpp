@@ -316,16 +316,29 @@ void CMFCDiet1View::OnBnClickedButton9()
 	//m_pDialog1 = new CDlgTab01;
 
 
-
-	CMFCDiet1Doc *pDoc = GetDocument();
-	//Food tmp;
-	CString str;
-	//SYSTEMTIME date;
-	//CTime date_day;
+	//if (m_pShowInfoDlg != NULL) {
+		//m_pShowInfoDlg->SetFocus();
+		//AfxMessageBox(_T("호에"));
+	//}
 	m_date.GetCurSel(&date);
 	tmp.date_day = date.wDay;
 	tmp.date_month = date.wMonth;
 	tmp.date_year = date.wYear;
+	//else {
+		m_pShowInfoDlg = new CShowInfoDialog();
+		m_pShowInfoDlg->m_pView = this;
+		m_pShowInfoDlg->Create(IDD_SHOWINFO);
+		m_pShowInfoDlg->ShowWindow(SW_SHOW);
+	//}// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	
+	//CMFCDiet1Doc *pDoc = GetDocument();
+	//Food tmp;
+	//CShowInfoDialog dlg;
+	//m_pShowInfoDlg ->DoModal();
+	CString str;
+	//SYSTEMTIME date;
+	//CTime date_day;
+
 	CString SelectDate;
 	
 
@@ -346,7 +359,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 	list.AddTail(tmp);
 
 		
-	str.Format(_T("%s     %.3lfkcal     %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
+	/*str.Format(_T("%s     %.3lfkcal     %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
 		if (tmp.time == 0 ) {
 			m_pDialog1->m_List1.AddString(str);
 		}
@@ -359,7 +372,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 		else if (tmp.time == 3) {
 			m_pDialog4->m_List4.AddString(str);
 		}
-	//}
+	//}*/
 	
 }
 
