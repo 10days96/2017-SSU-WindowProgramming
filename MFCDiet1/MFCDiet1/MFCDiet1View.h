@@ -95,6 +95,7 @@ public:
 	void SumTotalCalorie(CMFCDiet1Doc* pDoc);
 	double totalCalorie;
 	CEdit m_total_cal;
+	CEdit m_encour_cal;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

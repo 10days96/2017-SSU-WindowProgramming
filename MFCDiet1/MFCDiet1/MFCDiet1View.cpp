@@ -83,6 +83,7 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT2, m_edit2);
 	DDX_Text(pDX, IDC_EDIT3, m_edit3);
 	DDX_Control(pDX, IDC_TOTAL_CAL, m_total_cal);
+	DDX_Control(pDX, IDC_ENCOUR_CAL, m_encour_cal);
 }
 
 //BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)
@@ -144,6 +145,19 @@ void CMFCDiet1View::OnInitialUpdate()
 		CUserInfoDlg dlg;
 		dlg.DoModal();
 	}
+
+	CString str;
+	int exeState;
+
+	if (pDoc->user.exercise == 1)
+		exeState = 25;
+	else if (pDoc->user.exercise == 2)
+		exeState = 32;
+	else if (pDoc->user.exercise == 3)
+		exeState = 40;
+
+	str.Format(_T("%.2lf"), (pDoc->user.length-100)*0.9*exeState);
+	m_encour_cal.SetWindowTextW(str);
 }
 
 
@@ -201,6 +215,19 @@ void CMFCDiet1View::OnBnClickedButtonUserinfo()
 
 	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
 		dlg.DoModal();
+
+	CString str;
+	int exeState;
+
+	if (pDoc->user.exercise == 1)
+		exeState = 25;
+	else if (pDoc->user.exercise == 2)
+		exeState = 32;
+	else if (pDoc->user.exercise == 3)
+		exeState = 40;
+
+	str.Format(_T("%.2lf"), (pDoc->user.length - 100)*0.9*exeState);
+	m_encour_cal.SetWindowTextW(str);
 }
 
 
