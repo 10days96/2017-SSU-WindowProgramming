@@ -3,7 +3,8 @@
 
 
 // CDlgTab01 대화 상자입니다.
-
+class CMFCDiet1View;
+class CMFCDiet1Doc;
 class CDlgTab01 : public CDialog
 {
 	DECLARE_DYNAMIC(CDlgTab01)
@@ -23,4 +24,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListBox m_List1;
+	CMFCDiet1View* m_pView;
+	CMFCDiet1Doc* m_pDoc;
+//	afx_msg void OnLbnSetfocusList1();
+	afx_msg void OnLbnSelchangeList1();
 };

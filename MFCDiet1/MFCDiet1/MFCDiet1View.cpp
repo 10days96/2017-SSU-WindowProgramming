@@ -340,6 +340,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 	//else {
 		m_pShowInfoDlg = new CShowInfoDialog();
 		m_pShowInfoDlg->m_pView = this;
+		m_pShowInfoDlg->meal = tmp.time;
 		m_pShowInfoDlg->Create(IDD_SHOWINFO);
 		m_pShowInfoDlg->ShowWindow(SW_SHOW);
 	//}// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
@@ -349,27 +350,26 @@ void CMFCDiet1View::OnBnClickedButton9()
 	//CShowInfoDialog dlg;
 	//m_pShowInfoDlg ->DoModal();
 	CString str;
-	//SYSTEMTIME date;
-	//CTime date_day;
+	
 
 	CString SelectDate;
 	
 
-	c_edit1.GetWindowText(str);
-	str.Format(_T(" %s "), str);
+	//c_edit1.GetWindowText(str);
+	//str.Format(_T(" %s "), str);
 
-	tmp.foodname = str;
+	//tmp.foodname = str;
 
-	c_edit2.GetWindowText(str);
-	double input_cal = _wtof(str);
-	tmp.cal = input_cal;
+	//c_edit2.GetWindowText(str);
+	//double input_cal = _wtof(str);
+	//tmp.cal = input_cal;
 
 	//tmp.a_date = date;
 
-	c_edit3.GetWindowText(str);
-	double input_plate = _wtof(str);
-	tmp.plate = input_plate;
-	pDoc->list.AddTail(tmp);
+	//c_edit3.GetWindowText(str);
+	//double input_plate = _wtof(str);
+	//tmp.plate = input_plate;
+	//pDoc->list.AddTail(tmp);
 
 		
 	/*str.Format(_T("%s     %.3lfkcal     %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
