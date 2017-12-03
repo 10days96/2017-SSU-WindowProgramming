@@ -280,13 +280,11 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	POSITION pos = pDoc->list.GetHeadPosition();
 
-	tmp = pDoc->list.GetAt(pos);
-
 	while (pos != NULL) {
-
+		tmp = pDoc->list.GetAt(pos);
 		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
 
-		if (tmp.date_day == date.wDay && tmp.date_month == date.wMonth && tmp.date_year == date.wYear) {
+		if (tmp.date_day == date.wDay && tmp.date_month == date.wMonth && tmp.date_year == date.wYear ) {
 			if (tmp.time == 0)
 				m_pDialog1->m_List1.AddString(str);
 			else if (tmp.time == 1)
@@ -418,12 +416,12 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 				pfood = pDoc->list.GetAt(pos);
-				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
+				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
 				}
-				tmp = pDoc->list.GetNext(pos);
+				pfood = pDoc->list.GetNext(pos);
 			}
 			m_pDialog1->m_List1.DeleteString(index);
 		}
@@ -436,17 +434,16 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			m_pDialog2->m_List2.GetText(index, str);
 			AfxExtractSubString(findName, str, 0, ' ');
 
-
 			POSITION pos = pDoc->list.GetHeadPosition();
 
 			while (pos != NULL) {
-
-				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
+				pfood = pDoc->list.GetAt(pos);
+				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
 				}
-				tmp = pDoc->list.GetNext(pos);
+				pfood = pDoc->list.GetNext(pos);
 			}
 			m_pDialog2->m_List2.DeleteString(index);
 		}
@@ -462,13 +459,13 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			POSITION pos = pDoc->list.GetHeadPosition();
 
 			while (pos != NULL) {
-
-				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
+				pfood = pDoc->list.GetAt(pos);
+				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
 				}
-				tmp = pDoc->list.GetNext(pos);
+				pfood = pDoc->list.GetNext(pos);
 			}
 			m_pDialog3->m_List3.DeleteString(index);
 		}
@@ -484,13 +481,13 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			POSITION pos = pDoc->list.GetHeadPosition();
 
 			while (pos != NULL) {
-
-				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
+				pfood = pDoc->list.GetAt(pos);
+				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
 				}
-				tmp = pDoc->list.GetNext(pos);
+				pfood = pDoc->list.GetNext(pos);
 			}
 			m_pDialog4->m_List4.DeleteString(index);
 		}
