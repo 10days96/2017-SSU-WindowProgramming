@@ -259,7 +259,6 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	*pResult = 0;
 
-	SYSTEMTIME date;
 	CString str;
 
 	// Calender에 선택된 날짜정보를 얻는다.
@@ -269,6 +268,8 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 	//Food tmp;
 
 	tmp.date_day = date.wDay;
+	tmp.date_month = date.wMonth;
+	tmp.date_year = date.wYear;
 
 	//str.Format(_T("%d 년 %d 월 %d 일"), date.wYear, date.wMonth, date.wDay);
 
@@ -279,8 +280,9 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	POSITION pos = pDoc->list.GetHeadPosition();
 
-	while (pos != NULL) {
+	tmp = pDoc->list.GetAt(pos);
 
+	while (pos != NULL) {
 
 		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
 
@@ -402,6 +404,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 	int index;
 	CString str, findName;
 	CMFCDiet1Doc * pDoc = GetDocument();
+	Food pfood;
 
 	if (tmp.time == 0)
 	{
@@ -414,8 +417,8 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			POSITION pos = pDoc->list.GetHeadPosition();
 
 			while (pos != NULL) {
-			
-				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				pfood = pDoc->list.GetAt(pos);
+				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -438,7 +441,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 
-				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -460,7 +463,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 
-				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -482,7 +485,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 
-				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				if (findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && tmp.time == pfood.time)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;

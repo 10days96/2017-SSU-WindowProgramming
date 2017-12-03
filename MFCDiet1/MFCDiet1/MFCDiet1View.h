@@ -57,7 +57,6 @@ public:
 	int select;
 	//Food tmp;
 	SYSTEMTIME date;
-	SYSTEMTIME date1;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
 //<<<<<<< Updated upstream
