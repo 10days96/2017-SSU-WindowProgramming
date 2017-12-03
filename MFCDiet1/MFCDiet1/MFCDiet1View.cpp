@@ -53,6 +53,13 @@ CMFCDiet1View::CMFCDiet1View()
 	m_pDialog2 = NULL;
 	m_pDialog3 = NULL;
 	m_pDialog4 = NULL;
+	totalCarbo = 0;
+	totalProtein = 0;
+	totalFat = 0;
+	totalCholest = 0;
+	totalFiber = 0;
+	totalNa = 0;
+
 }
 
 CMFCDiet1View::~CMFCDiet1View()
@@ -263,6 +270,13 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	*pResult = 0;
 
+	totalCarbo = 0;
+	totalProtein = 0;
+	totalFat = 0;
+	totalCholest = 0;
+	totalFiber = 0;
+	totalNa = 0;
+
 	CString str;
 
 	// Calender에 선택된 날짜정보를 얻는다.
@@ -297,6 +311,13 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 				m_pDialog3->m_List3.AddString(str);
 			else if (tmp.time == 3)
 				m_pDialog4->m_List4.AddString(str);
+
+			totalCarbo += tmp.Carbo;
+			totalProtein += tmp.Protein;
+			totalFat += tmp.Fat; 
+			totalCholest += tmp.Cholest;
+			totalFiber += tmp.Fiber;
+			totalNa += tmp.Na;
 		}
 		//tmp = list.GetNext(pos);
 		/*

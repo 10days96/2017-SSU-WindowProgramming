@@ -8,6 +8,7 @@
 #include "DlgTab02.h"
 #include "DlgTab03.h"
 #include "DlgTab04.h"
+#include "MFCDiet1Doc.h"
 #include "afxdtctl.h"
 #include "afxwin.h"
 class CShowInfoDialog;
@@ -81,6 +82,14 @@ public:
 	CShowInfoDialog* m_pShowInfoDlg;
 //	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedButton3();
+
+	////////////////파이 차트를 그리기 위한 영양분 총 섭취량 변수////////////////
+	double totalCarbo;
+	double totalProtein;
+	double totalFat;
+	double totalCholest;
+	double totalFiber;
+	double totalNa;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

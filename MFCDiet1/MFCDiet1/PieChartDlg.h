@@ -23,10 +23,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	float avr[6];
+	double avr[6];
 	CRect rectView;
 	CRect rectColor1, rectColor2, rectColor3, rectColor4, rectColor5, rectColor6;
-	int InputValue[6];
+	double InputValue[6];
 	int x[6], y[6];
 	int text_x[6], text_y[6];
 	int init_x, init_y;

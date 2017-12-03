@@ -310,6 +310,14 @@ void CShowInfoDialog::OnBnClickedOk()
 		m_pView->tmp.time = 3;
 	}
 	pDoc->list.AddTail(m_pView->tmp);
+	
+	/////////////////////////파이차트를 위한 영양소 총 섭취량에 현재 추가한 데이터 추가하는 코드//////////////////////
+	m_pView->totalCarbo += m_pView->tmp.Carbo;
+	m_pView->totalCholest += m_pView->tmp.Cholest;
+	m_pView->totalFat += m_pView->tmp.Fat;
+	m_pView->totalFiber += m_pView->tmp.Fiber;
+	m_pView->totalNa += m_pView->tmp.Na;
+	m_pView->totalProtein += m_pView->tmp.Protein;
 	CDialog::OnOK();
 }
 
