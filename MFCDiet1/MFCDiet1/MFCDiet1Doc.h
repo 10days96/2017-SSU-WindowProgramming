@@ -14,6 +14,12 @@ typedef struct Food {
 	CString foodname;
 	double plate;
 	double cal;
+	double Carbo;
+	double Protein;
+	double Fat;
+	double Cholest;
+	double Fiber;
+	double Na;
 } Food;
 
 class CMFCDiet1Doc : public CDocument

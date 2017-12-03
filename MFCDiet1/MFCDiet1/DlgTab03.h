@@ -23,4 +23,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListBox m_List3;
+	afx_msg void OnLbnSelchangeList1();
 };

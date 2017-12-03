@@ -86,6 +86,7 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 void CMFCDiet1View::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
+	
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
 
@@ -102,6 +103,7 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_pDialog1->GetWindowRect(&rect);
 	m_pDialog1->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog1->ShowWindow(SW_SHOW);
+	//m_pDialog1->m_pView = this;
 
 	m_pDialog2 = new CDlgTab02;
 	m_pDialog2->Create(IDD_TAB2, &m_Tab);
@@ -211,6 +213,7 @@ void CMFCDiet1View::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		m_pDialog2->ShowWindow(SW_HIDE);
 		m_pDialog3->ShowWindow(SW_HIDE);
 		m_pDialog4->ShowWindow(SW_HIDE);
+		m_pDialog1->m_pView = this;
 		tmp.time = 0;
 		break;
 	case 1:
@@ -272,7 +275,7 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 	while (pos != NULL) {
 		tmp = pDoc->list.GetNext(pos);
 	
-		str.Format(_T("%s   %.3lfkcal  %.2lf인분"),tmp.foodname, tmp.cal, tmp.plate);
+		str.Format(_T("%s,%.3lfkcal,%.2lf인분"),tmp.foodname, tmp.cal, tmp.plate);
 
 		if (tmp.date_day == date.wDay && tmp.date_month == date.wMonth && tmp.date_year == date.wYear) {
 		if(tmp.time ==0)
@@ -337,27 +340,26 @@ void CMFCDiet1View::OnBnClickedButton9()
 	//CShowInfoDialog dlg;
 	//m_pShowInfoDlg ->DoModal();
 	CString str;
-	//SYSTEMTIME date;
-	//CTime date_day;
+	
 
 	CString SelectDate;
 	
 
-	c_edit1.GetWindowText(str);
-	str.Format(_T(" %s "), str);
+	//c_edit1.GetWindowText(str);
+	//str.Format(_T(" %s "), str);
 
-	tmp.foodname = str;
+	//tmp.foodname = str;
 
-	c_edit2.GetWindowText(str);
-	double input_cal = _wtof(str);
-	tmp.cal = input_cal;
+	//c_edit2.GetWindowText(str);
+	//double input_cal = _wtof(str);
+	//tmp.cal = input_cal;
 
 	//tmp.a_date = date;
 
-	c_edit3.GetWindowText(str);
-	double input_plate = _wtof(str);
-	tmp.plate = input_plate;
-	pDoc->list.AddTail(tmp);
+	//c_edit3.GetWindowText(str);
+	//double input_plate = _wtof(str);
+	//tmp.plate = input_plate;
+	//pDoc->list.AddTail(tmp);
 
 		
 	/*str.Format(_T("%s     %.3lfkcal     %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);

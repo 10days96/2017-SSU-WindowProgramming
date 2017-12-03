@@ -20,16 +20,15 @@ CShowInfoDialog::CShowInfoDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(IDD_SHOWINFO, pParent)
 	, m_D1_EDIT_Name(_T(""))
 	//, m_Info_Amount(1)
-	, m_Info_Carbo(0)
-	, m_Info_Protein(0)
-	, m_Info_Fat(0)
-	, m_Info_Cholest(0)
-	, m_Info_Fiber(0)
-	, m_Info_Na(0)
-	, m_Info_Calory(0)
 	, m_Info_Amount(_T("1"))
 	, m_Info_Date(_T(""))
-	, m_Info_meal(0)
+	, m_Info_Calory(_T(""))
+	, m_Info_Carbo(_T(""))
+	, m_Info_Protein(_T(""))
+	, m_Info_Fat(_T(""))
+	, m_Info_Cholest(_T(""))
+	, m_Info_Fiber(_T(""))
+	, m_Info_Na(_T(""))
 {
 	//m_Info_Date.Format(_T("%4d-%2d-%2d"),m_pView->date.wYear,
 		//m_pView->date.wMonth,m_pView->date.wDay);
@@ -57,8 +56,15 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, ID_D1_Kcal_Edit, m_Info_Calory);
 	DDX_Text(pDX, ID_D1_Amount_Edit, m_Info_Amount);
 	DDX_Text(pDX, ID_D1_Date_Edit, m_Info_Date);
-	DDX_CBIndex(pDX, ID_D1_Meal_combo, m_Info_meal);
+	//DDX_CBIndex(pDX, ID_D1_Meal_combo, m_Info_meal);
 	DDX_Control(pDX, ID_D1_Meal_combo, m_Info_Combo);
+	DDX_Text(pDX, ID_D1_Kcal_Edit, m_Info_Calory);
+	DDX_Text(pDX, ID_D1_Carbo_Edit, m_Info_Carbo);
+	DDX_Text(pDX, ID_D1_Protein_Edit, m_Info_Protein);
+	DDX_Text(pDX, ID_D1_Fat_Edit, m_Info_Fat);
+	DDX_Text(pDX, ID_D1_Cholest_Edit, m_Info_Cholest);
+	DDX_Text(pDX, ID_D1_Fiber_Edit, m_Info_Fiber);
+	DDX_Text(pDX, ID_D1_Na_Edit, m_Info_Na);
 }
 
 
@@ -127,38 +133,41 @@ void CShowInfoDialog::OnBnClickedD1Search()
 	CString Amount;
 	int count = 0;
 	GetDlgItemText(ID_D1_Name_Edit,Find_Name);
+	if (!Find_Name.Compare(_T(""))) {
+		AfxMessageBox(_T("이름을 입력 해주세요."));
+	};
 	m_D1_EDIT_Name = Find_Name;
 
 	setlocale(LC_ALL, "");
 	file.Open(_T("calory1.txt"),CFile::modeRead);
 	while (file.ReadString(str)) {
-		if (str.Find(Find_Name) != -1) {
+		if (str.Find(Find_Name) != -1 && Find_Name.Compare(_T(""))) {
 			AfxExtractSubString(calory[0],str,1,',');
-			m_Info_Calory = _wtof(calory[0]);
+			m_Info_Calory = calory[0];
 			SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
 		
 			AfxExtractSubString(calory[1], str, 2, ',');
-			m_Info_Carbo = _wtof(calory[1]);
+			m_Info_Carbo = calory[1];
 			SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
 
 			AfxExtractSubString(calory[2], str, 3, ',');
-			m_Info_Protein = _wtof(calory[2]);
+			m_Info_Protein = calory[2];
 			SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
 
 			AfxExtractSubString(calory[3], str, 4, ',');
-			m_Info_Fat= _wtof(calory[3]);
+			m_Info_Fat= calory[3];
 			SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
 
 			AfxExtractSubString(calory[4], str, 5, ',');
-			m_Info_Cholest = _wtof(calory[4]);
+			m_Info_Cholest = calory[4];
 			SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
 
 			AfxExtractSubString(calory[5], str, 6, ',');
-			m_Info_Fiber = _wtof(calory[5]);
+			m_Info_Fiber = calory[5];
 			SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
 
 			AfxExtractSubString(calory[6], str, 7, ',');
-			m_Info_Na = _wtof(calory[6]);
+			m_Info_Na = calory[6];
 			SetDlgItemText(ID_D1_Na_Edit, calory[6]);
 			
 			break;
@@ -214,31 +223,31 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit()
 	SetDlgItemText(ID_D1_Name_Edit, m_D1_EDIT_Name);
 	UpdateData(FALSE);
 
-	Info[0] = m_Info_Calory*amount;
+	Info[0] = _wtof(m_Info_Calory)*amount;
 	calory[0].Format(_T("%.1lf"), Info[0]);
 	SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
 
-	Info[1] = m_Info_Carbo*amount;
+	Info[1] = _wtof(m_Info_Carbo)*amount;
 	calory[1].Format(_T("%.1lf"), Info[1]);
 	SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
 
-	Info[2] = m_Info_Protein*amount;
+	Info[2] = _wtof(m_Info_Protein)*amount;
 	calory[2].Format(_T("%.1lf"), Info[2]);
 	SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
 
-	Info[3] = m_Info_Fat*amount;
+	Info[3] = _wtof(m_Info_Fat)*amount;
 	calory[3].Format(_T("%.1lf"), Info[3]);
 	SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
 
-	Info[4] = m_Info_Cholest*amount;
+	Info[4] = _wtof(m_Info_Cholest)*amount;
 	calory[4].Format(_T("%.1lf"), Info[4]);
 	SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
 
-	Info[5] = m_Info_Fiber*amount;
+	Info[5] = _wtof(m_Info_Fiber)*amount;
 	calory[5].Format(_T("%.1lf"), Info[5]);
 	SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
 
-	Info[6] = m_Info_Na*amount;
+	Info[6] = _wtof(m_Info_Na)*amount;
 	calory[6].Format(_T("%.1lf"), Info[6]);
 	
 	SetDlgItemText(ID_D1_Na_Edit, calory[6]);
@@ -247,47 +256,60 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit()
 
 void CShowInfoDialog::OnBnClickedOk()
 {
+	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
+	CMFCDiet1Doc * pDoc = (CMFCDiet1Doc *)pFrame->GetActiveDocument();
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	GetDlgItemText(ID_D1_Amount_Edit, m_Info_Amount);
 	GetDlgItemText(ID_D1_Name_Edit, m_D1_EDIT_Name);
-	m_Info_Calory = *(double *)GetDlgItem(ID_D1_Kcal_Edit);
-	m_Info_meal = *(double *)GetDlgItem(ID_D1_Amount_Edit);
-	m_Info_Carbo = *(double *)GetDlgItem(ID_D1_Carbo_Edit);
-	m_Info_Protein = *(double *)GetDlgItem(ID_D1_Protein_Edit);
-	m_Info_Fat = *(double *)GetDlgItem(ID_D1_Fat_Edit);
-	m_Info_Cholest = *(double *)GetDlgItem(ID_D1_Cholest_Edit);
-	m_Info_Fiber = *(double *)GetDlgItem(ID_D1_Fiber_Edit);
-	m_Info_Na = *(double *)GetDlgItem(ID_D1_Na_Edit);
+	GetDlgItemText(ID_D1_Kcal_Edit, m_Info_Calory);
+	GetDlgItemText(ID_D1_Carbo_Edit, m_Info_Carbo);
+	GetDlgItemText(ID_D1_Protein_Edit, m_Info_Protein);
+	GetDlgItemText(ID_D1_Fat_Edit, m_Info_Fat);
+	GetDlgItemText(ID_D1_Cholest_Edit, m_Info_Cholest);
+	GetDlgItemText(ID_D1_Fiber_Edit, m_Info_Fiber);
+	GetDlgItemText(ID_D1_Na_Edit, m_Info_Na);
+
 
 	m_pView->tmp.foodname = m_D1_EDIT_Name;
 	m_pView->tmp.plate=_wtof(m_Info_Amount);
-	m_pView->tmp.cal = m_Info_Calory;
-	CString Cal_str;
-	Cal_str.Format(_T("%.1lf"),m_Info_Calory);
+	m_pView->tmp.cal = _wtof(m_Info_Calory);
+	m_pView->tmp.Carbo = _wtof(m_Info_Carbo);
+	m_pView->tmp.Protein = _wtof(m_Info_Protein);
+	m_pView->tmp.Fat = _wtof(m_Info_Fat);
+	m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
+	m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
+	m_pView->tmp.Na = _wtof(m_Info_Na);
+	//CString Cal_str;
+	//Cal_str.Format(_T("%.1lf"),m_Info_Calory);
 	//AfxMessageBox(Cal_str);
 	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
-	m_pView->c_edit2.SetWindowText(Cal_str);
+	m_pView->c_edit2.SetWindowText(m_Info_Calory);
 	m_pView->c_edit3.SetWindowText(m_Info_Amount);
 	
 	
 	CString str;
-	str.Format(_T("%s     %.3lfkcal     %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
+	str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
 	CString a;
 	//a.Format(_T("%d"),m_Info_meal);
 	//AfxMessageBox(a);
 
 	if (m_Info_Combo.GetCurSel() == 0) {
 		m_pView->m_pDialog1->m_List1.AddString(str);
+		m_pView->tmp.time = 0;
 	}
 	else if (m_Info_Combo.GetCurSel() == 1) {
 		m_pView ->m_pDialog2->m_List2.AddString(str);
+		m_pView->tmp.time = 1;
 	}
 	else if (m_Info_Combo.GetCurSel() == 2) {
 		m_pView->m_pDialog3->m_List3.AddString(str);
+		m_pView->tmp.time = 2;
 	}
 	else if (m_Info_Combo.GetCurSel() == 3) {
 		m_pView->m_pDialog4->m_List4.AddString(str);
+		m_pView->tmp.time = 3;
 	}
+	pDoc->list.AddTail(m_pView->tmp);
 	CDialog::OnOK();
 }
 
@@ -318,6 +340,7 @@ BOOL CShowInfoDialog::OnInitDialog()
 	m_Info_Date.Format(_T("%4d-%2d-%2d"), date.wYear,
 		date.wMonth, date.wDay);
 	SetDlgItemText(ID_D1_Date_Edit,m_Info_Date);
+	m_Info_Combo.SetCurSel(0);
 	//m_Info_meal = 0;
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 
