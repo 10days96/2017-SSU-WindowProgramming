@@ -53,13 +53,14 @@ CMFCDiet1View::CMFCDiet1View()
 	m_pDialog2 = NULL;
 	m_pDialog3 = NULL;
 	m_pDialog4 = NULL;
+
 	totalCarbo = 0;
 	totalProtein = 0;
 	totalFat = 0;
 	totalCholest = 0;
 	totalFiber = 0;
 	totalNa = 0;
-
+	totalCalorie = 0;
 }
 
 CMFCDiet1View::~CMFCDiet1View()
@@ -81,6 +82,7 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT1, m_edit1);
 	DDX_Text(pDX, IDC_EDIT2, m_edit2);
 	DDX_Text(pDX, IDC_EDIT3, m_edit3);
+	DDX_Control(pDX, IDC_TOTAL_CAL, m_total_cal);
 }
 
 //BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)
@@ -289,6 +291,7 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 	tmp.date_month = date.wMonth;
 	tmp.date_year = date.wYear;
 
+	SumTotalCalorie(pDoc);
 	//str.Format(_T("%d 년 %d 월 %d 일"), date.wYear, date.wMonth, date.wDay);
 
 	m_pDialog1->m_List1.ResetContent();
@@ -409,7 +412,7 @@ void CMFCDiet1View::OnBnClickedButton9()
 			m_pDialog4->m_List4.AddString(str);
 		}
 	//}*/
-	
+	SumTotalCalorie(pDoc);
 }
 
 
@@ -522,4 +525,23 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 	CString test;
 	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
 	AfxMessageBox(test);
+}
+
+void CMFCDiet1View::SumTotalCalorie(CMFCDiet1Doc* pDoc)
+{
+	POSITION pos = pDoc->list.GetHeadPosition();
+	Food pfood;
+	totalCalorie = 0;
+
+	while (pos != NULL) {
+		pfood = pDoc->list.GetAt(pos);
+		if (tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day)
+		{
+			totalCalorie += pfood.cal;
+		}
+		pfood = pDoc->list.GetNext(pos);
+	}
+	CString str;
+	str.Format(_T("%.2lf"), totalCalorie);
+	m_total_cal.SetWindowText(str);
 }

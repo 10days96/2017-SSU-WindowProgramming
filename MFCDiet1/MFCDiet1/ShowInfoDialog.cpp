@@ -318,6 +318,8 @@ void CShowInfoDialog::OnBnClickedOk()
 	m_pView->totalFiber += m_pView->tmp.Fiber;
 	m_pView->totalNa += m_pView->tmp.Na;
 	m_pView->totalProtein += m_pView->tmp.Protein;
+
+	m_pView->SumTotalCalorie(pDoc);
 	CDialog::OnOK();
 }
 

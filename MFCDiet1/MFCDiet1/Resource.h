@@ -29,6 +29,7 @@
 #define IDC_BUTTON6                     1010
 #define IDC_BUTTON_CHART                1010
 #define IDC_EDIT4                       1011
+#define IDC_TOTAL_CAL                   1011
 #define IDC_BUTTON7                     1012
 #define IDC_BUTTON_USERINFO             1012
 #define IDC_BUTTON8                     1013

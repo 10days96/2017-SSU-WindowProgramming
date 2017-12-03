@@ -90,6 +90,11 @@ public:
 	double totalCholest;
 	double totalFiber;
 	double totalNa;
+
+	/////////////////총섭취 칼로리 구하는 코드/////////////////////
+	void SumTotalCalorie(CMFCDiet1Doc* pDoc);
+	double totalCalorie;
+	CEdit m_total_cal;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
