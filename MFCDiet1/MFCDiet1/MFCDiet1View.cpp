@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_NOTIFY(MCN_SELECT, IDC_MONTHCALENDAR1, &CMFCDiet1View::OnMcnSelectMonthcalendar1)
 	ON_BN_CLICKED(IDC_BUTTON9, &CMFCDiet1View::OnBnClickedButton9)
 //	ON_NOTIFY(NM_CLICK, IDC_TAB1, &CMFCDiet1View::OnNMClickTab1)
+ON_BN_CLICKED(IDC_BUTTON3, &CMFCDiet1View::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -86,7 +87,6 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 void CMFCDiet1View::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
-	
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
 
@@ -103,7 +103,6 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_pDialog1->GetWindowRect(&rect);
 	m_pDialog1->MoveWindow(5, 25, rect.Width(), rect.Height());
 	m_pDialog1->ShowWindow(SW_SHOW);
-	//m_pDialog1->m_pView = this;
 
 	m_pDialog2 = new CDlgTab02;
 	m_pDialog2->Create(IDD_TAB2, &m_Tab);
@@ -129,6 +128,13 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_pDialog4->ShowWindow(SW_HIDE);
 
 	UpdateData(FALSE);
+
+	CMFCDiet1Doc* pDoc = GetDocument();
+	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
+	{
+		CUserInfoDlg dlg;
+		dlg.DoModal();
+	}
 }
 
 
@@ -180,9 +186,12 @@ void CMFCDiet1View::OnBnClickedButton2()
 void CMFCDiet1View::OnBnClickedButtonUserinfo()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CMFCDiet1Doc* pDoc = GetDocument();
 	CUserInfoDlg dlg;
-
 	dlg.DoModal();
+
+	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
+		dlg.DoModal();
 }
 
 
@@ -213,7 +222,6 @@ void CMFCDiet1View::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		m_pDialog2->ShowWindow(SW_HIDE);
 		m_pDialog3->ShowWindow(SW_HIDE);
 		m_pDialog4->ShowWindow(SW_HIDE);
-		m_pDialog1->m_pView = this;
 		tmp.time = 0;
 		break;
 	case 1:
@@ -264,50 +272,50 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	//str.Format(_T("%d 년 %d 월 %d 일"), date.wYear, date.wMonth, date.wDay);
 
-	
 	m_pDialog1->m_List1.ResetContent();
 	m_pDialog2->m_List2.ResetContent();
 	m_pDialog3->m_List3.ResetContent();
 	m_pDialog4->m_List4.ResetContent();
 
-	POSITION pos = pDoc -> list.GetHeadPosition();
+	POSITION pos = pDoc->list.GetHeadPosition();
 
 	while (pos != NULL) {
-		tmp = pDoc->list.GetNext(pos);
-	
-		str.Format(_T("%s,%.3lfkcal,%.2lf인분"),tmp.foodname, tmp.cal, tmp.plate);
+
+
+		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
 
 		if (tmp.date_day == date.wDay && tmp.date_month == date.wMonth && tmp.date_year == date.wYear) {
-		if(tmp.time ==0)
-			m_pDialog1->m_List1.AddString(str);
-		else if(tmp.time ==1)
-			m_pDialog2->m_List2.AddString(str);
-		else if (tmp.time == 2)
-			m_pDialog3->m_List3.AddString(str);
-		else if (tmp.time == 3)
-			m_pDialog4->m_List4.AddString(str);
+			if (tmp.time == 0)
+				m_pDialog1->m_List1.AddString(str);
+			else if (tmp.time == 1)
+				m_pDialog2->m_List2.AddString(str);
+			else if (tmp.time == 2)
+				m_pDialog3->m_List3.AddString(str);
+			else if (tmp.time == 3)
+				m_pDialog4->m_List4.AddString(str);
 		}
 		//tmp = list.GetNext(pos);
 		/*
 		if (tmp.time == 0 && tmp.a_date  == m_date.GetCurSel(&date)) {
-			
-			m_pDialog1->m_List1.AddString(str);
+
+		m_pDialog1->m_List1.AddString(str);
 		}
 		else if (tmp.time == 1 && tmp.a_date == m_date.GetCurSel(&date)) {
-			
-			m_pDialog2->m_List2.AddString(str);
+
+		m_pDialog2->m_List2.AddString(str);
 		}
 		else if (tmp.time == 2 && tmp.a_date == m_date.GetCurSel(&date)) {
-			
-			m_pDialog3->m_List3.AddString(str);
+
+		m_pDialog3->m_List3.AddString(str);
 		}
 		else if (tmp.time == 3 && tmp.a_date == m_date.GetCurSel(&date)) {
-			
-			m_pDialog4->m_List4.AddString(str);
+
+		m_pDialog4->m_List4.AddString(str);
 		}
 		*/
+
+		tmp = pDoc->list.GetNext(pos);
 	}
-	
 	
 }
 
@@ -386,3 +394,107 @@ void CMFCDiet1View::OnBnClickedButton9()
 //	int selectTab = m_Tab.GetCurSel();
 //	*pResult = 0;
 //}
+
+
+void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	int index;
+	CString str, findName;
+	CMFCDiet1Doc * pDoc = GetDocument();
+
+	if (tmp.time == 0)
+	{
+		index = m_pDialog1->m_List1.GetCurSel();
+		if (LB_ERR != index)
+		{
+			m_pDialog1->m_List1.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+			
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+			m_pDialog1->m_List1.DeleteString(index);
+		}
+	}
+	else if (tmp.time == 1)
+	{
+		index = m_pDialog2->m_List2.GetCurSel();
+		if (LB_ERR != index)
+		{
+			m_pDialog2->m_List2.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+			m_pDialog2->m_List2.DeleteString(index);
+		}
+	}
+	else if (tmp.time == 2)
+	{
+		index = m_pDialog3->m_List3.GetCurSel();
+		if (LB_ERR != index)
+		{
+			m_pDialog3->m_List3.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+		
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+			m_pDialog3->m_List3.DeleteString(index);
+		}
+	}
+	else if (tmp.time == 3)
+	{
+		index = m_pDialog4->m_List4.GetCurSel();
+		if (LB_ERR != index)
+		{
+			m_pDialog4->m_List4.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+			m_pDialog4->m_List4.DeleteString(index);
+		}
+	}
+
+	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
+	CString test;
+	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
+	AfxMessageBox(test);
+}

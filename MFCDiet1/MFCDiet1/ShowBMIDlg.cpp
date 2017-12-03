@@ -40,6 +40,8 @@ BOOL CShowBMIDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+	SetWindowText(_T("BMI 정보"));
+
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
 	CMFCDiet1Doc * pDoc = (CMFCDiet1Doc *)pFrame->GetActiveDocument();

@@ -147,8 +147,10 @@ BOOL CPieChartDlg::OnInitDialog()
 	
 	CDialog::OnInitDialog();
 
-	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	SetWindowText(_T("섭취한 영양소 원형차트"));
 
+	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	
 	//pie 틀
 	GetDlgItem(IDC_VIEW)->GetWindowRect(&rectView);
 	ScreenToClient(&rectView);
