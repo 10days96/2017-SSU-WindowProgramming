@@ -283,6 +283,9 @@ void CShowInfoDialog::OnBnClickedCancel()
 BOOL CShowInfoDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+
+	SetWindowText(_T("식단 정보"));
+
 	SYSTEMTIME date;
 	//::ZeroMemory(reinterpret_cast<void*>(&time),sizeof(date));
 	m_pView -> m_date.GetCurSel(&date);

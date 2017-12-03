@@ -78,6 +78,9 @@ void CUserInfoDlg::OnBnClickedOk()
 BOOL CUserInfoDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+
+	SetWindowText(_T("사용자 정보"));
+
 	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
 	CMFCDiet1Doc * pDoc = (CMFCDiet1Doc *)pFrame->GetActiveDocument();
 	CString str;

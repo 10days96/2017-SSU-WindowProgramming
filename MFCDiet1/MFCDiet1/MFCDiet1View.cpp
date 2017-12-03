@@ -128,6 +128,13 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_pDialog4->ShowWindow(SW_HIDE);
 
 	UpdateData(FALSE);
+
+	CMFCDiet1Doc* pDoc = GetDocument();
+	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
+	{
+		CUserInfoDlg dlg;
+		dlg.DoModal();
+	}
 }
 
 
@@ -179,9 +186,12 @@ void CMFCDiet1View::OnBnClickedButton2()
 void CMFCDiet1View::OnBnClickedButtonUserinfo()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CMFCDiet1Doc* pDoc = GetDocument();
 	CUserInfoDlg dlg;
-
 	dlg.DoModal();
+
+	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
+		dlg.DoModal();
 }
 
 
