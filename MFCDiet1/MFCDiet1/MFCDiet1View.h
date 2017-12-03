@@ -81,6 +81,7 @@ public:
 	Food tmp;
 	CShowInfoDialog* m_pShowInfoDlg;
 //	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedButton3();
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

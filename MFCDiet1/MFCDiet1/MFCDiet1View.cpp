@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_NOTIFY(MCN_SELECT, IDC_MONTHCALENDAR1, &CMFCDiet1View::OnMcnSelectMonthcalendar1)
 	ON_BN_CLICKED(IDC_BUTTON9, &CMFCDiet1View::OnBnClickedButton9)
 //	ON_NOTIFY(NM_CLICK, IDC_TAB1, &CMFCDiet1View::OnNMClickTab1)
+ON_BN_CLICKED(IDC_BUTTON3, &CMFCDiet1View::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -383,3 +384,107 @@ void CMFCDiet1View::OnBnClickedButton9()
 //	int selectTab = m_Tab.GetCurSel();
 //	*pResult = 0;
 //}
+
+
+void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	int index;
+	CString str, findName;
+	CMFCDiet1Doc * pDoc = GetDocument();
+
+	if (tmp.time == 0)
+	{
+		index = m_pDialog1->m_List1.GetCurSel();
+		if (LB_ERR != index)
+		{
+			CString str, findName;
+			m_pDialog1->m_List1.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+				
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+		}
+	}
+	else if (tmp.time == 1)
+	{
+		index = m_pDialog2->m_List2.GetCurSel();
+		if (LB_ERR != index)
+		{
+			CString str, findName;
+			m_pDialog2->m_List2.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+		}
+	}
+	else if (tmp.time == 2)
+	{
+		index = m_pDialog3->m_List3.GetCurSel();
+		if (LB_ERR != index)
+		{
+			CString str, findName;
+			m_pDialog3->m_List3.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+		
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+		}
+	}
+	else if (tmp.time == 3)
+	{
+		index = m_pDialog4->m_List4.GetCurSel();
+		if (LB_ERR != index)
+		{
+			CString str, findName;
+			m_pDialog4->m_List4.GetText(index, str);
+			AfxExtractSubString(findName, str, 0, ' ');
+
+			POSITION pos = pDoc->list.GetHeadPosition();
+
+			while (pos != NULL) {
+
+				if (findName.Compare(pDoc->list.GetAt(pos).foodname))
+				{
+					pDoc->list.RemoveAt(pos);
+					break;
+				}
+				tmp = pDoc->list.GetNext(pos);
+			}
+		}
+	}
+
+	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
+	CString test;
+	test.Format(_T("List Length: %d"), pDoc->list.GetSize());
+	AfxMessageBox(test);
+}
