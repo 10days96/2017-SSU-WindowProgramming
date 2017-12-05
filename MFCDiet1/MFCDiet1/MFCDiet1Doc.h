@@ -22,6 +22,14 @@ typedef struct Food {
 	double Na;
 } Food;
 
+typedef struct {
+	int age;
+	double length;
+	double weight;
+	BOOL gender;
+	int exercise;
+} UserInfo;
+
 class CMFCDiet1Doc : public CDocument
 {
 protected: // serialization에서만 만들어집니다.
@@ -30,14 +38,6 @@ protected: // serialization에서만 만들어집니다.
 
 // 특성입니다.
 public:
-
-	typedef struct{
-		int age;
-		double length;
-		double weight;
-		BOOL gender;
-		int exercise;
-	} UserInfo;
 
 	UserInfo user;
 	CList<Food, Food> list;

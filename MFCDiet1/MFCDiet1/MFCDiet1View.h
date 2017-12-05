@@ -96,6 +96,8 @@ public:
 	double totalCalorie;
 	CEdit m_total_cal;
 	CEdit m_encour_cal;
+	afx_msg void OnClose();
+	afx_msg void OnDestroy();
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

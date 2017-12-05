@@ -37,6 +37,8 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON9, &CMFCDiet1View::OnBnClickedButton9)
 //	ON_NOTIFY(NM_CLICK, IDC_TAB1, &CMFCDiet1View::OnNMClickTab1)
 ON_BN_CLICKED(IDC_BUTTON3, &CMFCDiet1View::OnBnClickedButton3)
+ON_WM_CLOSE()
+ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -140,13 +142,71 @@ void CMFCDiet1View::OnInitialUpdate()
 	UpdateData(FALSE);
 
 	CMFCDiet1Doc* pDoc = GetDocument();
+	
+	CStdioFile file;
+	CFileException e;
+	if (!file.Open(_T("my.dat"), CFile::modeRead, &e))
+	{
+		e.ReportError();
+		return;
+	}
+
+	///////////////불러오기///////////////////
+	CString readStr, str;
+	Food inputFood;
+	file.ReadString(readStr);
+	AfxExtractSubString(str, readStr, 0, ' ');
+	pDoc->user.age = _wtoi(str);
+	AfxExtractSubString(str, readStr, 1, ' ');
+	pDoc->user.length = _wtof(str);
+	AfxExtractSubString(str, readStr, 2, ' ');
+	pDoc->user.weight = _wtof(str);
+	AfxExtractSubString(str, readStr, 3, ' ');
+	pDoc->user.gender = _wtoi(str);
+	AfxExtractSubString(str, readStr, 4, ' ');
+	pDoc->user.exercise = _wtoi(str);
+
+	while (file.ReadString(readStr))
+	{
+		AfxExtractSubString(str, readStr, 0, ' ');
+		inputFood.date_day = _wtoi(str);
+		AfxExtractSubString(str, readStr, 1, ' ');
+		inputFood.date_month = _wtoi(str);
+		AfxExtractSubString(str, readStr, 2, ' ');
+		inputFood.date_year = _wtoi(str);
+		AfxExtractSubString(str, readStr, 3, ' ');
+		inputFood.time = _wtoi(str);
+		AfxExtractSubString(str, readStr, 4, ' ');
+		inputFood.foodname = str;                //한글 깨짐
+		AfxExtractSubString(str, readStr, 5, ' ');
+		inputFood.plate = _wtof(str);
+		AfxExtractSubString(str, readStr, 6, ' ');
+		inputFood.cal = _wtof(str);
+		AfxExtractSubString(str, readStr, 7, ' ');
+		inputFood.Carbo = _wtof(str);
+		AfxExtractSubString(str, readStr, 8, ' ');
+		inputFood.Protein = _wtof(str);
+		AfxExtractSubString(str, readStr, 9, ' ');
+		inputFood.Fat = _wtof(str);
+		AfxExtractSubString(str, readStr, 10, ' ');
+		inputFood.Cholest = _wtof(str);
+		AfxExtractSubString(str, readStr, 11, ' ');
+		inputFood.Fiber = _wtof(str);
+		AfxExtractSubString(str, readStr, 12, ' ');
+		inputFood.Na = _wtof(str);
+
+		pDoc->list.AddTail(inputFood);
+	}
+
+	file.Close();
+	
 	while (pDoc->user.age == 0 || pDoc->user.length < 0.001 || pDoc->user.weight < 0.001)
 	{
 		CUserInfoDlg dlg;
 		dlg.DoModal();
 	}
 
-	CString str;
+	CString cal;
 	int exeState;
 
 	if (pDoc->user.exercise == 1)
@@ -156,8 +216,8 @@ void CMFCDiet1View::OnInitialUpdate()
 	else if (pDoc->user.exercise == 3)
 		exeState = 40;
 
-	str.Format(_T("%.2lf"), (pDoc->user.length-100)*0.9*exeState);
-	m_encour_cal.SetWindowTextW(str);
+	cal.Format(_T("%.2lf"), (pDoc->user.length-100)*0.9*exeState);
+	m_encour_cal.SetWindowTextW(cal);
 }
 
 
@@ -571,4 +631,51 @@ void CMFCDiet1View::SumTotalCalorie(CMFCDiet1Doc* pDoc)
 	CString str;
 	str.Format(_T("%.2lf"), totalCalorie);
 	m_total_cal.SetWindowText(str);
+}
+
+
+void CMFCDiet1View::OnClose()
+{
+	CMFCDiet1Doc* pDoc = GetDocument();
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	
+	CFormView::OnClose();
+}
+
+
+void CMFCDiet1View::OnDestroy()
+{
+	CFormView::OnDestroy();
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	CMFCDiet1Doc* pDoc = GetDocument();
+	CStdioFile file;
+	CFileException e;
+	if (!file.Open(_T("my.dat"), CFile::modeWrite | CFile::modeCreate, &e))
+	{
+		e.ReportError();
+		return;
+	}
+
+
+	/////////////종료시 뷰 파괴 전 저장//////////////////
+	CString str;
+	Food pfood;
+	POSITION pos = pDoc->list.GetHeadPosition();
+
+	str.Format(_T("%d %f %f %d %d"), pDoc->user.age, pDoc->user.length, pDoc->user.weight, pDoc->user.gender, pDoc->user.exercise);
+	file.WriteString(str + "\n");
+
+	while (pos != NULL)
+	{
+		AfxMessageBox(_T("저장중"));
+		pfood = pDoc->list.GetAt(pos);
+		str.Format(_T("%d %d %d %d %s %lf %lf %lf %lf %lf %lf %lf %lf %lf"),
+			pfood.date_day, pfood.date_month, pfood.date_year, pfood.time,
+			pfood.foodname, pfood.plate, pfood.cal, pfood.Carbo, pfood.Protein, pfood.Fat, pfood.Cholest, pfood.Fiber, pfood.Na);
+		file.WriteString(str + "\n");
+		pfood = pDoc->list.GetNext(pos);
+	}
+
+	file.Close();
 }
