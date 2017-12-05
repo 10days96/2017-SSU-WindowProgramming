@@ -98,6 +98,7 @@ public:
 	CEdit m_encour_cal;
 	afx_msg void OnClose();
 	afx_msg void OnDestroy();
+	void ShowFoodList(CMFCDiet1Doc* pDoc);
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

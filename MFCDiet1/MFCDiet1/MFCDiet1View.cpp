@@ -147,8 +147,7 @@ void CMFCDiet1View::OnInitialUpdate()
 	CFileException e;
 	if (!file.Open(_T("my.dat"), CFile::modeRead, &e))
 	{
-		e.ReportError();
-		return;
+		file.Open(_T("my.dat"), CFile::modeCreate);
 	}
 
 	///////////////불러오기///////////////////
@@ -208,7 +207,6 @@ void CMFCDiet1View::OnInitialUpdate()
 
 	CString cal;
 	int exeState;
-
 	if (pDoc->user.exercise == 1)
 		exeState = 25;
 	else if (pDoc->user.exercise == 2)
@@ -218,6 +216,7 @@ void CMFCDiet1View::OnInitialUpdate()
 
 	cal.Format(_T("%.2lf"), (pDoc->user.length-100)*0.9*exeState);
 	m_encour_cal.SetWindowTextW(cal);
+	//ShowFoodList(pDoc);
 }
 
 
@@ -386,6 +385,9 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 	m_pDialog3->m_List3.ResetContent();
 	m_pDialog4->m_List4.ResetContent();
 
+
+	ShowFoodList(pDoc);
+	/*
 	POSITION pos = pDoc->list.GetHeadPosition();
 
 	while (pos != NULL) {
@@ -427,10 +429,10 @@ void CMFCDiet1View::OnMcnSelectMonthcalendar1(NMHDR *pNMHDR, LRESULT *pResult)
 
 		m_pDialog4->m_List4.AddString(str);
 		}
-		*/
+		
 
 		tmp = pDoc->list.GetNext(pos);
-	}
+	}*/
 	
 }
 
@@ -678,4 +680,34 @@ void CMFCDiet1View::OnDestroy()
 	}
 
 	file.Close();
+}
+
+
+void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
+{
+	POSITION pos = pDoc->list.GetHeadPosition();
+
+	while (pos != NULL) {
+		tmp = pDoc->list.GetAt(pos);
+		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
+
+		if (tmp.date_day == date.wDay && tmp.date_month == date.wMonth && tmp.date_year == date.wYear) {
+			if (tmp.time == 0)
+				m_pDialog1->m_List1.AddString(str);
+			else if (tmp.time == 1)
+				m_pDialog2->m_List2.AddString(str);
+			else if (tmp.time == 2)
+				m_pDialog3->m_List3.AddString(str);
+			else if (tmp.time == 3)
+				m_pDialog4->m_List4.AddString(str);
+
+			totalCarbo += tmp.Carbo;
+			totalProtein += tmp.Protein;
+			totalFat += tmp.Fat;
+			totalCholest += tmp.Cholest;
+			totalFiber += tmp.Fiber;
+			totalNa += tmp.Na;
+		}
+		tmp = pDoc->list.GetNext(pos);
+	}
 }
