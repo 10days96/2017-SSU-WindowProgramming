@@ -234,9 +234,12 @@
   <ItemGroup>
     <Image Include="res\BMI.bmp" />
     <Image Include="res\BMI.png" />
+    <Image Include="res\chart.bmp" />
+    <Image Include="res\info.bmp" />
     <Image Include="res\MFCDiet1.ico" />
     <Image Include="res\MFCDiet1Doc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\weight.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

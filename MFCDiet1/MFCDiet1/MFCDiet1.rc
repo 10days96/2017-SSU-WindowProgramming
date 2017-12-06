@@ -82,6 +82,12 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDB_BITMAP1             BITMAP                  "res\\BMI.bmp"
 
+IDB_BITMAP2             BITMAP                  "res\\chart.bmp"
+
+IDB_BITMAP3             BITMAP                  "res\\info.bmp"
+
+IDB_BITMAP4             BITMAP                  "res\\weight.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -184,9 +190,9 @@ IDD_MFCDIET1_FORM DIALOGEX 0, 0, 463, 247
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "INFO",IDC_BUTTON_USERINFO,402,24,36,30
-    PUSHBUTTON      "BMI",IDC_BUTTON_BMI,402,60,36,30
-    PUSHBUTTON      "GRAPH",IDC_BUTTON_CHART,402,96,36,30
+    PUSHBUTTON      "INFO",IDC_BUTTON_USERINFO,402,24,36,30,BS_BITMAP
+    PUSHBUTTON      "BMI",IDC_BUTTON_BMI,402,60,36,30,BS_BITMAP
+    PUSHBUTTON      "GRAPH",IDC_BUTTON_CHART,402,96,36,30,BS_BITMAP
     PUSHBUTTON      "자세히",ID_SHOWINFO,20,210,36,14
     PUSHBUTTON      "수정",IDC_BUTTON2,68,210,36,14
     PUSHBUTTON      "삭제",IDC_BUTTON3,116,210,36,14

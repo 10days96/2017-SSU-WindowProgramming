@@ -140,5 +140,14 @@
     <Image Include="res\BMI.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\chart.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\info.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\weight.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

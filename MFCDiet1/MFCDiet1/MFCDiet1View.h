@@ -101,6 +101,9 @@ public:
 	afx_msg void OnClose();
 	afx_msg void OnDestroy();
 	void ShowFoodList(CMFCDiet1Doc* pDoc);
+	CButton m_button_info;
+	CButton m_button_bmi;
+	CButton m_button_chart;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

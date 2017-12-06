@@ -19,6 +19,9 @@
 #define IDD_SHOWMORE                    334
 #define IDB_PNG1                        339
 #define IDB_BITMAP1                     340
+#define IDB_BITMAP2                     343
+#define IDB_BITMAP3                     344
+#define IDB_BITMAP4                     345
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
@@ -116,7 +119,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        343
+#define _APS_NEXT_RESOURCE_VALUE        346
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1065
 #define _APS_NEXT_SYMED_VALUE           310

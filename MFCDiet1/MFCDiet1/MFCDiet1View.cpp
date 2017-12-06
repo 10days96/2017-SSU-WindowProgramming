@@ -89,6 +89,9 @@ void CMFCDiet1View::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT3, m_edit3);
 	DDX_Control(pDX, IDC_TOTAL_CAL, m_total_cal);
 	DDX_Control(pDX, IDC_ENCOUR_CAL, m_encour_cal);
+	DDX_Control(pDX, IDC_BUTTON_USERINFO, m_button_info);
+	DDX_Control(pDX, IDC_BUTTON_BMI, m_button_bmi);
+	DDX_Control(pDX, IDC_BUTTON_CHART, m_button_chart);
 }
 
 //BOOL CMFCDiet1View::PreCreateWindow(CREATESTRUCT& cs)
@@ -104,6 +107,17 @@ void CMFCDiet1View::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
+
+	////////버튼 이미지 변경/////////////
+	CBitmap cButtonImg1;
+	CBitmap cButtonImg2;
+	CBitmap cButtonImg3;
+	cButtonImg1.LoadBitmap(IDB_BITMAP3);
+	cButtonImg2.LoadBitmap(IDB_BITMAP4);
+	cButtonImg3.LoadBitmap(IDB_BITMAP2);
+	m_button_info.SetBitmap(cButtonImg1);
+	m_button_bmi.SetBitmap(cButtonImg2);
+	m_button_chart.SetBitmap(cButtonImg3);
 
 	m_Tab.DeleteAllItems();
 	m_Tab.InsertItem(0, L"아침", 0);
