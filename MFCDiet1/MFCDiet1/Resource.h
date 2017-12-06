@@ -16,6 +16,7 @@
 #define IDD_TAB2                        331
 #define IDD_TAB3                        332
 #define IDD_TAB4                        333
+#define IDD_SHOWMORE                    334
 #define IDB_PNG1                        339
 #define IDB_BITMAP1                     340
 #define IDC_MONTHCALENDAR1              1000
@@ -92,10 +93,21 @@
 #define IDC_COLOR2                      1052
 #define IDC_EDIT_NAME                   1052
 #define IDC_COLOR3                      1053
+#define ID_D2_Name_Edit                 1053
 #define IDC_COLOR4                      1054
+#define ID_D2_Date_Edit                 1054
 #define IDC_COLOR5                      1055
+#define ID_D2_Kcal_Edit                 1055
 #define IDC_COLOR6                      1056
+#define ID_D2_Amount_Edit               1056
 #define IDC_BUTTON_PIECHART             1057
+#define ID_D2_Meal_combo                1057
+#define ID_D2_Carbo_Edit                1058
+#define ID_D2_Protein_Edit              1059
+#define ID_D2_Fat_Edit                  1060
+#define ID_D2_Cholest_Edit              1061
+#define ID_D2_Fiber_Edit                1062
+#define ID_D2_Na_Edit                   1063
 
 // Next default values for new objects
 // 
@@ -103,7 +115,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        343
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1053
+#define _APS_NEXT_CONTROL_VALUE         1065
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
