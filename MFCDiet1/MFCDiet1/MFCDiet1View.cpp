@@ -1030,9 +1030,9 @@ void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 			totalCarbo += tmp.Carbo;
 			totalProtein += tmp.Protein;
 			totalFat += tmp.Fat;
-			totalCholest += tmp.Cholest;
+			totalCholest += (tmp.Cholest)/1000;
 			totalFiber += tmp.Fiber;
-			totalNa += tmp.Na;
+			totalNa += (tmp.Na)/1000;
 		}
 		tmp = pDoc->list.GetNext(pos);
 	}

@@ -54,12 +54,14 @@ BOOL CShowBMIDlg::OnInitDialog()
 
 	if (bmi < 18.5)
 		SetDlgItemText(IDC_EDIT_STATE, _T("체중부족"));
-	else if(bmi < 23.0)
+	else if (bmi < 23.0)
 		SetDlgItemText(IDC_EDIT_STATE, _T("정상"));
-	else if (bmi  <25.0)
+	else if (bmi < 25.0)
 		SetDlgItemText(IDC_EDIT_STATE, _T("과체중"));
-	else
+	else if (bmi < 30.0)
 		SetDlgItemText(IDC_EDIT_STATE, _T("비만"));
+	else
+		SetDlgItemText(IDC_EDIT_STATE, _T("고도비만"));
 	/*
 	CClientDC dc(this);
 	CImage Image;
