@@ -15,6 +15,7 @@
 #include "UserInfoDlg.h"
 #include "ShowBMIDlg.h"
 #include "PieChartDlg.h"
+#include <locale.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -165,6 +166,8 @@ void CMFCDiet1View::OnInitialUpdate()
 	AfxExtractSubString(str, readStr, 4, ' ');
 	pDoc->user.exercise = _wtoi(str);
 
+	setlocale(LC_ALL, "");
+
 	while (file.ReadString(readStr))
 	{
 		AfxExtractSubString(str, readStr, 0, ' ');
@@ -216,7 +219,10 @@ void CMFCDiet1View::OnInitialUpdate()
 
 	cal.Format(_T("%.2lf"), (pDoc->user.length-100)*0.9*exeState);
 	m_encour_cal.SetWindowTextW(cal);
-	//ShowFoodList(pDoc);
+
+	m_date.GetCurSel(&date);
+	ShowFoodList(pDoc);
+	SumTotalCalorie(pDoc);
 }
 
 
@@ -533,7 +539,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 				pfood = pDoc->list.GetAt(pos);
-				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && pfood.time == 0)
+				if (!findName.Compare(pfood.foodname) && pfood.date_day == date.wDay && pfood.date_month == date.wMonth && pfood.date_year == date.wYear && pfood.time == 0)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -555,7 +561,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 				pfood = pDoc->list.GetAt(pos);
-				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && pfood.time == 1)
+				if (!findName.Compare(pfood.foodname) && pfood.date_day == date.wDay && pfood.date_month == date.wMonth && pfood.date_year == date.wYear && pfood.time == 1)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -577,7 +583,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 				pfood = pDoc->list.GetAt(pos);
-				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && pfood.time == 2)
+				if (!findName.Compare(pfood.foodname) && pfood.date_day == date.wDay && pfood.date_month == date.wMonth && pfood.date_year == date.wYear && pfood.time == 2)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -599,7 +605,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 			while (pos != NULL) {
 				pfood = pDoc->list.GetAt(pos);
-				if (!findName.Compare(pfood.foodname) && tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day && pfood.time == 3)
+				if (!findName.Compare(pfood.foodname) && pfood.date_day == date.wDay && pfood.date_month == date.wMonth && pfood.date_year == date.wYear && pfood.time == 3)
 				{
 					pDoc->list.RemoveAt(pos);
 					break;
@@ -609,6 +615,7 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			m_pDialog4->m_List4.DeleteString(index);
 		}
 	}
+	SumTotalCalorie(pDoc);
 
 	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
 	CString test;
@@ -624,7 +631,7 @@ void CMFCDiet1View::SumTotalCalorie(CMFCDiet1Doc* pDoc)
 
 	while (pos != NULL) {
 		pfood = pDoc->list.GetAt(pos);
-		if (tmp.date_year == pfood.date_year && tmp.date_month == pfood.date_month && tmp.date_day == pfood.date_day)
+		if (pfood.date_day == date.wDay && pfood.date_month == date.wMonth && pfood.date_year == date.wYear)
 		{
 			totalCalorie += pfood.cal;
 		}
@@ -670,7 +677,7 @@ void CMFCDiet1View::OnDestroy()
 
 	while (pos != NULL)
 	{
-		AfxMessageBox(_T("저장중"));
+//		AfxMessageBox(_T("저장중"));
 		pfood = pDoc->list.GetAt(pos);
 		str.Format(_T("%d %d %d %d %s %lf %lf %lf %lf %lf %lf %lf %lf %lf"),
 			pfood.date_day, pfood.date_month, pfood.date_year, pfood.time,
