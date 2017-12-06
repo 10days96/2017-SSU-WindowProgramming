@@ -98,12 +98,12 @@ BOOL CUserInfoDlg::OnInitDialog()
 	else
 		radioMale.SetCheck(1);
 
-	if (pDoc->user.exercise == 1)
-		radioLow.SetCheck(1);
+	if (pDoc->user.exercise == 3)
+		radioHigh.SetCheck(1);
 	else if (pDoc->user.exercise == 2)
 		radioNomal.SetCheck(1);
 	else
-		radioHigh.SetCheck(1);
+		radioLow.SetCheck(1);
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
