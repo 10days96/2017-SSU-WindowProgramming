@@ -9,6 +9,7 @@
 #include "MFCDiet1View.h"
 #include "MainFrm.h"
 #include <locale.h>
+#include "MoreDlg.h"
 #include <Windows.h>
 
 
@@ -30,10 +31,7 @@ CShowInfoDialog::CShowInfoDialog(CWnd* pParent /*=NULL*/)
 	, m_Info_Fiber(_T(""))
 	, m_Info_Na(_T(""))
 {
-	//m_Info_Date.Format(_T("%4d-%2d-%2d"),m_pView->date.wYear,
-		//m_pView->date.wMonth,m_pView->date.wDay);
-	//m_Info_Amount = 1;
-
+	
 }
 
 CShowInfoDialog::~CShowInfoDialog()
@@ -44,8 +42,6 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, ID_D1_Name_Edit, m_D1_EDIT_Name);
-	//DDX_Text(pDX, ID_D1_Kcal_Edit, m_D1_Kcal_Edit);
-	//DDX_Text(pDX, ID_D1_Amount_Edit, m_Info_Amount);
 	DDX_Text(pDX, ID_D1_Amount_Edit, m_Info_Amount);
 	DDX_Text(pDX, ID_D1_Carbo_Edit, m_Info_Carbo);
 	DDX_Text(pDX, ID_D1_Protein_Edit, m_Info_Protein);
@@ -56,7 +52,6 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, ID_D1_Kcal_Edit, m_Info_Calory);
 	DDX_Text(pDX, ID_D1_Amount_Edit, m_Info_Amount);
 	DDX_Text(pDX, ID_D1_Date_Edit, m_Info_Date);
-	//DDX_CBIndex(pDX, ID_D1_Meal_combo, m_Info_meal);
 	DDX_Control(pDX, ID_D1_Meal_combo, m_Info_Combo);
 	DDX_Text(pDX, ID_D1_Kcal_Edit, m_Info_Calory);
 	DDX_Text(pDX, ID_D1_Carbo_Edit, m_Info_Carbo);
@@ -70,7 +65,6 @@ void CShowInfoDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CShowInfoDialog, CDialog)
 	ON_WM_CTLCOLOR()
-	//ON_BN_CLICKED(IDCANCEL, &CShowInfoDialog::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_D1_Search, &CShowInfoDialog::OnBnClickedD1Search)
 	ON_BN_CLICKED(IDC_D1_Search, &CShowInfoDialog::OnBnClickedD1Search)
 	ON_EN_CHANGE(ID_D1_Amount_Edit, &CShowInfoDialog::OnEnChangeD1AmountEdit)
@@ -82,46 +76,6 @@ END_MESSAGE_MAP()
 
 // CShowInfoDialog 메시지 처리기입니다.
 
-//컨트롤 색을 바꾸는 함수
-/*HBRUSH CShowInfoDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if (pWnd->GetDlgCtrlID() == IDOK) {
-		pDC->SetTextColor(RGB(255,255,255));
-		pDC->SetBkColor(RGB(0,0,0));
-
-		return (HBRUSH)::GetStockObject(NULL_BRUSH);
-	}
-	// TODO:  여기서 DC의 특성을 변경합니다.
-
-	// TODO:  기본값이 적당하지 않으면 다른 브러시를 반환합니다.
-	return hbr;
-}*/
-
-
-/*void CShowInfoDialog::OnBnClickedCancel()
-{
-	DestroyWindow();
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//CDialog::OnCancel();
-}*/
-
-
-//void CShowInfoDialog::PostNcDestroy()
-//{
-//	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-//	m_pView->m_pShowInfoDlg = NULL;
-//	delete this;
-//	//CDialog::PostNcDestroy();
-//}
-
-
-/*void CShowInfoDialog::OnBnClickedButton2()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-}
-*/
 
 void CShowInfoDialog::OnBnClickedD1Search()
 {
@@ -176,30 +130,11 @@ void CShowInfoDialog::OnBnClickedD1Search()
 
 		}
 	}
-	//AfxMessageBox(calory[6]);
 	file.Close();
 	
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
 
-/*
-char* CShowInfoDialog::UTF8toANSI(char* pszCode)stn 
-{
-	BSTR    bstrWide;
-	char*   pszAnsi = NULL;
-	int     nLength;
-	nLength = MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, NULL, NULL);
-	bstrWide = SysAllocStringLen(NULL, nLength);
-	MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, bstrWide, nLength);
-	nLength = WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, NULL, 0, NULL, NULL);
-	pszAnsi = new char[nLength];
-	WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, pszAnsi, nLength, NULL, NULL);
-	SysFreeString(bstrWide);
-
-	return pszAnsi;
-	//return nullptr;
-}
-*/
 
 void CShowInfoDialog::OnEnChangeD1AmountEdit()
 {
@@ -209,7 +144,6 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit()
 	// 이 알림 메시지를 보내지 않습니다.
 
 	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//UpdateData(TRUE);
 	CString Amount;
 	double amount = 0;
 	CString calory[7];
@@ -258,6 +192,7 @@ void CShowInfoDialog::OnBnClickedOk()
 {
 	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
 	CMFCDiet1Doc * pDoc = (CMFCDiet1Doc *)pFrame->GetActiveDocument();
+	CMFCDiet1View* m_pView = (CMFCDiet1View *)pFrame->GetActiveView();
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	GetDlgItemText(ID_D1_Amount_Edit, m_Info_Amount);
 	GetDlgItemText(ID_D1_Name_Edit, m_D1_EDIT_Name);
@@ -279,9 +214,6 @@ void CShowInfoDialog::OnBnClickedOk()
 	m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
 	m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
 	m_pView->tmp.Na = _wtof(m_Info_Na);
-	//CString Cal_str;
-	//Cal_str.Format(_T("%.1lf"),m_Info_Calory);
-	//AfxMessageBox(Cal_str);
 	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
 	m_pView->c_edit2.SetWindowText(m_Info_Calory);
 	m_pView->c_edit3.SetWindowText(m_Info_Amount);
@@ -290,24 +222,46 @@ void CShowInfoDialog::OnBnClickedOk()
 	CString str;
 	str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
 	CString a;
-	//a.Format(_T("%d"),m_Info_meal);
-	//AfxMessageBox(a);
+	if (m_pView->buttonstate == 9) {
+		
+	}
 
-	if (m_Info_Combo.GetCurSel() == 0) {
-		m_pView->m_pDialog1->m_List1.AddString(str);
-		m_pView->tmp.time = 0;
+	if (m_pView->buttonstate == 2) {
+		if (m_Info_Combo.GetCurSel() == 0) {
+			m_pView->m_pDialog1->m_List1.AddString(str);
+			m_pView->tmp.time = 0;
+		}
+		else if (m_Info_Combo.GetCurSel() == 1) {
+			m_pView->m_pDialog2->m_List2.AddString(str);
+			m_pView->tmp.time = 1;
+		}
+		else if (m_Info_Combo.GetCurSel() == 2) {
+			m_pView->m_pDialog3->m_List3.AddString(str);
+			m_pView->tmp.time = 2;
+		}
+		else if (m_Info_Combo.GetCurSel() == 3) {
+			m_pView->m_pDialog4->m_List4.AddString(str);
+			m_pView->tmp.time = 3;
+		}
 	}
-	else if (m_Info_Combo.GetCurSel() == 1) {
-		m_pView ->m_pDialog2->m_List2.AddString(str);
-		m_pView->tmp.time = 1;
-	}
-	else if (m_Info_Combo.GetCurSel() == 2) {
-		m_pView->m_pDialog3->m_List3.AddString(str);
-		m_pView->tmp.time = 2;
-	}
-	else if (m_Info_Combo.GetCurSel() == 3) {
-		m_pView->m_pDialog4->m_List4.AddString(str);
-		m_pView->tmp.time = 3;
+
+	if (m_pView->buttonstate == 9) {
+		if (m_Info_Combo.GetCurSel() == 0) {
+			m_pView->m_pDialog1->m_List1.AddString(str);
+			m_pView->tmp.time = 0;
+		}
+		else if (m_Info_Combo.GetCurSel() == 1) {
+			m_pView->m_pDialog2->m_List2.AddString(str);
+			m_pView->tmp.time = 1;
+		}
+		else if (m_Info_Combo.GetCurSel() == 2) {
+			m_pView->m_pDialog3->m_List3.AddString(str);
+			m_pView->tmp.time = 2;
+		}
+		else if (m_Info_Combo.GetCurSel() == 3) {
+			m_pView->m_pDialog4->m_List4.AddString(str);
+			m_pView->tmp.time = 3;
+		}
 	}
 	pDoc->list.AddTail(m_pView->tmp);
 	
@@ -328,7 +282,7 @@ void CShowInfoDialog::OnBnClickedOk()
 void CShowInfoDialog::PostNcDestroy()
 {
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-	m_pView->m_pShowInfoDlg = NULL;
+	//m_pView->m_pShowInfoDlg = NULL;
 	delete this;
 	//CDialog::PostNcDestroy();
 }
@@ -345,19 +299,26 @@ void CShowInfoDialog::OnBnClickedCancel()
 BOOL CShowInfoDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-
+	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
+	CMFCDiet1View* pView = (CMFCDiet1View *)pFrame->GetActiveView();
 	SetWindowText(_T("식단 정보"));
 
 	SYSTEMTIME date;
-	m_pView -> m_date.GetCurSel(&date);
+	pView->m_date.GetCurSel(&date);
 	m_Info_Date.Format(_T("%4d-%2d-%2d"), date.wYear,
 		date.wMonth, date.wDay);
-	SetDlgItemText(ID_D1_Date_Edit,m_Info_Date);
+	SetDlgItemText(ID_D1_Date_Edit, m_Info_Date);
 	m_Info_Combo.SetCurSel(0);
 	//m_Info_meal = 0;
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-
-	return TRUE;  // return TRUE unless you set the focus to a control
+	//if (m_pView->buttonstate == 7) {
+		//CMoreDlg *pDlg = (CMoreDlg*)AfxGetMainWnd();
+		//pDlg->SendMessage(WM_CLOSE, 0, 0);
+	//}
+	//if(pView->buttonstate == 7)
+		//return FALSE;
+	//else
+		return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 

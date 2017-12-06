@@ -48,10 +48,14 @@ void CDlgTab01::OnLbnSelchangeList1()
 	int nIndex =m_List1.GetCurSel();
 	CString str;
 	CString name;
+	//int selectedIndex = -1;
+	//CPoint point;
+	//selectedIndex = m_List1.WindowFromPoint(point);
+	//GetCursorPos(&point);
 	m_List1.GetText(nIndex,str);
 	AfxExtractSubString(name, str, 0, ' ');
 	pView->c_edit1.SetWindowText(name);
-
+	
 	POSITION  pos = pDoc ->list.GetHeadPosition();
 	for (int i = 0; i < pDoc->list.GetCount(); i++) {
 			Food tmp = (Food)pDoc->list.GetNext(pos);

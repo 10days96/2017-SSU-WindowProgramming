@@ -338,6 +338,45 @@ BEGIN
     LISTBOX         IDC_LIST1,12,9,167,197,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_SHOWMORE DIALOGEX 0, 0, 353, 184
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "s"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        ID_D2_Name_Edit,48,52,66,14,ES_AUTOHSCROLL | ES_READONLY,WS_EX_ACCEPTFILES
+    EDITTEXT        ID_D2_Kcal_Edit,48,76,66,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Amount_Edit,48,102,66,14,ES_AUTOHSCROLL | ES_READONLY
+    COMBOBOX        ID_D2_Meal_combo,48,126,102,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        ID_D2_Carbo_Edit,211,16,90,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Protein_Edit,211,40,90,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Fat_Edit,211,64,90,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Cholest_Edit,211,88,90,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Fiber_Edit,211,112,90,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        ID_D2_Na_Edit,211,136,90,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "닫기",IDCANCEL,180,166,50,14
+    EDITTEXT        ID_D2_Date_Edit,48,28,102,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "날짜:",ID_D1_Date,18,31,18,8
+    LTEXT           "이름:",ID_D1_Name,18,56,18,8
+    LTEXT           "열랑:",ID_D1_Calory,18,80,18,8
+    LTEXT           "섭취량:",ID_D1_Amount,18,104,24,8
+    LTEXT           "kcal / 인분",ID_D1_kcalper1,120,82,33,8
+    LTEXT           "인분",IDC_STATIC,120,104,24,8
+    LTEXT           "시기:",ID_D1_Meal,19,128,18,8
+    LTEXT           "탄수화물:",ID_D1_Carbo,169,19,30,8
+    LTEXT           "단백질:",ID_D1_Protein,169,44,24,8
+    LTEXT           "지방:",ID_D1_Fat,169,67,18,8
+    LTEXT           "나트륨:",ID_D1_Na,169,139,24,8
+    LTEXT           "식이섬유:",ID_D1_Fiber,169,115,30,8
+    LTEXT           "g / 인분",ID_D1_gper1,307,19,29,8
+    LTEXT           "g / 인분",ID_D1_gper2,307,43,29,8
+    LTEXT           "g / 인분",ID_D1_gper3,307,67,29,8
+    LTEXT           "g / 인분",ID_D1_gper4,307,91,29,8
+    LTEXT           "g / 인분",ID_D1_gper5,307,115,29,8
+    LTEXT           "콜레스테롤:",ID_D1_Cholest,169,90,36,8
+    LTEXT           "g / 인분",ID_D1_gper6,307,139,29,8
+    DEFPUSHBUTTON   "확인",IDOK,108,166,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -465,6 +504,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 208
     END
+
+    IDD_SHOWMORE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 346
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -519,6 +566,11 @@ BEGIN
     0
 END
 
+IDD_SHOWMORE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -534,6 +586,19 @@ BEGIN
     ID_D1_Meal_combo, 0x403, 5, 0
 0xfac0, 0xe1b3, "\000" 
     ID_D1_Meal_combo, 0x403, 5, 0
+0xa3b0, 0xc4bd, "\000" 
+    0
+END
+
+IDD_SHOWMORE DLGINIT
+BEGIN
+    ID_D2_Meal_combo, 0x403, 5, 0
+0xc6be, 0xa7c4, "\000" 
+    ID_D2_Meal_combo, 0x403, 5, 0
+0xa1c1, 0xc9bd, "\000" 
+    ID_D2_Meal_combo, 0x403, 5, 0
+0xfac0, 0xe1b3, "\000" 
+    ID_D2_Meal_combo, 0x403, 5, 0
 0xa3b0, 0xc4bd, "\000" 
     0
 END

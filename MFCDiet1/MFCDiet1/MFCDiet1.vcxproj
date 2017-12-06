@@ -194,6 +194,7 @@
     <ClInclude Include="MFCDiet1.h" />
     <ClInclude Include="MFCDiet1Doc.h" />
     <ClInclude Include="MFCDiet1View.h" />
+    <ClInclude Include="MoreDlg.h" />
     <ClInclude Include="PieChartDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ShowBMIDlg.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="MFCDiet1.cpp" />
     <ClCompile Include="MFCDiet1Doc.cpp" />
     <ClCompile Include="MFCDiet1View.cpp" />
+    <ClCompile Include="MoreDlg.cpp" />
     <ClCompile Include="PieChartDlg.cpp" />
     <ClCompile Include="ShowBMIDlg.cpp" />
     <ClCompile Include="ShowInfoDialog.cpp" />

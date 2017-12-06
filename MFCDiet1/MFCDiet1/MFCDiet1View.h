@@ -12,7 +12,7 @@
 #include "afxdtctl.h"
 #include "afxwin.h"
 class CShowInfoDialog;
-
+class CMoreDlg;
 
 class CMFCDiet1View : public CFormView
 {
@@ -80,6 +80,8 @@ public:
 	afx_msg void OnBnClickedButton9();
 	Food tmp;
 	CShowInfoDialog* m_pShowInfoDlg;
+	int buttonstate;
+	CMoreDlg* m_pMoreDlg;
 //	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedButton3();
 
