@@ -44,7 +44,7 @@ BOOL CMoreDlg::OnInitDialog()
 {
 	
 	CDialog::OnInitDialog();
-
+	SetWindowText(_T("식단 정보"));
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 
 	return TRUE;  // return TRUE unless you set the focus to a control
