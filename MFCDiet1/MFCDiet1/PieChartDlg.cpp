@@ -6,6 +6,8 @@
 #include "PieChartDlg.h"
 #include "afxdialogex.h"
 #include <math.h>
+#include "MainFrm.h"
+#include "MFCDiet1View.h"
 
 
 // CPieChartDlg 대화 상자입니다.
@@ -407,17 +409,18 @@ void CPieChartDlg::OnPaint()
 
 void CPieChartDlg::OnBnClickedButton1()
 {
-	
+	CMainFrame* pFrame = (CMainFrame *)AfxGetMainWnd();
+	CMFCDiet1View * pView = (CMFCDiet1View *)pFrame->GetActiveView();
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	int TotalSum;
+	double TotalSum;
 	int i;
 
-	InputValue[0] = 1;
-	InputValue[1] = 2;
-	InputValue[2] = 3;
-	InputValue[3] = 4;
-	InputValue[4] = 5;
-	InputValue[5] = 6;
+	InputValue[0] = pView->totalCarbo;
+	InputValue[1] = pView->totalProtein;
+	InputValue[2] = pView->totalFat;
+	InputValue[3] = pView->totalCholest;
+	InputValue[4] = pView->totalFiber;
+	InputValue[5] = pView->totalNa;
 	UpdateData(1);
 
 	TotalSum = InputValue[0] + InputValue[1] + InputValue[2] + InputValue[3] + InputValue[4] + InputValue[5];

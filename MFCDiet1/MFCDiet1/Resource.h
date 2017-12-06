@@ -30,6 +30,7 @@
 #define IDC_BUTTON6                     1010
 #define IDC_BUTTON_CHART                1010
 #define IDC_EDIT4                       1011
+#define IDC_TOTAL_CAL                   1011
 #define IDC_BUTTON7                     1012
 #define IDC_BUTTON_USERINFO             1012
 #define IDC_BUTTON8                     1013
@@ -40,6 +41,8 @@
 #define ID_D1_Meal_combo                1017
 #define IDC_EDIT5                       1018
 #define ID_D1_Carbo_Edit                1018
+#define IDC_ENCOR_CAL                   1018
+#define IDC_ENCOUR_CAL                  1018
 #define IDC_EDIT6                       1019
 #define ID_D1_Protein_Edit              1019
 #define IDC_EDIT7                       1020

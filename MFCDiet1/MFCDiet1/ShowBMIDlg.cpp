@@ -30,6 +30,7 @@ void CShowBMIDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CShowBMIDlg, CDialog)
+	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
@@ -62,11 +63,48 @@ BOOL CShowBMIDlg::OnInitDialog()
 	/*
 	CClientDC dc(this);
 	CImage Image;
-	Image.Load(_T("BMI.png"));
-	Image.BitBlt(dc.m_hDC, 0, 400);
+	Image.Load(_T("BMI.bmp"));
+	Image.StretchBlt(dc, 0, 0, 50, 100, SRCCOPY);
 	*/
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
-				  
+
+}
+
+
+void CShowBMIDlg::OnPaint()
+{
+	CPaintDC dc(this); // device context for painting
+					   // TODO: 여기에 메시지 처리기 코드를 추가합니다.
+					   // 그리기 메시지에 대해서는 CDialog::OnPaint()을(를) 호출하지 마십시오.
+	DrawDoubleBuffering();
+}
+
+
+void CShowBMIDlg::DrawDoubleBuffering()
+{
+	CDC* pDC = GetDC();
+	CRect rect;
+	GetClientRect(rect);
+
+	CDC MemDC;
+	CBitmap * pOldBitmap;
+	CBitmap bmp;
+
+	MemDC.CreateCompatibleDC(pDC);
+	bmp.CreateCompatibleBitmap(pDC, rect.Width(), rect.Height());
+	pOldBitmap = (CBitmap *)MemDC.SelectObject(&bmp);
+	MemDC.PatBlt(0, 0, rect.Width(), rect.Height(), WHITENESS);
+
+	CBitmap bmpImage;
+	BOOL tmp = bmpImage.LoadBitmapW(IDB_BITMAP1);
+	MemDC.SelectObject(&bmpImage);
+
+	BITMAP bmpImageSize;
+	bmpImage.GetObject(sizeof(BITMAP), &bmpImageSize);
+
+	pDC->StretchBlt(10, 200, rect.Width()-20, rect.Height()-300, &MemDC, 0, 0, bmpImageSize.bmWidth, bmpImageSize.bmHeight, SRCCOPY);
+	MemDC.SelectObject(pOldBitmap);
+	MemDC.DeleteDC();
 
 }

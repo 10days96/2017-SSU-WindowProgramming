@@ -8,6 +8,7 @@
 #include "DlgTab02.h"
 #include "DlgTab03.h"
 #include "DlgTab04.h"
+#include "MFCDiet1Doc.h"
 #include "afxdtctl.h"
 #include "afxwin.h"
 class CShowInfoDialog;
@@ -57,7 +58,6 @@ public:
 	int select;
 	//Food tmp;
 	SYSTEMTIME date;
-	SYSTEMTIME date1;
 	afx_msg void OnBnClickedShowinfo();
 	afx_msg void OnBnClickedButton2();
 //<<<<<<< Updated upstream
@@ -84,6 +84,20 @@ public:
 	CMoreDlg* m_pMoreDlg;
 //	afx_msg void OnNMClickTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedButton3();
+
+	////////////////파이 차트를 그리기 위한 영양분 총 섭취량 변수////////////////
+	double totalCarbo;
+	double totalProtein;
+	double totalFat;
+	double totalCholest;
+	double totalFiber;
+	double totalNa;
+
+	/////////////////총섭취 칼로리 구하는 코드/////////////////////
+	void SumTotalCalorie(CMFCDiet1Doc* pDoc);
+	double totalCalorie;
+	CEdit m_total_cal;
+	CEdit m_encour_cal;
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전
