@@ -54,5 +54,6 @@ BOOL CMoreDlg::OnInitDialog()
 
 void CMoreDlg::OnBnClickedOk()
 {
+	//
 	CDialog::OnOK();
 }
