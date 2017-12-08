@@ -47,24 +47,27 @@ void CDlgTab02::OnLbnSelchangeList1()
 	int nIndex = m_List2.GetCurSel();
 	CString str;
 	CString name;
-	m_List2.GetText(nIndex, str);
-	AfxExtractSubString(name, str, 0, ' ');
-	pView->c_edit1.SetWindowText(name);
+	if (LB_ERR != nIndex) {
+		m_List2.GetText(nIndex, str);
+		AfxExtractSubString(name, str, 0, ' ');
+		pView->c_edit1.SetWindowText(name);
 
-	POSITION  pos = pDoc->list.GetHeadPosition();
-	for (int i = 0; i < pDoc->list.GetCount(); i++) {
-		Food tmp = (Food)pDoc->list.GetNext(pos);
-		CString tmp_name;
-		int meal;
-		tmp_name = tmp.foodname;
-		meal = tmp.time;
-		if (!name.Compare(tmp_name) && meal == 1) {
-			CString str, str2;
-			str.Format(_T("%.1lf"), tmp.cal);
-			str2.Format(_T("%.1lf"), tmp.plate);
-			pView->c_edit2.SetWindowText(str);
-			pView->c_edit3.SetWindowText(str2);
-			break;
+		POSITION  pos = pDoc->list.GetHeadPosition();
+
+		for (int i = 0; i < pDoc->list.GetCount(); i++) {
+			Food tmp = (Food)pDoc->list.GetNext(pos);
+			CString tmp_name;
+			int meal;
+			tmp_name = tmp.foodname;
+			meal = tmp.time;
+			if (!name.Compare(tmp_name) && meal == 1) {
+				CString str, str2;
+				str.Format(_T("%.1lf"), tmp.cal);
+				str2.Format(_T("%.1lf"), tmp.plate);
+				pView->c_edit2.SetWindowText(str);
+				pView->c_edit3.SetWindowText(str2);
+				break;
+			}
 		}
 	}
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
