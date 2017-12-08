@@ -72,7 +72,6 @@ void CDlgTab01::OnLbnSelchangeList1()
 				pView->c_edit2.SetWindowText(str);
 				pView->c_edit3.SetWindowText(str2);
 				break;
-				//
 			}
 		}
 	}

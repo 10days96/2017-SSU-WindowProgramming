@@ -135,9 +135,7 @@ void CShowInfoDialog::OnBnClickedD1Search()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
 
-
-void CShowInfoDialog::OnEnChangeD1AmountEdit()
-{
+void CShowInfoDialog::OnEnChangeD1AmountEdit(){
 	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
 	// CDialog::OnInitDialog() 함수를 재지정 
 	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
@@ -252,47 +250,6 @@ void CShowInfoDialog::OnBnClickedOk()
 	bool check = TRUE;
 	Food pfood;
 
-	m_pView->tmp.foodname = m_D1_EDIT_Name;
-	m_pView->tmp.plate=_wtof(m_Info_Amount);
-	m_pView->tmp.cal = _wtof(m_Info_Calory);
-	m_pView->tmp.Carbo = _wtof(m_Info_Carbo);
-	m_pView->tmp.Protein = _wtof(m_Info_Protein);
-	m_pView->tmp.Fat = _wtof(m_Info_Fat);
-	m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
-	m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
-	m_pView->tmp.Na = _wtof(m_Info_Na);
-	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
-	m_pView->c_edit2.SetWindowText(m_Info_Calory);
-	m_pView->c_edit3.SetWindowText(m_Info_Amount);
-	
-	str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
-	CString a;
-	POSITION  pos = pDoc->list.GetHeadPosition();
-	for (int i = 0; i < pDoc->list.GetCount(); i++) {
-		Food tmp = (Food)pDoc->list.GetNext(pos);
-		CString tmp_name = tmp.foodname;
-		double plate = tmp.plate;
-		if (!name.Compare(tmp_name) && meal == 0) {
-			CString str, str2;
-			
-			str.Format(_T("%.1lf"), tmp.cal);
-			str2.Format(_T("%.1lf"), tmp.plate);
-			m_pView->c_edit2.SetWindowText(str);
-			m_pView->c_edit3.SetWindowText(str2);
-			break;
-		}
-	}
-	if (m_pView->buttonstate == 9)
-	{
-		POSITION pos = pDoc->list.GetHeadPosition();
-		while (pos != NULL)
-		{
-			pfood = pDoc->list.GetAt(pos);
-			check = m_D1_EDIT_Name.Compare(pfood.foodname);
-			pfood = pDoc->list.GetNext(pos);
-		}
-	}
-
 	if (check)
 	{
 		m_pView->tmp.foodname = m_D1_EDIT_Name;
@@ -307,38 +264,182 @@ void CShowInfoDialog::OnBnClickedOk()
 		m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
 		m_pView->c_edit2.SetWindowText(m_Info_Calory);
 		m_pView->c_edit3.SetWindowText(m_Info_Amount);
+	}
+	else
+		AfxMessageBox(_T("동일한 이름의 음식 항목이 이미 존재합니다."));
+	
+	str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
+	//AfxMessageBox(str);
+	CString a;
 
-		CString str;
-		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname, m_pView->tmp.cal, m_pView->tmp.plate);
-		CString a;
-		if (m_pView->buttonstate == 9) {
-
+	if (m_pView->buttonstate == 9)
+	{
+		POSITION pos = pDoc->list.GetHeadPosition();
+		while (pos != NULL)
+		{
+			pfood = pDoc->list.GetAt(pos);
+			check = m_D1_EDIT_Name.Compare(pfood.foodname);
+			pfood = pDoc->list.GetNext(pos);
 		}
+	}
+
+		//CString str;
+		//str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname, m_pView->tmp.cal, m_pView->tmp.plate);
+		//CString a;
+	
 
 	if (m_pView->buttonstate == 2) {
 		if (m_Info_Combo.GetCurSel() == 0) {
-			nIndex = m_pView -> m_pDialog1 ->m_List1.GetCurSel();
-			m_pView->m_pDialog1 -> m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex,str);
+			nIndex = m_pView->m_pDialog1->m_List1.GetCurSel();
+			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
+			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 0;
+			POSITION pos = pDoc->list.GetHeadPosition();
+			for (int i = 0; i < pDoc->list.GetCount(); i++) {
+				Food tmp = (Food)pDoc->list.GetAt(pos);
+				CString tmp_name = tmp.foodname;
+				double plate = tmp.plate;
+				int meal = tmp.time;
+				name = m_pView->tmp.foodname;
+				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
+				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
+				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
+				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
+				double Na = tmp.Na / plate* m_pView->tmp.plate;
+				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
+				if (!name.Compare(tmp_name) && meal == 0) {
+					CString str[7];
+					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
+					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
+					m_pView->c_edit2.SetWindowText(str[0]);
+					m_pView->c_edit3.SetWindowText(str[1]);
+					tmp.cal = m_pView->tmp.cal;
+					tmp.plate = m_pView->tmp.plate;
+					tmp.Carbo = carbo;
+					tmp.Protein = Protein;
+					tmp.Fat = Fat;
+					tmp.Na = Na;
+					tmp.Protein = Protein;
+					tmp.Fiber = Fiber;
+					pDoc->list.SetAt(pos, tmp);
+					break;
+				}
+				pDoc->list.GetNext(pos);
+			}
 		}
 		else if (m_Info_Combo.GetCurSel() == 1) {
 			nIndex = m_pView->m_pDialog2->m_List2.GetCurSel();
 			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
 			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 1;
+			POSITION pos = pDoc->list.GetHeadPosition();
+			for (int i = 0; i < pDoc->list.GetCount(); i++) {
+				Food tmp = (Food)pDoc->list.GetAt(pos);
+				CString tmp_name = tmp.foodname;
+				double plate = tmp.plate;
+				int meal = tmp.time;
+				name = m_pView->tmp.foodname;
+				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
+				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
+				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
+				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
+				double Na = tmp.Na / plate* m_pView->tmp.plate;
+				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
+				if (!name.Compare(tmp_name) && meal == 0) {
+					CString str[7];
+					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
+					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
+					m_pView->c_edit2.SetWindowText(str[0]);
+					m_pView->c_edit3.SetWindowText(str[1]);
+					tmp.cal = m_pView->tmp.cal;
+					tmp.plate = m_pView->tmp.plate;
+					tmp.Carbo = carbo;
+					tmp.Protein = Protein;
+					tmp.Fat = Fat;
+					tmp.Na = Na;
+					tmp.Protein = Protein;
+					tmp.Fiber = Fiber;
+					pDoc->list.SetAt(pos, tmp);
+					break;
+				}
+				pDoc->list.GetNext(pos);
+			}
 		}
 		else if (m_Info_Combo.GetCurSel() == 2) {
 			nIndex = m_pView->m_pDialog3->m_List3.GetCurSel();
 			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
 			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 2;
+			POSITION pos = pDoc->list.GetHeadPosition();
+			for (int i = 0; i < pDoc->list.GetCount(); i++) {
+				Food tmp = (Food)pDoc->list.GetAt(pos);
+				CString tmp_name = tmp.foodname;
+				double plate = tmp.plate;
+				int meal = tmp.time;
+				name = m_pView->tmp.foodname;
+				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
+				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
+				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
+				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
+				double Na = tmp.Na / plate* m_pView->tmp.plate;
+				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
+				if (!name.Compare(tmp_name) && meal == 0) {
+					CString str[7];
+					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
+					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
+					m_pView->c_edit2.SetWindowText(str[0]);
+					m_pView->c_edit3.SetWindowText(str[1]);
+					tmp.cal = m_pView->tmp.cal;
+					tmp.plate = m_pView->tmp.plate;
+					tmp.Carbo = carbo;
+					tmp.Protein = Protein;
+					tmp.Fat = Fat;
+					tmp.Na = Na;
+					tmp.Protein = Protein;
+					tmp.Fiber = Fiber;
+					pDoc->list.SetAt(pos, tmp);
+					break;
+				}
+				pDoc->list.GetNext(pos);
+			}
 		}
 		else if (m_Info_Combo.GetCurSel() == 3) {
 			nIndex = m_pView->m_pDialog4->m_List4.GetCurSel();
 			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
 			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 3;
+			POSITION pos = pDoc->list.GetHeadPosition();
+			for (int i = 0; i < pDoc->list.GetCount(); i++) {
+				Food tmp = (Food)pDoc->list.GetAt(pos);
+				CString tmp_name = tmp.foodname;
+				double plate = tmp.plate;
+				int meal = tmp.time;
+				name = m_pView->tmp.foodname;
+				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
+				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
+				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
+				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
+				double Na = tmp.Na / plate* m_pView->tmp.plate;
+				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
+				if (!name.Compare(tmp_name) && meal == 0) {
+					CString str[7];
+					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
+					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
+					m_pView->c_edit2.SetWindowText(str[0]);
+					m_pView->c_edit3.SetWindowText(str[1]);
+					tmp.cal = m_pView->tmp.cal;
+					tmp.plate = m_pView->tmp.plate;
+					tmp.Carbo = carbo;
+					tmp.Protein = Protein;
+					tmp.Fat = Fat;
+					tmp.Na = Na;
+					tmp.Protein = Protein;
+					tmp.Fiber = Fiber;
+					pDoc->list.SetAt(pos, tmp);
+					break;
+				}
+				pDoc->list.GetNext(pos);
+			}
 		}
 	}
 
@@ -370,11 +471,9 @@ void CShowInfoDialog::OnBnClickedOk()
 		m_pView->totalNa += (m_pView->tmp.Na)/1000;
 		m_pView->totalProtein += m_pView->tmp.Protein;
 		m_pView->SumTotalCalorie(pDoc);
-	}
-	else
-		AfxMessageBox(_T("동일한 이름의 음식 항목이 이미 존재합니다."));
-	CDialog::OnOK();
+		CDialog::OnOK();
 }
+
 
 
 
@@ -382,7 +481,7 @@ void CShowInfoDialog::PostNcDestroy()
 {
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	//m_pView->m_pShowInfoDlg = NULL;
-	delete this;
+	//delete this;
 	//CDialog::PostNcDestroy();
 }
 
@@ -408,15 +507,7 @@ BOOL CShowInfoDialog::OnInitDialog()
 		date.wMonth, date.wDay);
 	SetDlgItemText(ID_D1_Date_Edit, m_Info_Date);
 	m_Info_Combo.SetCurSel(0);
-	//m_Info_meal = 0;
-	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-	//if (m_pView->buttonstate == 7) {
-		//CMoreDlg *pDlg = (CMoreDlg*)AfxGetMainWnd();
-		//pDlg->SendMessage(WM_CLOSE, 0, 0);
-	//}
-	//if(pView->buttonstate == 7)
-		//return FALSE;
-	//else
+	
 		return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
