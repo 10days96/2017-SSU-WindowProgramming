@@ -26,4 +26,5 @@ public:
 	CMFCDiet1View* m_pView;
 	CComboBox m_Meal_combo;
 	afx_msg void OnBnClickedOk();
+	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };

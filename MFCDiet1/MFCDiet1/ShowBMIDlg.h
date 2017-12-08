@@ -26,4 +26,5 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	void DrawDoubleBuffering();
+	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };

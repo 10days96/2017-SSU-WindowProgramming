@@ -875,7 +875,6 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 				}
 				pfood = pDoc->list.GetNext(pos);
 			}
-			m_pDialog1->m_List1.DeleteString(index);
 		}
 	}
 	else if (m_Tab.GetCurSel() == 1)
@@ -897,7 +896,6 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 				}
 				pfood = pDoc->list.GetNext(pos);
 			}
-			m_pDialog2->m_List2.DeleteString(index);
 		}
 	}
 	else if (m_Tab.GetCurSel() == 2)
@@ -919,7 +917,6 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 				}
 				pfood = pDoc->list.GetNext(pos);
 			}
-			m_pDialog3->m_List3.DeleteString(index);
 		}
 	}
 	else if (m_Tab.GetCurSel() == 3)
@@ -941,20 +938,17 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 				}
 				pfood = pDoc->list.GetNext(pos);
 			}
-			m_pDialog4->m_List4.DeleteString(index);
 		}
 	}
-	SumTotalCalorie(pDoc);
 
+	SumTotalCalorie(pDoc);
+	ShowFoodList(pDoc);
 	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
-//<<<<<<< HEAD
-	//CString test;
-	//test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
-	//AfxMessageBox(test);
+
+	CString test;
+	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
+	AfxMessageBox(test);
 }
-//=======
-//test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
-	//AfxMessageBox(test);
 
 
 void CMFCDiet1View::SumTotalCalorie(CMFCDiet1Doc* pDoc)
@@ -1027,6 +1021,18 @@ void CMFCDiet1View::OnDestroy()
 void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 {
 	POSITION pos = pDoc->list.GetHeadPosition();
+
+	totalCarbo = 0;
+	totalProtein = 0;
+	totalFat = 0;
+	totalCholest = 0;
+	totalFiber = 0;
+	totalNa = 0;
+
+	m_pDialog1->m_List1.ResetContent();
+	m_pDialog2->m_List2.ResetContent();
+	m_pDialog3->m_List3.ResetContent();
+	m_pDialog4->m_List4.ResetContent();
 
 	while (pos != NULL) {
 		tmp = pDoc->list.GetAt(pos);
