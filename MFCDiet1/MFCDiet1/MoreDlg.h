@@ -3,7 +3,6 @@
 
 class CMFCDiet1View;
 // CMoreDlg 대화 상자입니다.
-typedef struct Food;
 class CMoreDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CMoreDlg)

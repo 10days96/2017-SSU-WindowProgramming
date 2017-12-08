@@ -943,11 +943,11 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 
 	SumTotalCalorie(pDoc);
 	ShowFoodList(pDoc);
-	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
 
-	CString test;
-	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
-	AfxMessageBox(test);
+	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
+	//CString test;
+	//test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
+	//AfxMessageBox(test);
 }
 
 
@@ -1007,7 +1007,7 @@ void CMFCDiet1View::OnDestroy()
 	{
 //		AfxMessageBox(_T("저장중"));
 		pfood = pDoc->list.GetAt(pos);
-		str.Format(_T("%d %d %d %d %s %lf %lf %lf %lf %lf %lf %lf %lf %lf"),
+		str.Format(_T("%d %d %d %d %s %lf %lf %lf %lf %lf %lf %lf %lf"),
 			pfood.date_day, pfood.date_month, pfood.date_year, pfood.time,
 			pfood.foodname, pfood.plate, pfood.cal, pfood.Carbo, pfood.Protein, pfood.Fat, pfood.Cholest, pfood.Fiber, pfood.Na);
 		file.WriteString(str + "\n");

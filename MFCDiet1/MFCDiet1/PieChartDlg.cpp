@@ -419,10 +419,10 @@ void CPieChartDlg::OnBnClickedButton1()
 	InputValue[0] = pView->totalCarbo;
 	InputValue[1] = pView->totalProtein;
 	InputValue[2] = pView->totalFat;
-	if(pView->totalCholest > 0.01)
+	//if(pView->totalCholest > 0.01)
 		InputValue[3] = pView->totalCholest;
 	InputValue[4] = pView->totalFiber;
-	if (pView->totalNa > 0.01)
+	//if (pView->totalNa > 0.01)
 		InputValue[5] = pView->totalNa;
 	UpdateData(1);
 

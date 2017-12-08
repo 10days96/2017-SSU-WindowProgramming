@@ -3,7 +3,6 @@
 class CMFCDiet1View;
 
 // CShowInfoDialog 대화 상자입니다.
-typedef struct Food;
 class CShowInfoDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CShowInfoDialog)
