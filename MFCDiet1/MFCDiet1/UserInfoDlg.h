@@ -37,4 +37,5 @@ public:
 	CButton radioLow;
 	CButton radioNomal;
 	CButton radioHigh;
+	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };

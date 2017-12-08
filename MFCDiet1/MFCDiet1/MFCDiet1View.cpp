@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CMFCDiet1View, CFormView)
 ON_BN_CLICKED(IDC_BUTTON3, &CMFCDiet1View::OnBnClickedButton3)
 ON_WM_CLOSE()
 ON_WM_DESTROY()
+ON_WM_DRAWITEM()
 END_MESSAGE_MAP()
 
 // CMFCDiet1View 생성/소멸
@@ -948,9 +949,15 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 			c_edit3.SetWindowText(_T(""));
 		}
 	}
-	SumTotalCalorie(pDoc);
-}
 
+	SumTotalCalorie(pDoc);
+	ShowFoodList(pDoc);
+	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
+
+	CString test;
+	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
+	AfxMessageBox(test);
+}
 
 
 void CMFCDiet1View::SumTotalCalorie(CMFCDiet1Doc* pDoc)
@@ -1023,6 +1030,18 @@ void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 {
 	POSITION pos = pDoc->list.GetHeadPosition();
 
+	totalCarbo = 0;
+	totalProtein = 0;
+	totalFat = 0;
+	totalCholest = 0;
+	totalFiber = 0;
+	totalNa = 0;
+
+	m_pDialog1->m_List1.ResetContent();
+	m_pDialog2->m_List2.ResetContent();
+	m_pDialog3->m_List3.ResetContent();
+	m_pDialog4->m_List4.ResetContent();
+
 	while (pos != NULL) {
 		tmp = pDoc->list.GetAt(pos);
 		str.Format(_T("%s   %.3lfkcal  %.2lf인분"), tmp.foodname, tmp.cal, tmp.plate);
@@ -1045,5 +1064,43 @@ void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 			totalNa += (tmp.Na)/1000;
 		}
 		tmp = pDoc->list.GetNext(pos);
+	}
+}
+
+
+void CMFCDiet1View::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if (nIDCtl == ID_SHOWINFO || nIDCtl == IDC_BUTTON2 || nIDCtl == IDC_BUTTON3 || nIDCtl == IDC_BUTTON9)
+	{
+		CDC dc;
+		RECT rect;
+		dc.Attach(lpDrawItemStruct->hDC);	//Get the Button DC to CDC
+
+		rect = lpDrawItemStruct->rcItem;	//Store the Button rect to local rect
+		dc.Draw3dRect(&rect, RGB(200, 200, 200), RGB(20, 20, 20));
+		dc.FillSolidRect(&rect, RGB(100, 100, 100));
+
+		//Show the Effect of Click Event
+		UINT state = lpDrawItemStruct->itemState;
+		if ((state & ODS_SELECTED))
+		{
+			dc.DrawEdge(&rect, EDGE_SUNKEN, BF_RECT);
+		}
+		else
+		{
+			dc.DrawEdge(&rect, EDGE_RAISED, BF_RECT);
+		}
+
+		//Draw Color Text
+		dc.SetBkColor(RGB(100, 100, 100));		//Setting the Text Background Color
+		dc.SetTextColor(RGB(255, 255, 255));		//Setting the Text Color
+
+		TCHAR buffer[MAX_PATH];
+		ZeroMemory(buffer, MAX_PATH);
+		::GetWindowText(lpDrawItemStruct->hwndItem, buffer, MAX_PATH);
+
+		dc.DrawText(buffer, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+		dc.Detach();							//Detach the Button DC
 	}
 }

@@ -71,6 +71,7 @@ BEGIN_MESSAGE_MAP(CShowInfoDialog, CDialog)
 	ON_BN_CLICKED(IDOK, &CShowInfoDialog::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CShowInfoDialog::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_RESET, &CShowInfoDialog::OnBnClickedReset)
+	ON_WM_DRAWITEM()
 END_MESSAGE_MAP()
 
 
@@ -527,4 +528,42 @@ void CShowInfoDialog::OnBnClickedReset()
 	SetDlgItemText(ID_D1_Na_Edit, _T(""));
 
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+void CShowInfoDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if (nIDCtl == IDOK || nIDCtl == IDCANCEL || nIDCtl == IDC_RESET || nIDCtl == IDC_D1_Search)
+	{
+		CDC dc;
+		RECT rect;
+		dc.Attach(lpDrawItemStruct->hDC);	//Get the Button DC to CDC
+
+		rect = lpDrawItemStruct->rcItem;	//Store the Button rect to local rect
+		dc.Draw3dRect(&rect, RGB(200, 200, 200), RGB(20, 20, 20));
+		dc.FillSolidRect(&rect, RGB(100, 100, 100));
+
+		//Show the Effect of Click Event
+		UINT state = lpDrawItemStruct->itemState;
+		if ((state & ODS_SELECTED))
+		{
+			dc.DrawEdge(&rect, EDGE_SUNKEN, BF_RECT);
+		}
+		else
+		{
+			dc.DrawEdge(&rect, EDGE_RAISED, BF_RECT);
+		}
+
+		//Draw Color Text
+		dc.SetBkColor(RGB(100, 100, 100));		//Setting the Text Background Color
+		dc.SetTextColor(RGB(255, 255, 255));		//Setting the Text Color
+
+		TCHAR buffer[MAX_PATH];
+		ZeroMemory(buffer, MAX_PATH);
+		::GetWindowText(lpDrawItemStruct->hwndItem, buffer, MAX_PATH);
+
+		dc.DrawText(buffer, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+		dc.Detach();							//Detach the Button DC
+	}
+	CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);
 }

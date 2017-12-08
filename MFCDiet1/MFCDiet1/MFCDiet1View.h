@@ -104,6 +104,7 @@ public:
 	CButton m_button_info;
 	CButton m_button_bmi;
 	CButton m_button_chart;
+	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };
 
 #ifndef _DEBUG  // MFCDiet1View.cpp의 디버그 버전

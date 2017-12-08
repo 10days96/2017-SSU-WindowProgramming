@@ -23,7 +23,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	double avr[6];
+	float avr[6];
 	CRect rectView;
 	CRect rectColor1, rectColor2, rectColor3, rectColor4, rectColor5, rectColor6;
 	double InputValue[6];
@@ -54,4 +54,5 @@ public:
 	afx_msg void OnPaint();
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
+	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };

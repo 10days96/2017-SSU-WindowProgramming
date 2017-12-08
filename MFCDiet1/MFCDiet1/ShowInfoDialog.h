@@ -44,4 +44,5 @@ public:
 	CString m_Info_Cholest;
 	CString m_Info_Fiber;
 	CString m_Info_Na;
+	void CShowInfoDialog::OnDrawItem(int nIDCH, PDRAWITEMSTRUCT lpDrawItemStruct);
 };
