@@ -954,9 +954,9 @@ void CMFCDiet1View::OnBnClickedButton3()             //삭제 버튼
 	ShowFoodList(pDoc);
 
 	///////리스트 내 원소 삭제 여부를 길이로 알려주는 테스트 코드///////
-	//CString test;
-	//test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
-	//AfxMessageBox(test);
+	CString test;
+	test.Format(_T("FoodName: %s, List Length: %d"), findName, pDoc->list.GetSize());
+	AfxMessageBox(test);
 }
 
 
