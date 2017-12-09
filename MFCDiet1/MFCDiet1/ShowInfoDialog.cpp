@@ -225,7 +225,6 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit(){
 		calory[6].Format(_T("%.1lf"), Info[6]);
 
 		SetDlgItemText(ID_D1_Na_Edit, calory[6]);
-	//}
 }
 
 
@@ -283,11 +282,6 @@ void CShowInfoDialog::OnBnClickedOk()
 			pfood = pDoc->list.GetNext(pos);
 		}
 	}
-
-		//CString str;
-		//str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname, m_pView->tmp.cal, m_pView->tmp.plate);
-		//CString a;
-	
 
 	if (m_pView->buttonstate == 2) {
 		if (m_Info_Combo.GetCurSel() == 0) {
@@ -461,8 +455,8 @@ void CShowInfoDialog::OnBnClickedOk()
 				m_pView->m_pDialog4->m_List4.AddString(str);
 				m_pView->tmp.time = 3;
 			}
+			pDoc->list.AddTail(m_pView->tmp);
 		}
-		pDoc->list.AddTail(m_pView->tmp);
 
 		/////////////////////////파이차트를 위한 영양소 총 섭취량에 현재 추가한 데이터 추가하는 코드//////////////////////
 		m_pView->totalCarbo += m_pView->tmp.Carbo;
