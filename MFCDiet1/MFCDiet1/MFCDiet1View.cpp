@@ -1034,6 +1034,8 @@ void CMFCDiet1View::OnDestroy()
 void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 {
 	POSITION pos = pDoc->list.GetHeadPosition();
+	SYSTEMTIME date;
+    m_date.GetCurSel(&date);
 
 	totalCarbo = 0;
 	totalProtein = 0;
