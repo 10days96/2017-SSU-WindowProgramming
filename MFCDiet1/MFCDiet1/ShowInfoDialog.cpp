@@ -154,6 +154,9 @@ void CShowInfoDialog::OnBnClickedD1Search()
 				m_Info_Na = calory[6];
 				SetDlgItemText(ID_D1_Na_Edit, calory[6]);
 
+				m_Info_Amount = _T("1.0");
+				SetDlgItemText(ID_D1_Amount_Edit, _T("1.0"));
+
 				break;
 			}
 		}
