@@ -2,6 +2,7 @@
 // Microsoft Visual C++에서 생성한 포함 파일입니다.
 // MFCDiet1.rc에서 사용되고 있습니다.
 //
+#define IDOK2                           2
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDD_MFCDIET1_FORM               101
@@ -23,6 +24,7 @@
 #define IDB_BITMAP3                     344
 #define IDB_BITMAP4                     345
 #define IDD_SEARCH_CHECK                346
+#define IDD_SEARCH_LIST                 347
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
@@ -116,6 +118,9 @@
 #define ID_D2_Fiber_Edit                1062
 #define ID_D2_Na_Edit                   1063
 #define IDC_BUTTON1                     1065
+#define IDC_EDIT_SEARCHNAME             1066
+#define IDC_EDIT_SEARCHCAL              1067
+#define IDC_LIST_SEARCH                 1068
 
 // Next default values for new objects
 // 
@@ -123,7 +128,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        347
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1066
+#define _APS_NEXT_CONTROL_VALUE         1069
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

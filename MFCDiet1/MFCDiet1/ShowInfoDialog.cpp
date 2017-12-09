@@ -11,6 +11,7 @@
 #include <locale.h>
 #include "MoreDlg.h"
 #include <Windows.h>
+#include "SearchListDlg.h"
 
 
 // CShowInfoDialog 대화 상자입니다.
@@ -81,54 +82,80 @@ END_MESSAGE_MAP()
 void CShowInfoDialog::OnBnClickedD1Search()
 {
 	UpdateData(TRUE);
+	CSearchListDlg sdlg;
 	CString str;
 	CStdioFile file;
-	CString Find_Name;
+	CString Find_Name, foodName;
 	CString calory[7];
 	CString Amount;
 	int count = 0;
+	BOOL showSdlg = FALSE;
+
 	GetDlgItemText(ID_D1_Name_Edit,Find_Name);
 	if (!Find_Name.Compare(_T(""))) {
 		AfxMessageBox(_T("이름을 입력 해주세요."));
+		return;
 	};
-	m_D1_EDIT_Name = Find_Name;
+	//m_D1_EDIT_Name = Find_Name;
 
+	///////////////////////////////SearchListDlg 시작//////////////////////////////////
+	sdlg.selectedName = Find_Name;
 	setlocale(LC_ALL, "");
 	file.Open(_T("calory1.txt"),CFile::modeRead);
 	while (file.ReadString(str)) {
-		if (str.Find(Find_Name) != -1 && Find_Name.Compare(_T(""))) {
-			AfxExtractSubString(calory[0],str,1,',');
-			m_Info_Calory = calory[0];
-			SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
-		
-			AfxExtractSubString(calory[1], str, 2, ',');
-			m_Info_Carbo = calory[1];
-			SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
-
-			AfxExtractSubString(calory[2], str, 3, ',');
-			m_Info_Protein = calory[2];
-			SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
-
-			AfxExtractSubString(calory[3], str, 4, ',');
-			m_Info_Fat= calory[3];
-			SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
-
-			AfxExtractSubString(calory[4], str, 5, ',');
-			m_Info_Cholest = calory[4];
-			SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
-
-			AfxExtractSubString(calory[5], str, 6, ',');
-			m_Info_Fiber = calory[5];
-			SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
-
-			AfxExtractSubString(calory[6], str, 7, ',');
-			m_Info_Na = calory[6];
-			SetDlgItemText(ID_D1_Na_Edit, calory[6]);
-			
-			break;
+		if (str.Find(Find_Name) != -1) {
+			AfxExtractSubString(foodName, str, 0, ',');
+			sdlg.foodNameList.AddTail(foodName);
 		}
-		else {
+	}
+	if (sdlg.foodNameList.GetCount() == 0)
+		AfxMessageBox(_T("검색 결과가 없습니다."));
+	else
+	{
+		sdlg.DoModal();
+		Find_Name = sdlg.selectedName;
+	}
 
+	m_D1_EDIT_Name = Find_Name;
+	SetDlgItemText(ID_D1_Name_Edit, Find_Name);
+
+	/////////////////////////////SearchListDlg를 통해 이름이 선택된 경우에만 식단 검색//////////////////////
+	if (sdlg.whichButton)
+	{
+		file.SeekToBegin();
+		while (file.ReadString(str)) {
+			AfxExtractSubString(foodName, str, 0, ',');
+			if (!Find_Name.Compare(foodName)) {
+				AfxExtractSubString(calory[0], str, 1, ',');
+				m_Info_Calory = calory[0];
+				SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
+
+				AfxExtractSubString(calory[1], str, 2, ',');
+				m_Info_Carbo = calory[1];
+				SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
+
+				AfxExtractSubString(calory[2], str, 3, ',');
+				m_Info_Protein = calory[2];
+				SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
+
+				AfxExtractSubString(calory[3], str, 4, ',');
+				m_Info_Fat = calory[3];
+				SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
+
+				AfxExtractSubString(calory[4], str, 5, ',');
+				m_Info_Cholest = calory[4];
+				SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
+
+				AfxExtractSubString(calory[5], str, 6, ',');
+				m_Info_Fiber = calory[5];
+				SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
+
+				AfxExtractSubString(calory[6], str, 7, ',');
+				m_Info_Na = calory[6];
+				SetDlgItemText(ID_D1_Na_Edit, calory[6]);
+
+				break;
+			}
 		}
 	}
 	file.Close();
@@ -247,31 +274,91 @@ void CShowInfoDialog::OnBnClickedOk()
 	GetDlgItemText(ID_D1_Fiber_Edit, m_Info_Fiber);
 	GetDlgItemText(ID_D1_Na_Edit, m_Info_Na);
 
-	bool check = TRUE;
-	Food pfood;
 
-	if (check)
+	//////////////////////////중복된 음식 항목이 이미 존재하는지 확인//////////////////////////
+	bool check = TRUE;
+	CString listFoodName, listFood;
+
+	if (m_Info_Combo.GetCurSel() == 0)
 	{
-		m_pView->tmp.foodname = m_D1_EDIT_Name;
-		m_pView->tmp.plate = _wtof(m_Info_Amount);
-		m_pView->tmp.cal = _wtof(m_Info_Calory);
-		m_pView->tmp.Carbo = _wtof(m_Info_Carbo);
-		m_pView->tmp.Protein = _wtof(m_Info_Protein);
-		m_pView->tmp.Fat = _wtof(m_Info_Fat);
-		m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
-		m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
-		m_pView->tmp.Na = _wtof(m_Info_Na);
-		m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
-		m_pView->c_edit2.SetWindowText(m_Info_Calory);
-		m_pView->c_edit3.SetWindowText(m_Info_Amount);
+		for (int i = 0; i < m_pView->m_pDialog1->m_List1.GetCount(); i++)
+		{
+			m_pView->m_pDialog1->m_List1.GetText(i, listFood);
+			AfxExtractSubString(listFoodName, listFood, 0, ' ');
+
+			if (!m_D1_EDIT_Name.Compare(listFoodName))
+			{
+				check = FALSE;
+				break;
+			}
+		}
 	}
-	else
+	else if (m_Info_Combo.GetCurSel() == 1)
+	{
+		for (int i = 0; i < m_pView->m_pDialog2->m_List2.GetCount(); i++)
+		{
+			m_pView->m_pDialog2->m_List2.GetText(i, listFood);
+			AfxExtractSubString(listFoodName, listFood, 0, ' ');
+
+			if (!m_D1_EDIT_Name.Compare(listFoodName))
+			{
+				check = FALSE;
+				break;
+			}
+		}
+	}
+	else if (m_Info_Combo.GetCurSel() == 2)
+	{
+		for (int i = 0; i < m_pView->m_pDialog3->m_List3.GetCount(); i++)
+		{
+			m_pView->m_pDialog3->m_List3.GetText(i, listFood);
+			AfxExtractSubString(listFoodName, listFood, 0, ' ');
+
+			if (!m_D1_EDIT_Name.Compare(listFoodName))
+			{
+				check = FALSE;
+				break;
+			}
+		}
+	}
+	else if (m_Info_Combo.GetCurSel() == 3)
+	{
+		for (int i = 0; i < m_pView->m_pDialog4->m_List4.GetCount(); i++)
+		{
+			m_pView->m_pDialog4->m_List4.GetText(i, listFood);
+			AfxExtractSubString(listFoodName, listFood, 0, ' ');
+
+			if (!m_D1_EDIT_Name.Compare(listFoodName))
+			{
+				check = FALSE;
+				break;
+			}
+		}
+	}
+
+	if (!check)
+	{
 		AfxMessageBox(_T("동일한 이름의 음식 항목이 이미 존재합니다."));
-	
+		return;
+	}
+
+	m_pView->tmp.foodname = m_D1_EDIT_Name;
+	m_pView->tmp.plate = _wtof(m_Info_Amount);
+	m_pView->tmp.cal = _wtof(m_Info_Calory);
+	m_pView->tmp.Carbo = _wtof(m_Info_Carbo);
+	m_pView->tmp.Protein = _wtof(m_Info_Protein);
+	m_pView->tmp.Fat = _wtof(m_Info_Fat);
+	m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
+	m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
+	m_pView->tmp.Na = _wtof(m_Info_Na);
+	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
+	m_pView->c_edit2.SetWindowText(m_Info_Calory);
+	m_pView->c_edit3.SetWindowText(m_Info_Amount);
+
 	str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname,m_pView-> tmp.cal, m_pView->tmp.plate);
 	//AfxMessageBox(str);
 	CString a;
-
+	Food pfood;
 	if (m_pView->buttonstate == 9)
 	{
 		POSITION pos = pDoc->list.GetHeadPosition();
@@ -283,11 +370,15 @@ void CShowInfoDialog::OnBnClickedOk()
 		}
 	}
 
+		//CString str;
+		//str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname, m_pView->tmp.cal, m_pView->tmp.plate);
+		//CString a;
+
 	if (m_pView->buttonstate == 2) {
 		if (m_Info_Combo.GetCurSel() == 0) {
 			nIndex = m_pView->m_pDialog1->m_List1.GetCurSel();
-			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
+			//m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
+			//m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 0;
 			POSITION pos = pDoc->list.GetHeadPosition();
 			for (int i = 0; i < pDoc->list.GetCount(); i++) {
@@ -456,16 +547,16 @@ void CShowInfoDialog::OnBnClickedOk()
 				m_pView->tmp.time = 3;
 			}
 			pDoc->list.AddTail(m_pView->tmp);
-		}
 
-		/////////////////////////파이차트를 위한 영양소 총 섭취량에 현재 추가한 데이터 추가하는 코드//////////////////////
-		m_pView->totalCarbo += m_pView->tmp.Carbo;
-		m_pView->totalCholest += (m_pView->tmp.Cholest)/1000;
-		m_pView->totalFat += m_pView->tmp.Fat;
-		m_pView->totalFiber += m_pView->tmp.Fiber;
-		m_pView->totalNa += (m_pView->tmp.Na)/1000;
-		m_pView->totalProtein += m_pView->tmp.Protein;
-		m_pView->SumTotalCalorie(pDoc);
+			/////////////////////////파이차트를 위한 영양소 총 섭취량에 현재 추가한 데이터 추가하는 코드//////////////////////
+			m_pView->totalCarbo += m_pView->tmp.Carbo;
+			m_pView->totalCholest += (m_pView->tmp.Cholest) / 1000;
+			m_pView->totalFat += m_pView->tmp.Fat;
+			m_pView->totalFiber += m_pView->tmp.Fiber;
+			m_pView->totalNa += (m_pView->tmp.Na) / 1000;
+			m_pView->totalProtein += m_pView->tmp.Protein;
+			m_pView->SumTotalCalorie(pDoc);
+		}
 		CDialog::OnOK();
 }
 
