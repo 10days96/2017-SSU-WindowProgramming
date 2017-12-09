@@ -275,7 +275,6 @@ void CShowInfoDialog::OnBnClickedOk()
 	GetDlgItemText(ID_D1_Fiber_Edit, m_Info_Fiber);
 	GetDlgItemText(ID_D1_Na_Edit, m_Info_Na);
 
-
 	//////////////////////////중복된 음식 항목이 이미 존재하는지 확인//////////////////////////
 	bool check = TRUE;
 	CString listFoodName, listFood;
@@ -352,6 +351,16 @@ void CShowInfoDialog::OnBnClickedOk()
 	m_pView->tmp.Cholest = _wtof(m_Info_Cholest);
 	m_pView->tmp.Fiber = _wtof(m_Info_Fiber);
 	m_pView->tmp.Na = _wtof(m_Info_Na);
+
+	//////////////////////식단 정보가 잘못 입력(예 - 이름이 비어있음)된 경우 추가하지 않도록하는 코드////////////////////
+	if (!m_pView->tmp.foodname.Compare(_T("")) || m_pView->tmp.cal <= 0 || m_pView->tmp.plate <= 0||
+		m_pView->tmp.Carbo < 0 || m_pView->tmp.Protein < 0 || m_pView->tmp.Fat < 0 || m_pView->tmp.Cholest < 0 || m_pView->tmp.Fiber < 0 || m_pView->tmp.Na < 0)
+	{
+		AfxMessageBox(_T("이름 또는 칼로리 정보가 올바르지 않습니다."));
+		return;
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	m_pView->c_edit1.SetWindowText(m_D1_EDIT_Name);
 	m_pView->c_edit2.SetWindowText(m_Info_Calory);
 	m_pView->c_edit3.SetWindowText(m_Info_Amount);

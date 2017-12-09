@@ -94,6 +94,7 @@ BOOL CUserInfoDlg::OnInitDialog()
 	SetDlgItemText(IDC_EDIT_LENGTH, str);
 	str.Format(_T("%.2lf"), pDoc->user.weight);
 	SetDlgItemText(IDC_EDIT_WEIGHT, str);
+
 	if (pDoc->user.gender)
 		radioFemale.SetCheck(1);
 	else
@@ -105,6 +106,7 @@ BOOL CUserInfoDlg::OnInitDialog()
 		radioNomal.SetCheck(1);
 	else
 		radioLow.SetCheck(1);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
