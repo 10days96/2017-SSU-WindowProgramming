@@ -198,6 +198,7 @@
     <ClInclude Include="PieChartDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Search.h" />
+    <ClInclude Include="SearchListDlg.h" />
     <ClInclude Include="ShowBMIDlg.h" />
     <ClInclude Include="ShowInfoDialog.h" />
     <ClInclude Include="stdafx.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="MoreDlg.cpp" />
     <ClCompile Include="PieChartDlg.cpp" />
     <ClCompile Include="Search.cpp" />
+    <ClCompile Include="SearchListDlg.cpp" />
     <ClCompile Include="ShowBMIDlg.cpp" />
     <ClCompile Include="ShowInfoDialog.cpp" />
     <ClCompile Include="stdafx.cpp">

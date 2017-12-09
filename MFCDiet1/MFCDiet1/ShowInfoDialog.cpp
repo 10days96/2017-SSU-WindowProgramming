@@ -11,6 +11,7 @@
 #include <locale.h>
 #include "MoreDlg.h"
 #include <Windows.h>
+#include "SearchListDlg.h"
 
 
 // CShowInfoDialog 대화 상자입니다.
@@ -81,54 +82,80 @@ END_MESSAGE_MAP()
 void CShowInfoDialog::OnBnClickedD1Search()
 {
 	UpdateData(TRUE);
+	CSearchListDlg sdlg;
 	CString str;
 	CStdioFile file;
-	CString Find_Name;
+	CString Find_Name, foodName;
 	CString calory[7];
 	CString Amount;
 	int count = 0;
+	BOOL showSdlg = FALSE;
+
 	GetDlgItemText(ID_D1_Name_Edit,Find_Name);
 	if (!Find_Name.Compare(_T(""))) {
 		AfxMessageBox(_T("이름을 입력 해주세요."));
+		return;
 	};
-	m_D1_EDIT_Name = Find_Name;
+	//m_D1_EDIT_Name = Find_Name;
 
+	///////////////////////////////SearchListDlg 시작//////////////////////////////////
+	sdlg.selectedName = Find_Name;
 	setlocale(LC_ALL, "");
 	file.Open(_T("calory1.txt"),CFile::modeRead);
 	while (file.ReadString(str)) {
-		if (str.Find(Find_Name) != -1 && Find_Name.Compare(_T(""))) {
-			AfxExtractSubString(calory[0],str,1,',');
-			m_Info_Calory = calory[0];
-			SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
-		
-			AfxExtractSubString(calory[1], str, 2, ',');
-			m_Info_Carbo = calory[1];
-			SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
-
-			AfxExtractSubString(calory[2], str, 3, ',');
-			m_Info_Protein = calory[2];
-			SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
-
-			AfxExtractSubString(calory[3], str, 4, ',');
-			m_Info_Fat= calory[3];
-			SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
-
-			AfxExtractSubString(calory[4], str, 5, ',');
-			m_Info_Cholest = calory[4];
-			SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
-
-			AfxExtractSubString(calory[5], str, 6, ',');
-			m_Info_Fiber = calory[5];
-			SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
-
-			AfxExtractSubString(calory[6], str, 7, ',');
-			m_Info_Na = calory[6];
-			SetDlgItemText(ID_D1_Na_Edit, calory[6]);
-			
-			break;
+		if (str.Find(Find_Name) != -1) {
+			AfxExtractSubString(foodName, str, 0, ',');
+			sdlg.foodNameList.AddTail(foodName);
 		}
-		else {
+	}
+	if (sdlg.foodNameList.GetCount() == 0)
+		AfxMessageBox(_T("검색 결과가 없습니다."));
+	else
+	{
+		sdlg.DoModal();
+		Find_Name = sdlg.selectedName;
+	}
 
+	m_D1_EDIT_Name = Find_Name;
+	SetDlgItemText(ID_D1_Name_Edit, Find_Name);
+
+	/////////////////////////////SearchListDlg를 통해 이름이 선택된 경우에만 식단 검색//////////////////////
+	if (sdlg.whichButton)
+	{
+		file.SeekToBegin();
+		while (file.ReadString(str)) {
+			AfxExtractSubString(foodName, str, 0, ',');
+			if (!Find_Name.Compare(foodName)) {
+				AfxExtractSubString(calory[0], str, 1, ',');
+				m_Info_Calory = calory[0];
+				SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
+
+				AfxExtractSubString(calory[1], str, 2, ',');
+				m_Info_Carbo = calory[1];
+				SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
+
+				AfxExtractSubString(calory[2], str, 3, ',');
+				m_Info_Protein = calory[2];
+				SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
+
+				AfxExtractSubString(calory[3], str, 4, ',');
+				m_Info_Fat = calory[3];
+				SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
+
+				AfxExtractSubString(calory[4], str, 5, ',');
+				m_Info_Cholest = calory[4];
+				SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
+
+				AfxExtractSubString(calory[5], str, 6, ',');
+				m_Info_Fiber = calory[5];
+				SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
+
+				AfxExtractSubString(calory[6], str, 7, ',');
+				m_Info_Na = calory[6];
+				SetDlgItemText(ID_D1_Na_Edit, calory[6]);
+
+				break;
+			}
 		}
 	}
 	file.Close();
@@ -347,13 +374,12 @@ void CShowInfoDialog::OnBnClickedOk()
 		//CString str;
 		//str.Format(_T("%s   %.3lfkcal  %.2lf인분"), m_pView->tmp.foodname, m_pView->tmp.cal, m_pView->tmp.plate);
 		//CString a;
-	
 
 	if (m_pView->buttonstate == 2) {
 		if (m_Info_Combo.GetCurSel() == 0) {
 			nIndex = m_pView->m_pDialog1->m_List1.GetCurSel();
-			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
+			//m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
+			//m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
 			m_pView->tmp.time = 0;
 			POSITION pos = pDoc->list.GetHeadPosition();
 			for (int i = 0; i < pDoc->list.GetCount(); i++) {
