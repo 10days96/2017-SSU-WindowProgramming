@@ -32,7 +32,7 @@ CShowInfoDialog::CShowInfoDialog(CWnd* pParent /*=NULL*/)
 	, m_Info_Fiber(_T(""))
 	, m_Info_Na(_T(""))
 {
-	
+	//check_input = TRUE;
 }
 
 CShowInfoDialog::~CShowInfoDialog()
@@ -156,7 +156,6 @@ void CShowInfoDialog::OnBnClickedD1Search()
 
 				m_Info_Amount = _T("1.0");
 				SetDlgItemText(ID_D1_Amount_Edit, _T("1.0"));
-
 				break;
 			}
 		}
@@ -181,8 +180,16 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit(){
 	CMFCDiet1View* pView = (CMFCDiet1View *)pFrame->GetActiveView();
 	double Info[7];
 	CString name;// = m_D1_EDIT_Name;
+	CString calory1[7];
 	GetDlgItemText(ID_D1_Name_Edit,name);
 	GetDlgItemText(ID_D1_Amount_Edit, Amount);
+	GetDlgItemText(ID_D1_Kcal_Edit,calory1[0]);
+	GetDlgItemText(ID_D1_Carbo_Edit,calory1[1]);
+	GetDlgItemText(ID_D1_Protein_Edit, calory1[2]);
+	GetDlgItemText(ID_D1_Fat_Edit,calory1[3]);
+	GetDlgItemText(ID_D1_Cholest_Edit,calory1[4]);
+	GetDlgItemText(ID_D1_Fiber_Edit,calory1[5]);
+	GetDlgItemText(ID_D1_Na_Edit,calory1[6]);
 
 	amount = _wtof(Amount);
 	m_Info_Amount = Amount;
@@ -217,44 +224,90 @@ void CShowInfoDialog::OnEnChangeD1AmountEdit(){
 		calory[5].Format(_T("%.1lf"), Info[5]);
 		SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
 
-		Info[6] = _wtof(m_Info_Na) / _wtof(m_Info_Amount)*amount;
+		Info[6] = _wtof(m_Info_Na)*amount;
 		calory[6].Format(_T("%.1lf"), Info[6]);
-
 		SetDlgItemText(ID_D1_Na_Edit, calory[6]);
 	}
 	
 
-	//else if (pView->buttonstate == 9) {
+	else if (pView->buttonstate == 9) {
 		UpdateData(FALSE);
-		//GetDlgItemText(ID_D1_Amount_Edit, Amount);
-		Info[0] = _wtof(m_Info_Calory)*amount;
-		calory[0].Format(_T("%.1lf"), Info[0]);
-		SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
+			SetDlgItemText(ID_D1_Name_Edit, name);
+			//사용자가 입력 하는 경우
+			if (_wtof(m_Info_Calory) == 0){
+				m_Info_Calory = calory1[0];
+				SetDlgItemText(ID_D1_Kcal_Edit,m_Info_Calory);
+			}
+			else {
+				Info[0] = _wtof(m_Info_Calory)*amount;
+				calory[0].Format(_T("%.1lf"), Info[0]);
+				SetDlgItemText(ID_D1_Kcal_Edit, calory[0]);
+			}
 
-		Info[1] = _wtof(m_Info_Carbo)*amount;
-		calory[1].Format(_T("%.1lf"), Info[1]);
-		SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
+			if (_wtof(m_Info_Carbo) == 0 ){
+				m_Info_Carbo = calory1[1];
+				SetDlgItemText(ID_D1_Carbo_Edit, m_Info_Carbo);
+			}
+			else {
+				Info[1] = _wtof(m_Info_Carbo)*amount;
+				calory[1].Format(_T("%.1lf"), Info[1]);
+				SetDlgItemText(ID_D1_Carbo_Edit, calory[1]);
+			}
 
-		Info[2] = _wtof(m_Info_Protein)*amount;
-		calory[2].Format(_T("%.1lf"), Info[2]);
-		SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
+			if (_wtof(m_Info_Protein) == 0){
+				m_Info_Protein = calory1[2];
+				SetDlgItemText(ID_D1_Protein_Edit,m_Info_Protein);
+			}
 
-		Info[3] = _wtof(m_Info_Fat)*amount;
-		calory[3].Format(_T("%.1lf"), Info[3]);
-		SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
+			else {
+				Info[2] = _wtof(m_Info_Protein)*amount;
+				calory[2].Format(_T("%.1lf"), Info[2]);
+				SetDlgItemText(ID_D1_Protein_Edit, calory[2]);
+			}
+			if (_wtof(m_Info_Fat) == 0){
+				m_Info_Fat = calory1[3];
+				SetDlgItemText(ID_D1_Fat_Edit,m_Info_Fat);
+			}
 
-		Info[4] = _wtof(m_Info_Cholest)*amount;
-		calory[4].Format(_T("%.1lf"), Info[4]);
-		SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
+			else {
+				Info[3] = _wtof(m_Info_Fat)*amount;
+				calory[3].Format(_T("%.1lf"), Info[3]);
+				SetDlgItemText(ID_D1_Fat_Edit, calory[3]);
+			}
 
-		Info[5] = _wtof(m_Info_Fiber)*amount;
-		calory[5].Format(_T("%.1lf"), Info[5]);
-		SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
+			if (_wtof(m_Info_Cholest) == 0){
+				m_Info_Cholest = calory1[4];
+				SetDlgItemText(ID_D1_Cholest_Edit,m_Info_Cholest);
+			}
 
-		Info[6] = _wtof(m_Info_Na)*amount;
-		calory[6].Format(_T("%.1lf"), Info[6]);
+			else {
+				Info[4] = _wtof(m_Info_Cholest)*amount;
+				calory[4].Format(_T("%.1lf"), Info[4]);
+				SetDlgItemText(ID_D1_Cholest_Edit, calory[4]);
+			}
 
-		SetDlgItemText(ID_D1_Na_Edit, calory[6]);
+			if (_wtof(m_Info_Fiber) == 0){
+				m_Info_Fiber = calory1[5];
+				SetDlgItemText(ID_D1_Fiber_Edit,m_Info_Fiber);
+			}
+
+			else {
+				Info[5] = _wtof(m_Info_Fiber)*amount;
+				calory[5].Format(_T("%.1lf"), Info[5]);
+				SetDlgItemText(ID_D1_Fiber_Edit, calory[5]);
+			}
+
+			if (_wtof(m_Info_Na) == 0){
+				m_Info_Na = calory1[6];
+				SetDlgItemText(ID_D1_Na_Edit,m_Info_Na);
+			}
+
+			else {
+				Info[6] = _wtof(m_Info_Na)*amount;
+				calory[6].Format(_T("%.1lf"), Info[6]);
+				SetDlgItemText(ID_D1_Na_Edit, calory[6]);
+			}
+	}
 }
 
 
@@ -402,175 +455,26 @@ void CShowInfoDialog::OnBnClickedOk()
 			nIndex = m_pView->m_pDialog1->m_List1.GetCurSel();
 			m_pView->m_pDialog1->m_List1.GetText(nIndex, changeFood);
 			AfxExtractSubString(changeFood, changeFood, 0, ' ');
-			/*
-			nIndex = m_pView->m_pDialog1->m_List1.GetCurSel();
-			//m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			//m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
-			m_pView->tmp.time = 0;
-			int test = pDoc->list.GetCount();
-			POSITION pos = pDoc->list.GetHeadPosition();
-			for (int i = 0; i < pDoc->list.GetCount(); i++) {
-				Food tmp = (Food)pDoc->list.GetAt(pos);
-				CString tmp_name = tmp.foodname;
-				double plate = tmp.plate;
-				int meal = tmp.time;
-				name = m_pView->tmp.foodname;
-				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
-				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
-				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
-				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
-				double Na = tmp.Na / plate* m_pView->tmp.plate;
-				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
-				if (name.Compare(tmp_name) && meal == 0) {
-					CString str[7];
-					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
-					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
-					m_pView->c_edit2.SetWindowText(str[0]);
-					m_pView->c_edit3.SetWindowText(str[1]);
-					tmp.cal = m_pView->tmp.cal;
-					tmp.plate = m_pView->tmp.plate;
-					tmp.Carbo = carbo;
-					tmp.Protein = Protein;
-					tmp.Fat = Fat;
-					tmp.Na = Na;
-					tmp.Protein = Protein;
-					tmp.Fiber = Fiber;
-					pDoc->list.SetAt(pos, tmp);
-					test = pDoc->list.GetCount();
-					break;
-				}
-				pDoc->list.GetNext(pos);
-			}
-			*/
+		
 		}
 		else if (m_Info_Combo.GetCurSel() == 1) {
 			nIndex = m_pView->m_pDialog2->m_List2.GetCurSel();
 			m_pView->m_pDialog2->m_List2.GetText(nIndex, changeFood);
 			AfxExtractSubString(changeFood, changeFood, 0, ' ');
-			/*
-			nIndex = m_pView->m_pDialog2->m_List2.GetCurSel();
-			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
-			m_pView->tmp.time = 1;
-			POSITION pos = pDoc->list.GetHeadPosition();
-			for (int i = 0; i < pDoc->list.GetCount(); i++) {
-				Food tmp = (Food)pDoc->list.GetAt(pos);
-				CString tmp_name = tmp.foodname;
-				double plate = tmp.plate;
-				int meal = tmp.time;
-				name = m_pView->tmp.foodname;
-				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
-				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
-				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
-				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
-				double Na = tmp.Na / plate* m_pView->tmp.plate;
-				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
-				if (!name.Compare(tmp_name) && meal == 0) {
-					CString str[7];
-					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
-					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
-					m_pView->c_edit2.SetWindowText(str[0]);
-					m_pView->c_edit3.SetWindowText(str[1]);
-					tmp.cal = m_pView->tmp.cal;
-					tmp.plate = m_pView->tmp.plate;
-					tmp.Carbo = carbo;
-					tmp.Protein = Protein;
-					tmp.Fat = Fat;
-					tmp.Na = Na;
-					tmp.Protein = Protein;
-					tmp.Fiber = Fiber;
-					pDoc->list.SetAt(pos, tmp);
-					break;
-				}
-				pDoc->list.GetNext(pos);
-			}
-			*/
+		
 		}
 		else if (m_Info_Combo.GetCurSel() == 2) {
 			nIndex = m_pView->m_pDialog3->m_List3.GetCurSel();
 			m_pView->m_pDialog3->m_List3.GetText(nIndex, changeFood);
 			AfxExtractSubString(changeFood, changeFood, 0, ' ');
 
-			/*
-			nIndex = m_pView->m_pDialog3->m_List3.GetCurSel();
-			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
-			m_pView->tmp.time = 2;
-			POSITION pos = pDoc->list.GetHeadPosition();
-			for (int i = 0; i < pDoc->list.GetCount(); i++) {
-				Food tmp = (Food)pDoc->list.GetAt(pos);
-				CString tmp_name = tmp.foodname;
-				double plate = tmp.plate;
-				int meal = tmp.time;
-				name = m_pView->tmp.foodname;
-				double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
-				double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
-				double Protein = tmp.Protein / plate*m_pView->tmp.plate;
-				double Fat = tmp.Fat / plate *m_pView->tmp.plate;
-				double Na = tmp.Na / plate* m_pView->tmp.plate;
-				double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
-				if (!name.Compare(tmp_name) && meal == 0) {
-					CString str[7];
-					str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
-					str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
-					m_pView->c_edit2.SetWindowText(str[0]);
-					m_pView->c_edit3.SetWindowText(str[1]);
-					tmp.cal = m_pView->tmp.cal;
-					tmp.plate = m_pView->tmp.plate;
-					tmp.Carbo = carbo;
-					tmp.Protein = Protein;
-					tmp.Fat = Fat;
-					tmp.Na = Na;
-					tmp.Protein = Protein;
-					tmp.Fiber = Fiber;
-					pDoc->list.SetAt(pos, tmp);
-					break;
-				}
-				pDoc->list.GetNext(pos);
-			}*/
+			
 		}
 		else if (m_Info_Combo.GetCurSel() == 3) {
 			nIndex = m_pView->m_pDialog4->m_List4.GetCurSel();
 			m_pView->m_pDialog4->m_List4.GetText(nIndex, changeFood);
 			AfxExtractSubString(changeFood, changeFood, 0, ' ');
 
-			/*
-			nIndex = m_pView->m_pDialog4->m_List4.GetCurSel();
-			m_pView->m_pDialog1->m_List1.DeleteString(nIndex);
-			m_pView->m_pDialog1->m_List1.InsertString(nIndex, str);
-			m_pView->tmp.time = 3;
-			POSITION pos = pDoc->list.GetHeadPosition();
-			for (int i = 0; i < pDoc->list.GetCount(); i++) {
-			Food tmp = (Food)pDoc->list.GetAt(pos);
-			CString tmp_name = tmp.foodname;
-			double plate = tmp.plate;
-			int meal = tmp.time;
-			name = m_pView->tmp.foodname;
-			double carbo = tmp.Carbo / plate*m_pView->tmp.plate;
-			double cholest = tmp.Cholest / plate*m_pView->tmp.plate;
-			double Protein = tmp.Protein / plate*m_pView->tmp.plate;
-			double Fat = tmp.Fat / plate *m_pView->tmp.plate;
-			double Na = tmp.Na / plate* m_pView->tmp.plate;
-			double Fiber = tmp.Fiber / plate*m_pView->tmp.plate;
-			if (!name.Compare(tmp_name) && meal == 0) {
-			CString str[7];
-			str[0].Format(_T("%.1lf"), m_pView->tmp.cal);
-			str[1].Format(_T("%.1lf"), m_pView->tmp.plate);
-			m_pView->c_edit2.SetWindowText(str[0]);
-			m_pView->c_edit3.SetWindowText(str[1]);
-			tmp.cal = m_pView->tmp.cal;
-			tmp.plate = m_pView->tmp.plate;
-			tmp.Carbo = carbo;
-			tmp.Protein = Protein;
-			tmp.Fat = Fat;
-			tmp.Na = Na;
-			tmp.Protein = Protein;
-			tmp.Fiber = Fiber;
-			pDoc->list.SetAt(pos, tmp);
-			break;
-			}
-			pDoc->list.GetNext(pos);
-			}*/
 		}
 		POSITION pos = pDoc->list.GetHeadPosition();
 		while (pos != NULL)

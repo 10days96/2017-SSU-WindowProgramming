@@ -43,5 +43,6 @@ public:
 	CString m_Info_Cholest;
 	CString m_Info_Fiber;
 	CString m_Info_Na;
+	bool check_input;
 	void CShowInfoDialog::OnDrawItem(int nIDCH, PDRAWITEMSTRUCT lpDrawItemStruct);
 };
