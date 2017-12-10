@@ -108,7 +108,6 @@ void CMFCDiet1View::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
-
 	////////버튼 이미지 변경/////////////
 	CBitmap cButtonImg1;
 	CBitmap cButtonImg2;
@@ -119,7 +118,6 @@ void CMFCDiet1View::OnInitialUpdate()
 	m_button_info.SetBitmap(cButtonImg1);
 	m_button_bmi.SetBitmap(cButtonImg2);
 	m_button_chart.SetBitmap(cButtonImg3);
-
 	m_Tab.DeleteAllItems();
 	m_Tab.InsertItem(0, L"아침", 0);
 	m_Tab.InsertItem(1, L"점심", 0);
@@ -1078,6 +1076,7 @@ void CMFCDiet1View::ShowFoodList(CMFCDiet1Doc* pDoc)
 void CMFCDiet1View::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	
 	if (nIDCtl == ID_SHOWINFO || nIDCtl == IDC_BUTTON2 || nIDCtl == IDC_BUTTON3 || nIDCtl == IDC_BUTTON9)
 	{
 		CDC dc;
@@ -1110,4 +1109,29 @@ void CMFCDiet1View::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
 		dc.DrawText(buffer, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		dc.Detach();							//Detach the Button DC
 	}
+}
+
+
+void CMFCDiet1View::OnDraw(CDC* pDC)
+{
+	CRect cal;
+	//CRect band;
+	CRect client;
+	GetClientRect(client);
+	GetDlgItem(IDC_MONTHCALENDAR1) ->GetWindowRect(cal);
+	ScreenToClient(cal);
+	CPen pen;
+	pen.CreatePen(PS_SOLID,5,RGB(0,0,0));
+	pDC->SelectObject(&pen);
+	pDC->Rectangle(cal);
+	CRect band(client.right/6*5+20, 0, client.right, client.bottom);
+	COLORREF color = RGB(182,185,237);
+	CBrush brush1(color);
+	pDC->SelectStockObject(NULL_PEN);
+	pDC->SelectObject(&brush1);
+	pDC->Rectangle(band);
+
+
+
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 }

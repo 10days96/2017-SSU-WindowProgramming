@@ -186,12 +186,12 @@ BOOL CPieChartDlg::OnInitDialog()
 	InputValue[5] = 0;
 	PiDraw = false;
 	percent = _T("%");
-	pieColor[0] = RGB(255, 0, 0);
-	pieColor[1] = RGB(0, 255, 0);
-	pieColor[2] = RGB(0, 0, 255);
-	pieColor[3] = RGB(200, 50, 200);
-	pieColor[4] = RGB(50, 200, 200);
-	pieColor[5] = RGB(200, 200, 50);
+	pieColor[0] = RGB(247, 182, 204);
+	pieColor[1] = RGB(182, 1185, 237);
+	pieColor[2] = RGB(149, 225, 247);
+	pieColor[3] = RGB(245, 247, 184);
+	pieColor[4] = RGB(186, 235, 213);
+	pieColor[5] = RGB(247, 205, 130);
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -227,7 +227,7 @@ void CPieChartDlg::OnPaint()
 	CPen pen2, pen1;
 	pen1.CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 	pen2.CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
-
+	dc.SelectStockObject(NULL_PEN);
 
 	CBrush brush[6];
 	brush[0].CreateSolidBrush(pieColor[0]);
@@ -240,7 +240,7 @@ void CPieChartDlg::OnPaint()
 	dc.SelectObject(&brush[0]);
 	dc.SetBkMode(TRANSPARENT);
 
-	dc.SelectObject(&pen1);
+	//dc.SelectObject(&pen1);
 	//intit color select
 	dc.SelectObject(&brush[0]);
 	dc.Rectangle(&rectColor1);
@@ -255,7 +255,7 @@ void CPieChartDlg::OnPaint()
 	dc.SelectObject(&brush[5]);
 	dc.Rectangle(&rectColor6);
 
-	dc.SelectObject(&pen2);
+	//dc.SelectObject(&pen2);
 	if (PiDraw)
 	{
 
