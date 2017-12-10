@@ -14,9 +14,6 @@
 #define IDD_SHOWBMI                     326
 #define IDD_PIECHART                    328
 #define IDD_TAB1                        330
-#define IDD_TAB2                        331
-#define IDD_TAB3                        332
-#define IDD_TAB4                        333
 #define IDD_SHOWMORE                    334
 #define IDB_PNG1                        339
 #define IDB_BITMAP1                     340
@@ -24,7 +21,10 @@
 #define IDB_BITMAP3                     344
 #define IDB_BITMAP4                     345
 #define IDD_SEARCH_CHECK                346
-#define IDD_SEARCH_LIST                 347
+#define IDD_SEARCH_LIST                 346
+#define IDD_TAB2                        347
+#define IDD_TAB3                        348
+#define IDD_TAB4                        349
 #define IDC_MONTHCALENDAR1              1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
